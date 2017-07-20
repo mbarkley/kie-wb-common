@@ -26,10 +26,13 @@ import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.api.RemoteCallback;
 import org.jboss.errai.common.client.dom.HTMLElement;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datasource.management.service.DataManagementService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.callbacks.DefaultErrorCallback;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class TableObjectViewer
         implements TableObjectViewerView.Presenter, IsElement {
 

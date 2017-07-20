@@ -21,12 +21,15 @@ import javax.inject.Inject;
 
 import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.dom.Div;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.screens.datasource.management.client.editor.common.DefEditorBaseViewImpl;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class DriverDefEditorViewImpl
         extends DefEditorBaseViewImpl
         implements DriverDefEditorView {

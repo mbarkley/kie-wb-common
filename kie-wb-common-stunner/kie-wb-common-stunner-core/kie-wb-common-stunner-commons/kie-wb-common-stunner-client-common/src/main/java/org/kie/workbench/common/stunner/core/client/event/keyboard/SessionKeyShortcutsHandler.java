@@ -19,8 +19,10 @@ package org.kie.workbench.common.stunner.core.client.event.keyboard;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.api.SessionManager;
 import org.kie.workbench.common.stunner.core.client.session.ClientSession;
+import org.uberfire.async.UberfireActivityFragment;
 
 /**
  * A helper class for component that listen to keyboard events
@@ -28,6 +30,7 @@ import org.kie.workbench.common.stunner.core.client.session.ClientSession;
  * session bind to this component.
  */
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class SessionKeyShortcutsHandler {
 
     private final SessionManager clientSessionManager;

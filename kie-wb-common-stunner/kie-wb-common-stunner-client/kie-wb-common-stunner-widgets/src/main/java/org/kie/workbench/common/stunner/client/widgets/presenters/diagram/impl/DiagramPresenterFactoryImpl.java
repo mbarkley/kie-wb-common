@@ -19,6 +19,7 @@ package org.kie.workbench.common.stunner.client.widgets.presenters.diagram.impl;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.client.widgets.presenters.diagram.DiagramEditor;
 import org.kie.workbench.common.stunner.client.widgets.presenters.diagram.DiagramPresenterFactory;
@@ -36,8 +37,10 @@ import org.kie.workbench.common.stunner.core.client.canvas.controls.zoom.ZoomCon
 import org.kie.workbench.common.stunner.core.client.command.CanvasCommandManager;
 import org.kie.workbench.common.stunner.core.diagram.Diagram;
 import org.kie.workbench.common.stunner.core.graph.Element;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class DiagramPresenterFactoryImpl implements DiagramPresenterFactory<Diagram> {
 
     private final ShapeManager shapeManager;

@@ -26,6 +26,8 @@ import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
 import com.google.gwt.safehtml.shared.SafeUri;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.core.api.DefinitionManager;
 import org.kie.workbench.common.stunner.core.client.ShapeSet;
@@ -35,10 +37,12 @@ import org.kie.workbench.common.stunner.core.client.canvas.CanvasFactory;
 import org.kie.workbench.common.stunner.core.client.canvas.CanvasHandler;
 import org.kie.workbench.common.stunner.core.diagram.Diagram;
 import org.kie.workbench.common.stunner.core.util.DefinitionUtils;
+import org.uberfire.async.UberfireActivityFragment;
 
 import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class ShapeManagerImpl implements ShapeManager {
 
     private final DefinitionUtils definitionUtils;

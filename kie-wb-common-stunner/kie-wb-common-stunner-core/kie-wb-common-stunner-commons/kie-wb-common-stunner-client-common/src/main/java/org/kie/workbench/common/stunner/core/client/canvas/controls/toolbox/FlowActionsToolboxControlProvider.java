@@ -25,6 +25,8 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.google.gwt.logging.client.LogConfiguration;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.command.ToolboxCommand;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.command.ToolboxCommandFactory;
@@ -41,6 +43,7 @@ import org.kie.workbench.common.stunner.core.graph.Node;
 import org.kie.workbench.common.stunner.core.graph.content.definition.Definition;
 import org.kie.workbench.common.stunner.core.lookup.util.CommonLookups;
 import org.kie.workbench.common.stunner.core.util.DefinitionUtils;
+import org.uberfire.async.UberfireActivityFragment;
 
 /**
  * A toolbox control provider implementation that provides buttons to create new elements
@@ -55,6 +58,7 @@ import org.kie.workbench.common.stunner.core.util.DefinitionUtils;
  * the base morph types that match all the given targets.
  */
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class FlowActionsToolboxControlProvider extends AbstractToolboxControlProvider {
 
     private static Logger LOGGER = Logger.getLogger(FlowActionsToolboxControlProvider.class.getName());

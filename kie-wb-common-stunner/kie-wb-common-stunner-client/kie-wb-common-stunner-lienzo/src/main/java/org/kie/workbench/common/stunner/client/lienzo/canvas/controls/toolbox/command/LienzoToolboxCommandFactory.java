@@ -20,14 +20,18 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import com.ait.lienzo.client.core.shape.Shape;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.client.lienzo.util.LirnzoSvgPaths;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.command.ToolboxCommandFactory;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.command.actions.RemoveToolboxCommand;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.command.builder.NewConnectorCommand;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.command.builder.NewNodeCommand;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class LienzoToolboxCommandFactory extends ToolboxCommandFactory {
 
     private final ManagedInstance<RemoveToolboxCommand> removeToolboxCommands;

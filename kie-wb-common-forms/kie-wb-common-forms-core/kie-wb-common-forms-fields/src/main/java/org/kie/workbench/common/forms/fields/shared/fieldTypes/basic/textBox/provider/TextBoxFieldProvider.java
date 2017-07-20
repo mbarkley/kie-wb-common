@@ -18,14 +18,17 @@ package org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.textBox.pr
 
 import javax.enterprise.context.Dependent;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.BasicTypeFieldProvider;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.textBox.definition.CharacterBoxFieldDefinition;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.textBox.definition.TextBoxBaseDefinition;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.textBox.definition.TextBoxFieldDefinition;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.textBox.type.TextBoxFieldType;
 import org.kie.workbench.common.forms.model.TypeInfo;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class TextBoxFieldProvider extends BasicTypeFieldProvider<TextBoxBaseDefinition> {
 
     @Override

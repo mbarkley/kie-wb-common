@@ -20,6 +20,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.bpmn.client.shape.def.BPMNDiagramShapeDef;
 import org.kie.workbench.common.stunner.bpmn.client.shape.def.EndEventShapeDef;
 import org.kie.workbench.common.stunner.bpmn.client.shape.def.GatewayShapeDef;
@@ -53,8 +54,10 @@ import org.kie.workbench.common.stunner.core.client.shape.factory.ShapeFactory;
 import org.kie.workbench.common.stunner.core.definition.shape.Glyph;
 import org.kie.workbench.common.stunner.shapes.client.factory.BasicShapesFactory;
 import org.kie.workbench.common.stunner.svg.client.shape.factory.SVGShapeFactory;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class BPMNShapeFactory
         implements ShapeFactory<BPMNDefinition, Shape> {
 

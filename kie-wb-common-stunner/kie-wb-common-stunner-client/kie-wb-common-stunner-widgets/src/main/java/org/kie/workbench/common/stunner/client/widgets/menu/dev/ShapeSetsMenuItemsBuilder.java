@@ -28,15 +28,18 @@ import org.gwtbootstrap3.client.ui.DropDownMenu;
 import org.gwtbootstrap3.client.ui.constants.ButtonSize;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.client.widgets.menu.MenuUtils;
 import org.kie.workbench.common.stunner.core.client.ShapeSet;
 import org.kie.workbench.common.stunner.core.client.api.ShapeManager;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.workbench.model.menu.MenuItem;
 
 /**
  * The menu builder that provides a dropdown menu item in order to create new diagrams.
  */
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class ShapeSetsMenuItemsBuilder {
 
     private final ShapeManager shapeManager;

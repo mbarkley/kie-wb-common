@@ -20,12 +20,15 @@ import java.util.logging.Logger;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.client.widgets.menu.dev.AbstractMenuDevCommand;
 import org.kie.workbench.common.stunner.core.client.api.AbstractClientSessionManager;
 import org.kie.workbench.common.stunner.core.client.session.ClientFullSession;
 import org.kie.workbench.common.stunner.core.client.util.StunnerClientLogger;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class LogCommandHistoryDevCommand extends AbstractMenuDevCommand {
 
     private static Logger LOGGER = Logger.getLogger(LogCommandHistoryDevCommand.class.getName());

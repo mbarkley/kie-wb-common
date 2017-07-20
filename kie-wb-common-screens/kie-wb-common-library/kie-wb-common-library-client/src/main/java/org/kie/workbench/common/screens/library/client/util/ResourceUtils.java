@@ -23,15 +23,18 @@ import java.util.List;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.screens.explorer.client.utils.Classifier;
 import org.kie.workbench.common.screens.explorer.client.utils.Utils;
 import org.kie.workbench.common.widgets.client.handlers.NewProjectHandler;
 import org.kie.workbench.common.widgets.client.handlers.NewResourceHandler;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.client.workbench.type.ClientResourceType;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ResourceUtils {
 
     private Classifier classifier;

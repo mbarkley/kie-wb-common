@@ -22,6 +22,7 @@ import javax.enterprise.event.Observes;
 import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.client.widgets.presenters.diagram.DiagramViewer;
 import org.kie.workbench.common.stunner.client.widgets.presenters.diagram.impl.DiagramPreviewProxy;
@@ -47,6 +48,7 @@ import org.kie.workbench.common.stunner.core.client.session.impl.AbstractClientS
 import org.kie.workbench.common.stunner.core.diagram.Diagram;
 import org.kie.workbench.common.stunner.core.graph.util.GraphUtils;
 import org.kie.workbench.common.stunner.core.util.DefinitionUtils;
+import org.uberfire.async.UberfireActivityFragment;
 
 import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull;
 
@@ -57,6 +59,7 @@ import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull
  * size for the preview.
  */
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class SessionPreviewImpl
         extends AbstractSessionViewer<AbstractClientSession, AbstractCanvasHandler>
         implements SessionDiagramPreview<AbstractClientSession> {

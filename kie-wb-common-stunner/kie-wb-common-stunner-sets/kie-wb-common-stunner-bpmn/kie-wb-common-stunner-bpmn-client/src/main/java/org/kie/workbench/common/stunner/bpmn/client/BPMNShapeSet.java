@@ -19,12 +19,15 @@ package org.kie.workbench.common.stunner.bpmn.client;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.bpmn.BPMNDefinitionSet;
 import org.kie.workbench.common.stunner.bpmn.client.shape.factory.BPMNShapeFactory;
 import org.kie.workbench.common.stunner.core.api.DefinitionManager;
 import org.kie.workbench.common.stunner.core.client.AbstractBindableShapeSet;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class BPMNShapeSet extends AbstractBindableShapeSet<BPMNShapeFactory> {
 
     private final DefinitionManager definitionManager;

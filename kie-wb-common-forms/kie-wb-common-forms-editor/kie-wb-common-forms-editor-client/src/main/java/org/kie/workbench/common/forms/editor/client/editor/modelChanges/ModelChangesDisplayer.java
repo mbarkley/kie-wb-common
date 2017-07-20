@@ -22,6 +22,7 @@ import java.util.stream.Collectors;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.editor.client.editor.modelChanges.displayers.conflicts.PropertiesConflictsDisplayer;
 import org.kie.workbench.common.forms.editor.client.editor.modelChanges.displayers.newProperties.NewPropertiesDisplayer;
 import org.kie.workbench.common.forms.editor.model.FormModelSynchronizationResult;
@@ -31,10 +32,12 @@ import org.kie.workbench.common.forms.model.FieldDefinition;
 import org.kie.workbench.common.forms.model.FormDefinition;
 import org.kie.workbench.common.forms.model.FormModel;
 import org.kie.workbench.common.forms.service.shared.FieldManager;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.validation.PortablePreconditions;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ModelChangesDisplayer implements ModelChangesDisplayerView.Presenter {
 
     private ModelChangesDisplayerView view;

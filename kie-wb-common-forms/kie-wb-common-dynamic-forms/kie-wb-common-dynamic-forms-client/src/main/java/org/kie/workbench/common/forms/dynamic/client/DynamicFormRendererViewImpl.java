@@ -22,15 +22,19 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.forms.dynamic.client.rendering.FieldLayoutComponent;
 import org.kie.workbench.common.forms.dynamic.client.rendering.FormLayoutGenerator;
 import org.kie.workbench.common.forms.dynamic.service.shared.FormRenderingContext;
 import org.kie.workbench.common.forms.model.FieldDefinition;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class DynamicFormRendererViewImpl extends Composite implements DynamicFormRenderer.DynamicFormRendererView {
 
     @Inject

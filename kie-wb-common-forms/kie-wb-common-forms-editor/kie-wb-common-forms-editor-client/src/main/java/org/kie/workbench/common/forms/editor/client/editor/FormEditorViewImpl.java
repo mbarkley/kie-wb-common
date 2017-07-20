@@ -23,14 +23,18 @@ import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RequiresResize;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.widgets.metadata.client.KieEditorViewImpl;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.layout.editor.client.api.LayoutEditor;
 
 @Dependent
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class FormEditorViewImpl extends KieEditorViewImpl implements FormEditorPresenter.FormEditorView,
                                                                      RequiresResize {
 

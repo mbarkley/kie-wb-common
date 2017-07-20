@@ -19,9 +19,12 @@ package org.kie.workbench.common.stunner.client.widgets.toolbar.command;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ToolbarCommandFactory {
 
     private final ManagedInstance<ClearStatesToolbarCommand> clearStatesCommand;

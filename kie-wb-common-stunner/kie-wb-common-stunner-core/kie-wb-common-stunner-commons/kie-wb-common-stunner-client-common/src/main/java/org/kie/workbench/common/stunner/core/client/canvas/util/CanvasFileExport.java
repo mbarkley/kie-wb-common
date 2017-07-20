@@ -19,9 +19,11 @@ package org.kie.workbench.common.stunner.core.client.canvas.util;
 import java.util.function.Consumer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.AsyncBeanLoader;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
 import org.kie.workbench.common.stunner.core.client.canvas.CanvasExport;
 import org.kie.workbench.common.stunner.core.client.canvas.Layer;
@@ -45,8 +47,8 @@ public class CanvasFileExport {
     private static final String EXT_PDF = "pdf";
 
     private final CanvasExport<AbstractCanvasHandler> canvasExport;
-    private final FileExport<ImageDataUriContent> imageFileExport;
-    private final FileExport<PdfDocument> pdfFileExport;
+    private final AsyncBeanLoader<FileExport<ImageDataUriContent>> imageFileExport;
+    private final AsyncBeanLoader<FileExport<PdfDocument>> pdfFileExport;
     private final FileExportsPreferences preferences;
 
     protected CanvasFileExport() {
@@ -58,8 +60,8 @@ public class CanvasFileExport {
 
     @Inject
     public CanvasFileExport(final CanvasExport<AbstractCanvasHandler> canvasExport,
-                            final FileExport<ImageDataUriContent> imageFileExport,
-                            final FileExport<PdfDocument> pdfFileExport,
+                            final AsyncBeanLoader<FileExport<ImageDataUriContent>> imageFileExport,
+                            final AsyncBeanLoader<FileExport<PdfDocument>> pdfFileExport,
                             final FileExportsPreferences preferences) {
         this.canvasExport = canvasExport;
         this.imageFileExport = imageFileExport;
@@ -106,8 +108,7 @@ public class CanvasFileExport {
                          40,
                          290,
                          150);
-        pdfFileExport.export(content,
-                             fileName + "." + EXT_PDF);
+        pdfFileExport.call(exporter -> exporter.export(content, fileName + "." + EXT_PDF));
     }
 
     private void exportImage(final AbstractCanvasHandler canvasHandler,
@@ -116,8 +117,7 @@ public class CanvasFileExport {
         final String dataUrl = toDataImageURL(canvasHandler,
                                               type);
         final ImageDataUriContent content = ImageDataUriContent.create(dataUrl);
-        imageFileExport.export(content,
-                               fileName + "." + getFileExtension(type));
+        imageFileExport.call( exporter -> exporter.export(content, fileName + "." + getFileExtension(type)));
     }
 
     private String toDataImageURL(final AbstractCanvasHandler canvasHandler,

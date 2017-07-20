@@ -19,6 +19,9 @@ package org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddom
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
+import org.uberfire.async.UberfireActivityFragment;
+
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
@@ -26,6 +29,7 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.Widget;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class AdvancedDomainScreenViewImpl
         extends Composite
         implements AdvancedDomainScreenView {

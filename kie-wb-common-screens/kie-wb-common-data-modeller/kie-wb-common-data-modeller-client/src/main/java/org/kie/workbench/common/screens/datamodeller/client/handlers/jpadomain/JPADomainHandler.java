@@ -20,6 +20,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.command.AddPropertyCommand;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommand;
 import org.kie.workbench.common.screens.datamodeller.client.command.FieldTypeChangeCommand;
@@ -32,8 +33,10 @@ import org.kie.workbench.common.screens.datamodeller.model.jpadomain.JPADomainAn
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
 import org.kie.workbench.common.services.datamodeller.core.ObjectProperty;
 import org.kie.workbench.common.services.shared.preferences.ApplicationPreferences;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class JPADomainHandler implements DomainHandler {
 
     public static final String ENABLE_DATA_OBJECT_AUDIT = "enable-data-object-audit";

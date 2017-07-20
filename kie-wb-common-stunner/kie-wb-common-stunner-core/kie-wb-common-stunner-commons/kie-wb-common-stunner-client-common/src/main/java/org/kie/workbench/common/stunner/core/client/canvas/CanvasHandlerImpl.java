@@ -20,6 +20,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.api.FactoryManager;
 import org.kie.workbench.common.stunner.core.client.api.ClientDefinitionManager;
 import org.kie.workbench.common.stunner.core.client.api.ShapeManager;
@@ -43,6 +44,7 @@ import org.kie.workbench.common.stunner.core.graph.processing.index.Index;
 import org.kie.workbench.common.stunner.core.graph.processing.index.MutableIndex;
 import org.kie.workbench.common.stunner.core.graph.util.GraphUtils;
 import org.kie.workbench.common.stunner.core.rule.RuleManager;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.mvp.Command;
 import org.uberfire.mvp.ParameterizedCommand;
 
@@ -53,6 +55,7 @@ import org.uberfire.mvp.ParameterizedCommand;
  * @param <C> The handled canvas type.
  */
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class CanvasHandlerImpl<D extends Diagram, C extends AbstractCanvas> extends BaseCanvasHandler<D, C> {
 
     private final ClientFactoryService clientFactoryServices;

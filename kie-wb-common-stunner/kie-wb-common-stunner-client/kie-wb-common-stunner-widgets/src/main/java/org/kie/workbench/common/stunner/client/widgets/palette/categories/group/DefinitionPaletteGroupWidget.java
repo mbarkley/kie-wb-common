@@ -25,14 +25,17 @@ import javax.inject.Inject;
 
 import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.dom.HTMLElement;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.client.widgets.palette.categories.items.DefinitionPaletteItemWidget;
 import org.kie.workbench.common.stunner.core.client.components.palette.Palette;
 import org.kie.workbench.common.stunner.core.client.components.palette.model.definition.DefinitionPaletteGroup;
 import org.kie.workbench.common.stunner.core.client.components.palette.model.definition.DefinitionPaletteItem;
 import org.kie.workbench.common.stunner.core.client.shape.factory.ShapeFactory;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DefinitionPaletteGroupWidget implements DefinitionPaletteGroupWidgetView.Presenter,
                                                      IsElement {
 

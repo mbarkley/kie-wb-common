@@ -22,13 +22,16 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.server.controller.api.model.runtime.Container;
 import org.kie.workbench.common.screens.server.management.client.remote.card.ContainerCardPresenter;
+import org.uberfire.async.UberfireActivityFragment;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class RemoteStatusPresenter {
 
     public interface View extends IsWidget {

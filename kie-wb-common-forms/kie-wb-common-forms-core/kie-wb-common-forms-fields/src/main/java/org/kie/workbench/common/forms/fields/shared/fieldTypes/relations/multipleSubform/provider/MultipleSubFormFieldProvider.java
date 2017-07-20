@@ -19,6 +19,7 @@ package org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.multip
 import javax.enterprise.context.Dependent;
 
 import org.jboss.errai.common.client.api.Assert;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.MultipleValueFieldProvider;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.ModelTypeFieldProvider;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.multipleSubform.definition.MultipleSubFormFieldDefinition;
@@ -26,8 +27,10 @@ import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.multipl
 import org.kie.workbench.common.forms.model.FieldDefinition;
 import org.kie.workbench.common.forms.model.TypeInfo;
 import org.kie.workbench.common.forms.model.TypeKind;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class MultipleSubFormFieldProvider
         implements ModelTypeFieldProvider<MultipleSubFormFieldDefinition>,
                    MultipleValueFieldProvider<MultipleSubFormFieldDefinition> {

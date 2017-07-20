@@ -21,6 +21,8 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.ait.lienzo.client.core.shape.Group;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.client.lienzo.components.glyph.LienzoGlyphRenderer;
 import org.kie.workbench.common.stunner.client.lienzo.components.glyph.LienzoGlyphRenderers;
 import org.kie.workbench.common.stunner.core.client.api.ShapeManager;
@@ -32,8 +34,10 @@ import org.kie.workbench.common.stunner.core.client.components.views.CanvasDefin
 import org.kie.workbench.common.stunner.core.client.service.ClientFactoryService;
 import org.kie.workbench.common.stunner.core.definition.shape.Glyph;
 import org.kie.workbench.common.stunner.core.graph.processing.index.bounds.GraphBoundsIndexer;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class LienzoNewConnectorCommand extends NewConnectorCommand<Group> {
 
     private final LienzoGlyphRenderer<Glyph> glyphLienzoGlyphRenderer;

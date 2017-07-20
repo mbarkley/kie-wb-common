@@ -19,13 +19,16 @@ package org.kie.workbench.common.screens.datamodeller.client.widgets.packagesele
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
 import org.kie.workbench.common.screens.datamodeller.client.util.DataModelerUtils;
 import org.kie.workbench.common.screens.datamodeller.client.validation.ValidatorService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorCallback;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class NewPackagePopup
     implements NewPackagePopupView.Presenter {
 

@@ -21,11 +21,14 @@ import java.util.List;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerContext;
 import org.kie.workbench.common.screens.datamodeller.client.util.DataModelerUtils;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.data.Pair;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class NewFieldPopup
         implements NewFieldPopupView.Presenter {
 
@@ -56,7 +59,7 @@ public class NewFieldPopup
                     context.getDataModel().getDependencyJavaEnums(),
                     false );
         } else {
-            typeList = new ArrayList<Pair<String, String>>();
+            typeList = new ArrayList<>();
         }
         view.initTypeList( typeList, true );
     }

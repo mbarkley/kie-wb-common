@@ -22,6 +22,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.bpmn.BPMNDefinitionSet;
 import org.kie.workbench.common.stunner.bpmn.definition.BPMNDiagramImpl;
 import org.kie.workbench.common.stunner.bpmn.definition.BaseEndEvent;
@@ -45,9 +46,11 @@ import org.kie.workbench.common.stunner.core.client.api.ShapeManager;
 import org.kie.workbench.common.stunner.core.client.components.palette.factory.BindableDefSetPaletteDefinitionFactory;
 import org.kie.workbench.common.stunner.core.client.components.palette.model.definition.DefinitionSetPaletteBuilder;
 import org.kie.workbench.common.stunner.core.i18n.AbstractTranslationService;
+import org.uberfire.async.UberfireActivityFragment;
 
 // TODO: i18n.
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class BPMNPaletteDefinitionFactory extends BindableDefSetPaletteDefinitionFactory {
 
   private final AbstractTranslationService translationService;
@@ -75,8 +78,8 @@ public class BPMNPaletteDefinitionFactory extends BindableDefSetPaletteDefinitio
     put(Categories.CONTAINERS,
         Lane.class);
   }};
-  private final Map<String, String> CAT_TITLES = new HashMap<String, String>(6);
-  private static final Map<String, String> MORPH_GROUP_TITLES = new HashMap<String, String>(6);
+  private final Map<String, String> CAT_TITLES = new HashMap<>(6);
+  private static final Map<String, String> MORPH_GROUP_TITLES = new HashMap<>(6);
 
 
   @Inject

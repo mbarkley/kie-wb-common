@@ -20,12 +20,15 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerContext;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.common.domain.BaseDomainEditor;
 import org.kie.workbench.common.screens.datamodeller.events.DataObjectFieldSelectedEvent;
 import org.kie.workbench.common.screens.datamodeller.events.DataObjectSelectedEvent;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class MainDomainEditor extends BaseDomainEditor {
 
     public static final String MAIN_DOMAIN = "MAIN";

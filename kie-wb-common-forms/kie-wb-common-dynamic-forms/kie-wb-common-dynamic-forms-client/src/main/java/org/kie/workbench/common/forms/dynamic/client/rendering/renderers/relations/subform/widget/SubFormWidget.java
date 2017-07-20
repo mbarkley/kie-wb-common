@@ -22,6 +22,8 @@ import javax.inject.Inject;
 import com.google.gwt.user.client.TakesValue;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.FlowPanel;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.forms.dynamic.client.DynamicFormRenderer;
@@ -29,8 +31,10 @@ import org.kie.workbench.common.forms.dynamic.service.shared.FormRenderingContex
 import org.kie.workbench.common.forms.dynamic.service.shared.RenderMode;
 import org.kie.workbench.common.forms.processing.engine.handling.FieldChangeHandler;
 import org.kie.workbench.common.forms.processing.engine.handling.IsNestedModel;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class SubFormWidget extends Composite implements TakesValue<Object>,
                                                         IsNestedModel {
 

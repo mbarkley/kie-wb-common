@@ -19,9 +19,12 @@ package org.kie.workbench.common.stunner.core.client.session.command.impl;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class SessionCommandFactory {
 
     private final ManagedInstance<ClearStatesSessionCommand> clearStatesCommand;

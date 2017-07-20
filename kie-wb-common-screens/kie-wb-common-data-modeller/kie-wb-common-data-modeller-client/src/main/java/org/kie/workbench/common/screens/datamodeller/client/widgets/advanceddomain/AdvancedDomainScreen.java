@@ -20,15 +20,19 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
+
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
 
 
 
 @ApplicationScoped
 @WorkbenchScreen ( identifier = "AdvancedDomainScreen")
+@LoadAsync(UberfireActivityFragment.class)
 public class AdvancedDomainScreen {
 
     AdvancedDomainScreenView view;

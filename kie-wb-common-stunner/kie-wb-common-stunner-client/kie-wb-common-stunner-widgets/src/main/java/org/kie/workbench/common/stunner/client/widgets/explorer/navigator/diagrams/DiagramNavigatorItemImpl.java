@@ -26,13 +26,17 @@ import com.google.gwt.logging.client.LogConfiguration;
 import com.google.gwt.safehtml.shared.SafeUri;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.client.widgets.explorer.navigator.NavigatorItem;
 import org.kie.workbench.common.stunner.client.widgets.explorer.navigator.NavigatorItemView;
 import org.kie.workbench.common.stunner.core.client.api.ShapeManager;
 import org.kie.workbench.common.stunner.core.lookup.diagram.DiagramRepresentation;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DiagramNavigatorItemImpl implements IsWidget,
                                                  DiagramNavigatorItem {
 
@@ -61,6 +65,7 @@ public class DiagramNavigatorItemImpl implements IsWidget,
         return view.asWidget();
     }
 
+    @Override
     public void show(final DiagramRepresentation diagramRepresentation,
                      final int widthInPx,
                      final int heightInPx,

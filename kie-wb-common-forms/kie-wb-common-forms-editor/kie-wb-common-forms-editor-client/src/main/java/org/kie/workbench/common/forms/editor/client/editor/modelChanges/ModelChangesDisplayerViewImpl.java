@@ -22,14 +22,17 @@ import javax.inject.Inject;
 import org.jboss.errai.common.client.dom.DOMUtil;
 import org.jboss.errai.common.client.dom.Document;
 import org.jboss.errai.common.client.ui.ElementWrapperWidget;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.forms.editor.client.resources.i18n.FormEditorConstants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.common.popups.BaseModal;
 import org.uberfire.ext.widgets.common.client.common.popups.footers.ModalFooterOKButton;
 
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class ModelChangesDisplayerViewImpl implements ModelChangesDisplayerView,
                                                       IsElement {
 

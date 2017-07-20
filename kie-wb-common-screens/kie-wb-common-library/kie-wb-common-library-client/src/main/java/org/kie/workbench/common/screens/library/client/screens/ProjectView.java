@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import org.jboss.errai.common.client.dom.DOMUtil;
 import org.jboss.errai.common.client.dom.Div;
 import org.jboss.errai.common.client.dom.Input;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
@@ -34,9 +35,11 @@ import org.kie.workbench.common.screens.library.client.resources.i18n.LibraryCon
 import org.kie.workbench.common.screens.library.client.widgets.project.AssetItemWidget;
 import org.kie.workbench.common.screens.library.client.widgets.project.AssetsActionsWidget;
 import org.kie.workbench.common.screens.library.client.widgets.project.ProjectActionsWidget;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.mvp.Command;
 
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectView
         implements ProjectScreen.View,
                    IsElement {

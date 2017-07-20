@@ -19,12 +19,15 @@ package org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.integerBox
 import java.math.BigInteger;
 import javax.enterprise.context.Dependent;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.BasicTypeFieldProvider;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.integerBox.definition.IntegerBoxFieldDefinition;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.integerBox.type.IntegerBoxFieldType;
 import org.kie.workbench.common.forms.model.TypeInfo;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class IntegerBoxFieldProvider extends BasicTypeFieldProvider<IntegerBoxFieldDefinition> {
 
     @Override

@@ -24,6 +24,8 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.client.widgets.event.SessionDiagramOpenedEvent;
 import org.kie.workbench.common.stunner.client.widgets.explorer.tree.TreeExplorer;
 import org.kie.workbench.common.stunner.client.widgets.presenters.session.SessionPresenterFactory;
@@ -38,6 +40,7 @@ import org.kie.workbench.common.stunner.core.client.session.impl.AbstractClientF
 import org.kie.workbench.common.stunner.core.client.session.impl.AbstractClientReadOnlySession;
 import org.kie.workbench.common.stunner.core.client.session.impl.AbstractClientSession;
 import org.kie.workbench.common.stunner.core.diagram.Diagram;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchContextId;
 import org.uberfire.client.annotations.WorkbenchMenu;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
@@ -60,6 +63,7 @@ import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull
  */
 @Dependent
 @WorkbenchScreen(identifier = ProjectDiagramExplorerScreen.SCREEN_ID)
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectDiagramExplorerScreen {
 
     public static final String SCREEN_ID = "ProjectDiagramExplorerScreen";

@@ -19,6 +19,7 @@ package org.kie.workbench.common.stunner.client.widgets.toolbar.impl;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.client.widgets.toolbar.Toolbar;
 import org.kie.workbench.common.stunner.client.widgets.toolbar.ToolbarFactory;
@@ -26,8 +27,10 @@ import org.kie.workbench.common.stunner.client.widgets.toolbar.ToolbarView;
 import org.kie.workbench.common.stunner.client.widgets.toolbar.command.ToolbarCommandFactory;
 import org.kie.workbench.common.stunner.client.widgets.toolbar.item.AbstractToolbarItem;
 import org.kie.workbench.common.stunner.core.client.session.impl.AbstractClientFullSession;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class EditorToolbarFactory implements ToolbarFactory<AbstractClientFullSession> {
 
     private final ToolbarCommandFactory commandFactory;

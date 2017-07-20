@@ -18,12 +18,15 @@ package org.kie.workbench.common.screens.explorer.client.widgets.business;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.explorer.client.widgets.BaseViewPresenter;
+import org.uberfire.async.UberfireActivityFragment;
 
 /**
  * Repository, Package, Folder and File explorer
  */
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class BusinessViewPresenter
         extends BaseViewPresenter {
 

@@ -25,6 +25,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import org.guvnor.common.services.shared.validation.model.ValidationMessage;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.pdescriptor.ClassRow;
 import org.kie.workbench.common.screens.datamodeller.client.pdescriptor.ClassRowImpl;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.datasourceselector.DataSourceInfo;
@@ -45,6 +46,7 @@ import org.kie.workbench.common.widgets.client.popups.validation.ValidationPopup
 import org.kie.workbench.common.widgets.client.resources.i18n.CommonConstants;
 import org.kie.workbench.common.widgets.metadata.client.KieEditor;
 import org.uberfire.annotations.Customizable;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.client.annotations.WorkbenchEditor;
 import org.uberfire.client.annotations.WorkbenchMenu;
@@ -68,6 +70,7 @@ import org.uberfire.workbench.model.menu.Menus;
 @WorkbenchEditor( identifier = "PersistenceDescriptorEditor",
         supportedTypes = { PersistenceDescriptorType.class },
         priority = Integer.MAX_VALUE )
+@LoadAsync(UberfireActivityFragment.class)
 public class PersistenceDescriptorEditorPresenter
         extends KieEditor
         implements PersistenceDescriptorEditorView.Presenter {
@@ -123,6 +126,7 @@ public class PersistenceDescriptorEditorPresenter
         view.redraw();
     }
 
+    @Override
     @WorkbenchPartTitle
     public String getTitleText() {
         if ( versionRecordManager.getCurrentPath() != null ) {
@@ -134,6 +138,7 @@ public class PersistenceDescriptorEditorPresenter
         return super.getTitleText();
     }
 
+    @Override
     @WorkbenchPartTitleDecoration
     public IsWidget getTitle() {
         return super.getTitle();
@@ -166,6 +171,7 @@ public class PersistenceDescriptorEditorPresenter
         return true;
     }
 
+    @Override
     @OnClose
     public void OnClose() {
         super.OnClose();
@@ -228,6 +234,7 @@ public class PersistenceDescriptorEditorPresenter
         return content;
     }
 
+    @Override
     protected void addSourcePage() {
 
         addPage( new PageImpl( view.getSourceEditor(),
@@ -245,10 +252,12 @@ public class PersistenceDescriptorEditorPresenter
         } );
     }
 
+    @Override
     protected void updateSource(String source) {
         view.setSource( source );
     }
 
+    @Override
     protected void save() {
         savePopUpPresenter.show( versionRecordManager.getCurrentPath(),
                 new ParameterizedCommand<String>() {
@@ -419,7 +428,7 @@ public class PersistenceDescriptorEditorPresenter
             public void callback( Boolean persistable ) {
                 view.hideBusyIndicator();
                 if ( persistable ) {
-                    List<String> classes = new ArrayList<String>(  );
+                    List<String> classes = new ArrayList<>(  );
                     classes.add( className );
                     appendPersistableClasses( classes );
                     view.getPersistenceUnitClasses().setNewClassHelpMessage( null );
@@ -451,7 +460,7 @@ public class PersistenceDescriptorEditorPresenter
     }
 
     private List<ClassRow> wrappClassesList( List<String> classes ) {
-        List<ClassRow> classRows = new ArrayList<ClassRow>(  );
+        List<ClassRow> classRows = new ArrayList<>(  );
         if ( classes == null ) return null;
         for ( String clazz : classes ) {
             classRows.add( new ClassRowImpl( clazz ) );
@@ -460,7 +469,7 @@ public class PersistenceDescriptorEditorPresenter
     }
 
     private List<String> unWrappClassesList( List<ClassRow> classRows ) {
-        List<String> classes = new ArrayList<String>(  );
+        List<String> classes = new ArrayList<>(  );
         if ( classRows == null ) return null;
         for ( ClassRow classRow : classRows ) {
             classes.add( classRow.getClassName() );
@@ -469,7 +478,7 @@ public class PersistenceDescriptorEditorPresenter
     }
 
     private List<PropertyRow> wrappPropertiesList( List<Property> properties ) {
-        List<PropertyRow> wrapperList = new ArrayList<PropertyRow>(  );
+        List<PropertyRow> wrapperList = new ArrayList<>(  );
         if ( properties == null ) return null;
         for ( Property property : properties ) {
             wrapperList.add( new PropertyWrapperRow( property ) );
@@ -478,7 +487,7 @@ public class PersistenceDescriptorEditorPresenter
     }
 
     private List<Property> unWrappPropertiesList( List<PropertyRow> propertyRows ) {
-        List<Property> properties = new ArrayList<Property>(  );
+        List<Property> properties = new ArrayList<>(  );
         if ( propertyRows == null ) return null;
         for ( PropertyRow propertyRow : propertyRows ) {
             properties.add( new Property( propertyRow.getName(), propertyRow.getValue() ) );

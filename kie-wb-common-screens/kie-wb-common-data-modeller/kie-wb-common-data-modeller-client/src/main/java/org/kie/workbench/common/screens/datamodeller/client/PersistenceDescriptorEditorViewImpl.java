@@ -36,11 +36,14 @@ import org.gwtbootstrap3.client.ui.PanelBody;
 import org.gwtbootstrap3.client.ui.PanelCollapse;
 import org.gwtbootstrap3.client.ui.Radio;
 import org.gwtbootstrap3.client.ui.TextBox;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.pdescriptor.PersistenceUnitPropertyGrid;
 import org.kie.workbench.common.screens.datamodeller.client.pdescriptor.ProjectClassList;
 import org.kie.workbench.common.screens.datamodeller.client.pdescriptor.XMLViewer;
 import org.kie.workbench.common.widgets.metadata.client.KieEditorViewImpl;
+import org.uberfire.async.UberfireActivityFragment;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class PersistenceDescriptorEditorViewImpl
         extends KieEditorViewImpl
         implements PersistenceDescriptorEditorView {

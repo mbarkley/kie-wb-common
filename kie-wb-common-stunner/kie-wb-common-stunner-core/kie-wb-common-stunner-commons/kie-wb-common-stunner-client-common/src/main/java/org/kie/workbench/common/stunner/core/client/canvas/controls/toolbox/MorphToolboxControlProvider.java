@@ -23,6 +23,7 @@ import java.util.logging.Logger;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.command.ToolboxCommand;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.command.palette.AbstractPaletteMorphCommand;
@@ -33,12 +34,14 @@ import org.kie.workbench.common.stunner.core.client.components.toolbox.builder.T
 import org.kie.workbench.common.stunner.core.graph.Element;
 import org.kie.workbench.common.stunner.core.graph.content.definition.Definition;
 import org.kie.workbench.common.stunner.core.util.DefinitionUtils;
+import org.uberfire.async.UberfireActivityFragment;
 
 /**
  * A toolbox control provider implementation that provides buttons for each of the target
  * types in which source node can morph into.
  */
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class MorphToolboxControlProvider extends AbstractToolboxControlProvider {
 
     private static Logger LOGGER = Logger.getLogger(MorphToolboxControlProvider.class.getName());

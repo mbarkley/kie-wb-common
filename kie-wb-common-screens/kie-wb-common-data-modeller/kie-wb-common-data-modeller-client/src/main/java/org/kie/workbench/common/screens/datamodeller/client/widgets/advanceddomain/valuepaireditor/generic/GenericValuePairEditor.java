@@ -20,12 +20,16 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.valuepaireditor.ValuePairEditor;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.valuepaireditor.ValuePairEditorHandler;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.valuepaireditor.util.ValuePairEditorUtil;
 import org.kie.workbench.common.services.datamodeller.core.AnnotationValuePairDefinition;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class GenericValuePairEditor
     implements GenericValuePairEditorView.Presenter,
         ValuePairEditor<String> {
@@ -51,6 +55,7 @@ public class GenericValuePairEditor
         return view.asWidget();
     }
 
+    @Override
     public void clear() {
         view.clear();
     }
@@ -69,6 +74,7 @@ public class GenericValuePairEditor
         }
     }
 
+    @Override
     public void init( AnnotationValuePairDefinition valuePairDefinition ) {
         this.valuePairDefinition = valuePairDefinition;
         view.setValuePairLabel( ValuePairEditorUtil.buildValuePairLabel( valuePairDefinition ) );
@@ -83,10 +89,12 @@ public class GenericValuePairEditor
         this.name = name;
     }
 
+    @Override
     public String getValue() {
         return view.getValue();
     }
 
+    @Override
     public void setValue( String value ) {
         view.setValue( value );
     }
@@ -104,14 +112,17 @@ public class GenericValuePairEditor
         this.annotationClassName = annotationClassName;
     }
 
+    @Override
     public void setErrorMessage( String errorMessage ) {
         view.setErrorMessage( errorMessage );
     }
 
+    @Override
     public void clearErrorMessage() {
         view.clearErrorMessage();
     }
 
+    @Override
     public void showValidateButton( boolean show ) {
         view.showValidateButton( show );
     }
@@ -121,6 +132,7 @@ public class GenericValuePairEditor
         view.showValuePairName( show );
     }
 
+    @Override
     public void refresh() {
         view.refresh();
     }

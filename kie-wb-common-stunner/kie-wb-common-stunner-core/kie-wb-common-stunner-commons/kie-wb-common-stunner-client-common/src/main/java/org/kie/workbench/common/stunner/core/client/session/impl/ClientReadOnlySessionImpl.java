@@ -19,6 +19,7 @@ package org.kie.workbench.common.stunner.core.client.session.impl;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvas;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
 import org.kie.workbench.common.stunner.core.client.canvas.CanvasFactory;
@@ -26,8 +27,10 @@ import org.kie.workbench.common.stunner.core.client.canvas.controls.pan.PanContr
 import org.kie.workbench.common.stunner.core.client.canvas.controls.select.SelectionControl;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.zoom.ZoomControl;
 import org.kie.workbench.common.stunner.core.graph.Element;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ClientReadOnlySessionImpl extends AbstractClientReadOnlySession {
 
     @Inject

@@ -23,15 +23,18 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.Widget;
 import org.jboss.errai.common.client.ui.ElementWrapperWidget;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datasource.management.client.editor.driver.DriverDefEditorHelper;
 import org.kie.workbench.common.screens.datasource.management.client.editor.driver.DriverDefMainPanel;
 import org.kie.workbench.common.screens.datasource.management.client.editor.driver.DriverDefMainPanelView;
 import org.kie.workbench.common.screens.datasource.management.model.DriverDef;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.callbacks.Callback;
 import org.uberfire.ext.widgets.core.client.wizards.WizardPage;
 import org.uberfire.ext.widgets.core.client.wizards.WizardPageStatusChangeEvent;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DriverDefPage
         implements WizardPage,
                    DriverDefPageView.Presenter {

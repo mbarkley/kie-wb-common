@@ -20,11 +20,14 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.session.command.impl.SessionCommandFactory;
 import org.kie.workbench.common.stunner.core.client.session.command.impl.ValidateSessionCommand;
 import org.kie.workbench.common.stunner.core.client.session.impl.AbstractClientFullSession;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ValidateToolbarCommand extends AbstractToolbarCommand<AbstractClientFullSession, ValidateSessionCommand> {
 
     @Inject

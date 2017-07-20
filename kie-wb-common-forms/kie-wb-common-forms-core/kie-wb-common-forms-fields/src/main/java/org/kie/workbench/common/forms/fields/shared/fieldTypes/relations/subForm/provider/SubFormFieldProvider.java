@@ -19,14 +19,17 @@ package org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.subFor
 import javax.enterprise.context.Dependent;
 
 import org.jboss.errai.common.client.api.Assert;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.ModelTypeFieldProvider;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.subForm.definition.SubFormFieldDefinition;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.subForm.type.SubFormFieldType;
 import org.kie.workbench.common.forms.model.FieldDefinition;
 import org.kie.workbench.common.forms.model.TypeInfo;
 import org.kie.workbench.common.forms.model.TypeKind;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class SubFormFieldProvider
         implements ModelTypeFieldProvider<SubFormFieldDefinition> {
 

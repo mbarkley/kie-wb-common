@@ -20,12 +20,16 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.dynamic.client.rendering.FieldRenderer;
 import org.kie.workbench.common.stunner.bpmn.client.forms.util.ContextUtils;
 import org.kie.workbench.common.stunner.bpmn.definition.BPMNDefinition;
 import org.kie.workbench.common.stunner.bpmn.forms.model.AssignmentsEditorFieldDefinition;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class AssignmentsEditorFieldRenderer extends FieldRenderer<AssignmentsEditorFieldDefinition> {
 
     private AssignmentsEditorWidget assignmentsEditor;

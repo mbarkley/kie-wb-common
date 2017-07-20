@@ -26,17 +26,20 @@ import org.jboss.errai.bus.client.api.messaging.Message;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.ErrorCallback;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.datasourceselector.DataSourceInfo;
 import org.kie.workbench.common.screens.datasource.management.client.resources.i18n.DataSourceManagementConstants;
 import org.kie.workbench.common.screens.datasource.management.client.util.PopupsUtil;
 import org.kie.workbench.common.screens.datasource.management.model.DataSourceDefInfo;
 import org.kie.workbench.common.screens.datasource.management.service.DataSourceDefQueryService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.callbacks.DefaultErrorCallback;
 import org.uberfire.mvp.Command;
 import org.uberfire.mvp.ParameterizedCommand;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class DataSourceSelector
         implements DataSourceSelectorView.Presenter,
         org.kie.workbench.common.screens.datamodeller.client.widgets.datasourceselector.DataSourceSelector {
@@ -87,6 +90,7 @@ public class DataSourceSelector
         return project == null;
     }
 
+    @Override
     public void show(ParameterizedCommand<DataSourceInfo> onSelectCommand, Command onCloseCommand ) {
         this.onSelectCommand = onSelectCommand;
         this.onCloseCommand = onCloseCommand;

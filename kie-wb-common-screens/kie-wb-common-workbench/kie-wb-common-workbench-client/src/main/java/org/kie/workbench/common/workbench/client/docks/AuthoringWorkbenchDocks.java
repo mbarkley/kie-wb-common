@@ -24,9 +24,11 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.screens.library.api.preferences.LibraryInternalPreferences;
 import org.kie.workbench.common.workbench.client.resources.i18n.DefaultWorkbenchConstants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.workbench.docks.UberfireDock;
 import org.uberfire.client.workbench.docks.UberfireDockPosition;
 import org.uberfire.client.workbench.docks.UberfireDockReadyEvent;
@@ -35,6 +37,7 @@ import org.uberfire.client.workbench.docks.UberfireDocksInteractionEvent;
 import org.uberfire.mvp.PlaceRequest;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class AuthoringWorkbenchDocks {
 
     protected DefaultWorkbenchConstants constants = DefaultWorkbenchConstants.INSTANCE;

@@ -22,6 +22,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import org.jboss.errai.common.client.dom.Anchor;
 import org.jboss.errai.common.client.dom.DOMUtil;
 import org.jboss.errai.common.client.dom.Div;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
@@ -31,8 +32,10 @@ import org.kie.workbench.common.screens.library.client.widgets.project.AssetsAct
 import org.kie.workbench.common.screens.library.client.widgets.project.NewAssetHandlerWidget;
 import org.kie.workbench.common.screens.library.client.widgets.project.ProjectActionsWidget;
 import org.kie.workbench.common.widgets.client.handlers.NewResourceHandler;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class EmptyProjectView implements EmptyProjectScreen.View,
                                          IsElement {
 

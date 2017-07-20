@@ -22,12 +22,15 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import org.guvnor.common.services.shared.validation.model.ValidationMessage;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.widgets.client.resources.i18n.KieWorkbenchWidgetsConstants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.validation.PortablePreconditions;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ValidationPopup implements ValidationPopupView.Presenter {
 
     private ValidationPopupView view;

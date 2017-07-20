@@ -20,12 +20,14 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import org.jboss.errai.common.client.api.IsElement;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.library.api.ProjectInfo;
 import org.kie.workbench.common.screens.library.client.events.ProjectDetailEvent;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
 import org.kie.workbench.common.screens.library.client.util.ResourceUtils;
 import org.kie.workbench.common.widgets.client.handlers.NewResourceHandler;
 import org.kie.workbench.common.widgets.client.handlers.NewResourcePresenter;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
@@ -39,6 +41,7 @@ import static org.kie.workbench.common.screens.library.client.util.ResourceUtils
 import static org.kie.workbench.common.screens.library.client.util.ResourceUtils.isUploadHandler;
 
 @WorkbenchScreen(identifier = LibraryPlaces.EMPTY_PROJECT_SCREEN)
+@LoadAsync(UberfireActivityFragment.class)
 public class EmptyProjectScreen {
 
     public interface View extends UberElement<EmptyProjectScreen> {

@@ -20,12 +20,15 @@ import javax.inject.Inject;
 
 import org.jboss.errai.common.client.dom.DOMUtil;
 import org.jboss.errai.common.client.dom.UnorderedList;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.forms.editor.client.editor.modelChanges.displayers.conflicts.elements.ConflictElement;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class PropertiesConflictsDisplayerViewIpml implements PropertiesConflictsDisplayerView,
                                                              IsElement {
 

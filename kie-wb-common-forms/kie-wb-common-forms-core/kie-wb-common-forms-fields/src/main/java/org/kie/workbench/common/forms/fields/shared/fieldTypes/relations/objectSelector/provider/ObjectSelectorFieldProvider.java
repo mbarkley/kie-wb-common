@@ -18,6 +18,7 @@ package org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.object
 
 import javax.enterprise.context.Dependent;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.EntityRelationField;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.ModelTypeFieldProvider;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.objectSelector.definition.ObjectSelectorFieldDefinition;
@@ -25,8 +26,10 @@ import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.objectS
 import org.kie.workbench.common.forms.model.FieldDefinition;
 import org.kie.workbench.common.forms.model.TypeInfo;
 import org.kie.workbench.common.forms.model.TypeKind;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ObjectSelectorFieldProvider implements ModelTypeFieldProvider<ObjectSelectorFieldDefinition> {
 
     @Override

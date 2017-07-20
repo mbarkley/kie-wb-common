@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import com.google.gwt.user.client.ui.Widget;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.valuepaireditor.ValuePairEditor;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.valuepaireditor.ValuePairEditorProvider;
@@ -34,9 +35,11 @@ import org.kie.workbench.common.services.datamodeller.core.ElementType;
 import org.kie.workbench.common.services.datamodeller.driver.model.AnnotationParseRequest;
 import org.kie.workbench.common.services.datamodeller.driver.model.AnnotationParseResponse;
 import org.kie.workbench.common.services.shared.project.KieProject;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.core.client.wizards.WizardPageStatusChangeEvent;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ValuePairEditorPage
         extends CreateAnnotationWizardPage
         implements ValuePairEditorPageView.Presenter {

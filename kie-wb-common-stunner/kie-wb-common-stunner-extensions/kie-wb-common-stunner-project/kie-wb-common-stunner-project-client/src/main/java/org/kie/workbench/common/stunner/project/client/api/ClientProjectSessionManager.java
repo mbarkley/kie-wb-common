@@ -23,6 +23,7 @@ import javax.enterprise.inject.Any;
 import javax.enterprise.inject.Specializes;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.core.client.api.ClientSessionManagerImpl;
 import org.kie.workbench.common.stunner.core.client.session.ClientSessionFactory;
@@ -32,9 +33,11 @@ import org.kie.workbench.common.stunner.core.client.session.event.SessionOpenedE
 import org.kie.workbench.common.stunner.core.client.session.event.SessionPausedEvent;
 import org.kie.workbench.common.stunner.core.client.session.event.SessionResumedEvent;
 import org.kie.workbench.common.stunner.core.util.DefinitionUtils;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
 @Specializes
+@LoadAsync(UberfireActivityFragment.class)
 public class ClientProjectSessionManager extends ClientSessionManagerImpl {
 
     private static Logger LOGGER = Logger.getLogger(ClientProjectSessionManager.class.getName());

@@ -29,6 +29,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.container.SyncBeanManager;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.common.domain.ResourceOptions;
 import org.kie.workbench.common.screens.datamodeller.service.DataModelerService;
@@ -38,6 +39,7 @@ import org.kie.workbench.common.screens.javaeditor.client.type.JavaResourceType;
 import org.kie.workbench.common.widgets.client.handlers.DefaultNewResourceHandler;
 import org.kie.workbench.common.widgets.client.handlers.NewResourcePresenter;
 import org.kie.workbench.common.widgets.client.resources.i18n.CommonConstants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.mvp.PlaceManager;
 import org.uberfire.commons.data.Pair;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorWithReasonCallback;
@@ -47,6 +49,7 @@ import org.uberfire.mvp.Command;
 import org.uberfire.workbench.type.ResourceTypeDefinition;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class NewJavaFileTextHandler extends DefaultNewResourceHandler {
 
     @Inject
@@ -64,7 +67,7 @@ public class NewJavaFileTextHandler extends DefaultNewResourceHandler {
     @Inject
     private SyncBeanManager iocBeanManager;
 
-    private List<ResourceOptions> resourceOptions = new ArrayList<ResourceOptions>();
+    private List<ResourceOptions> resourceOptions = new ArrayList<>();
 
     @Inject
     private DomainHandlerRegistry domainHandlerRegistry;
@@ -77,7 +80,7 @@ public class NewJavaFileTextHandler extends DefaultNewResourceHandler {
             options = handler.getResourceOptions(false);
             if (options != null) {
                 resourceOptions.add(options);
-                extensions.add(new Pair<String, Widget>(handler.getName(),
+                extensions.add(new Pair<>(handler.getName(),
                                                         options.getWidget()));
             }
         }
@@ -105,7 +108,7 @@ public class NewJavaFileTextHandler extends DefaultNewResourceHandler {
 
         busyIndicatorView.showBusyIndicator(CommonConstants.INSTANCE.Saving());
 
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
         for (ResourceOptions options : resourceOptions) {
             params.putAll(options.getOptions());
         }

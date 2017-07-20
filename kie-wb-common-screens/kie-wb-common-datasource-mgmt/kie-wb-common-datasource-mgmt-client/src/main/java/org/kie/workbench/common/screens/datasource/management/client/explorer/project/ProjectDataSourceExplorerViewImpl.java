@@ -25,13 +25,16 @@ import org.guvnor.common.services.project.model.Project;
 import org.guvnor.structure.organizationalunit.OrganizationalUnit;
 import org.guvnor.structure.repositories.Repository;
 import org.jboss.errai.common.client.dom.Div;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.screens.datasource.management.client.explorer.common.DefExplorerContent;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectDataSourceExplorerViewImpl
         implements ProjectDataSourceExplorerView,
                    IsElement {

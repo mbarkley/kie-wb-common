@@ -21,8 +21,10 @@ import javax.inject.Inject;
 import com.google.gwt.user.client.ui.IsWidget;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.javaeditor.client.type.JavaResourceType;
 import org.kie.workbench.common.widgets.metadata.client.KieEditor;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.backend.vfs.VFSService;
 import org.uberfire.client.annotations.WorkbenchEditor;
@@ -34,6 +36,7 @@ import org.uberfire.mvp.Command;
 import org.uberfire.mvp.PlaceRequest;
 
 @WorkbenchEditor(identifier = "JavaEditor", supportedTypes = {JavaResourceType.class})
+@LoadAsync(UberfireActivityFragment.class)
 public class JavaEditorPresenter
         extends KieEditor {
 
@@ -58,11 +61,13 @@ public class JavaEditorPresenter
              place);
     }
 
+    @Override
     @WorkbenchPartTitle
     public String getTitleText() {
         return super.getTitleText();
     }
 
+    @Override
     @WorkbenchPartTitleDecoration
     public IsWidget getTitle() {
         return super.getTitle();
@@ -87,6 +92,7 @@ public class JavaEditorPresenter
         menuBuilder.addNewTopLevelMenu(versionRecordManager.buildMenu());
     }
 
+    @Override
     @WorkbenchPartView
     public IsWidget getWidget() {
         return super.getWidget();

@@ -30,6 +30,7 @@ import org.guvnor.structure.events.AfterDeleteOrganizationalUnitEvent;
 import org.guvnor.structure.events.AfterEditOrganizationalUnitEvent;
 import org.guvnor.structure.organizationalunit.OrganizationalUnit;
 import org.jboss.errai.common.client.api.Caller;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.screens.library.api.LibraryService;
 import org.kie.workbench.common.screens.library.api.search.FilterUpdateEvent;
@@ -38,6 +39,7 @@ import org.kie.workbench.common.screens.library.client.screens.organizationaluni
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
 import org.kie.workbench.common.screens.library.client.util.OrgUnitsMetricsFactory;
 import org.kie.workbench.common.screens.library.client.widgets.organizationalunit.OrganizationalUnitTileWidget;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
@@ -45,6 +47,7 @@ import org.uberfire.client.mvp.UberElement;
 
 @WorkbenchScreen(identifier = LibraryPlaces.ORGANIZATIONAL_UNITS_SCREEN,
         owningPerspective = LibraryPerspective.class)
+@LoadAsync(UberfireActivityFragment.class)
 public class OrganizationalUnitsScreen {
 
     public interface View extends UberElement<OrganizationalUnitsScreen> {

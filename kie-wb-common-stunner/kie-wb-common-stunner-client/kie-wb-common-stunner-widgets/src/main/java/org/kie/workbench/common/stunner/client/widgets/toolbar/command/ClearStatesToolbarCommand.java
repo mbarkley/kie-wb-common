@@ -20,11 +20,14 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import org.gwtbootstrap3.client.ui.constants.IconType;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.session.ClientReadOnlySession;
 import org.kie.workbench.common.stunner.core.client.session.command.impl.ClearStatesSessionCommand;
 import org.kie.workbench.common.stunner.core.client.session.command.impl.SessionCommandFactory;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ClearStatesToolbarCommand extends AbstractToolbarCommand<ClientReadOnlySession, ClearStatesSessionCommand> {
 
     @Inject

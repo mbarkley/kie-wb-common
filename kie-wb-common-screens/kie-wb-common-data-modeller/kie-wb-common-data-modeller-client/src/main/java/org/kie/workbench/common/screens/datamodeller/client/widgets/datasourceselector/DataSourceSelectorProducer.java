@@ -21,11 +21,14 @@ import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.uberfire.annotations.Customizable;
 import org.uberfire.annotations.FallbackImplementation;
+import org.uberfire.async.UberfireActivityFragment;
 
 //@Startup(value = StartupType.BOOTSTRAP, priority = -1)
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class DataSourceSelectorProducer {
 
     @Inject
@@ -37,6 +40,7 @@ public class DataSourceSelectorProducer {
 
     @Produces
     @Customizable
+    @LoadAsync(UberfireActivityFragment.class)
     public DataSourceSelector dataSourceSelectorProducer() {
         if ( this.dataSourceSelector.isUnsatisfied() ) {
             return defaultDataSourceSelector;

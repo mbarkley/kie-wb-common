@@ -33,6 +33,7 @@ import org.guvnor.common.services.shared.validation.model.ValidationMessage;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerContext;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerErrorCallback;
 import org.kie.workbench.common.screens.datamodeller.client.command.AddPropertyCommand;
@@ -60,6 +61,7 @@ import org.kie.workbench.common.screens.datamodeller.validation.DataObjectValida
 import org.kie.workbench.common.services.datamodeller.core.DataModel;
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
 import org.kie.workbench.common.services.datamodeller.core.ObjectProperty;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.client.mvp.LockRequiredEvent;
 import org.uberfire.client.mvp.PlaceManager;
@@ -70,6 +72,7 @@ import org.uberfire.mvp.Command;
 import org.uberfire.mvp.impl.PathPlaceRequest;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DataObjectBrowser
         implements IsWidget,
                    DataObjectBrowserView.Presenter {
@@ -80,7 +83,7 @@ public class DataObjectBrowser
 
     protected DataModelerContext context;
 
-    protected ListDataProvider<ObjectProperty> dataProvider = new ListDataProvider<ObjectProperty>(new ArrayList<ObjectProperty>());
+    protected ListDataProvider<ObjectProperty> dataProvider = new ListDataProvider<>(new ArrayList<ObjectProperty>());
 
     protected ValidatorService validatorService;
 
@@ -263,7 +266,7 @@ public class DataObjectBrowser
         List<ObjectProperty> dataObjectProperties = (dataObject != null) ?
                 DataModelerUtils.getManagedProperties(dataObject) : Collections.<ObjectProperty>emptyList();
 
-        ArrayList<ObjectProperty> sortBuffer = new ArrayList<ObjectProperty>();
+        ArrayList<ObjectProperty> sortBuffer = new ArrayList<>();
         if (dataObject != null) {
             sortBuffer.addAll(dataObjectProperties);
         }
@@ -414,10 +417,12 @@ public class DataObjectBrowser
         return getContext() != null ? getContext().getDataModel() : null;
     }
 
+    @Override
     public DataObject getDataObject() {
         return dataObject;
     }
 
+    @Override
     public void onSelectPropertyType(ObjectProperty property) {
         DataObject dataObject = getDataModel().getDataObject(property.getClassName());
         if (dataObject != null) {

@@ -22,9 +22,11 @@ import javax.inject.Inject;
 import com.google.gwt.user.client.ui.IsWidget;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.defaulteditor.service.DefaultEditorContent;
 import org.kie.workbench.common.screens.defaulteditor.service.DefaultEditorService;
 import org.kie.workbench.common.widgets.metadata.client.KieEditor;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.client.annotations.WorkbenchEditor;
 import org.uberfire.client.annotations.WorkbenchMenu;
@@ -46,6 +48,7 @@ import org.uberfire.workbench.model.menu.Menus;
  */
 @Dependent
 @WorkbenchEditor(identifier = "GuvnorDefaultFileEditor", supportedTypes = {AnyResourceType.class}, priority = -1)
+@LoadAsync(UberfireActivityFragment.class)
 public class GuvnorDefaultEditorPresenter
         extends KieEditor {
 
@@ -103,11 +106,13 @@ public class GuvnorDefaultEditorPresenter
         versionRecordManager.clear();
     }
 
+    @Override
     @WorkbenchPartTitle
     public String getTitleText() {
         return super.getTitleText();
     }
 
+    @Override
     @WorkbenchPartTitleDecoration
     public IsWidget getTitle() {
         return super.getTitle();
@@ -130,6 +135,7 @@ public class GuvnorDefaultEditorPresenter
         };
     }
 
+    @Override
     @WorkbenchPartView
     public IsWidget getWidget() {
         return super.getWidget();

@@ -25,6 +25,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.server.api.model.KieContainerStatus;
 import org.kie.server.controller.api.model.events.ServerInstanceDeleted;
@@ -33,10 +34,12 @@ import org.kie.server.controller.api.model.runtime.Container;
 import org.kie.server.controller.api.model.spec.ContainerSpec;
 import org.kie.workbench.common.screens.server.management.client.container.status.card.ContainerCardPresenter;
 import org.slf4j.Logger;
+import org.uberfire.async.UberfireActivityFragment;
 
 import com.google.gwt.user.client.ui.IsWidget;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ContainerRemoteStatusPresenter {
 
     public interface View extends IsWidget {
@@ -50,7 +53,7 @@ public class ContainerRemoteStatusPresenter {
     private final View view;
     private final ManagedInstance<ContainerCardPresenter> cardPresenterProvider;
 
-    private final Map<String, Map<String, ContainerCardPresenter>> index = new HashMap<String, Map<String, ContainerCardPresenter>>();
+    private final Map<String, Map<String, ContainerCardPresenter>> index = new HashMap<>();
 
     private ContainerSpec containerSpec;
 
@@ -76,8 +79,8 @@ public class ContainerRemoteStatusPresenter {
                 serverInstanceUpdated.getServerInstance() != null ) {
             final String updatedServerInstanceKey = serverInstanceUpdated.getServerInstance().getServerInstanceId();
             if ( index.containsKey( updatedServerInstanceKey ) ) {
-                final Map<String, ContainerCardPresenter> oldIndex = new HashMap<String, ContainerCardPresenter>( index.remove( updatedServerInstanceKey ) );
-                final Map<String, ContainerCardPresenter> newIndexIndex = new HashMap<String, ContainerCardPresenter>( serverInstanceUpdated.getServerInstance().getContainers().size() );
+                final Map<String, ContainerCardPresenter> oldIndex = new HashMap<>( index.remove( updatedServerInstanceKey ) );
+                final Map<String, ContainerCardPresenter> newIndexIndex = new HashMap<>( serverInstanceUpdated.getServerInstance().getContainers().size() );
                 index.put( updatedServerInstanceKey, newIndexIndex );
                 for ( final Container container : serverInstanceUpdated.getServerInstance().getContainers() ) {
                     ContainerCardPresenter presenter = oldIndex.remove( container.getContainerName() );

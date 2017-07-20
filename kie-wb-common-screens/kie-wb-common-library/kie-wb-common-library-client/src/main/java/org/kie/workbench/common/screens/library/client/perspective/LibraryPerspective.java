@@ -21,10 +21,12 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import org.kie.workbench.common.screens.library.api.ProjectInfo;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.library.api.search.FilterUpdateEvent;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
 import org.kie.workbench.common.widgets.client.search.ContextualSearch;
 import org.kie.workbench.common.widgets.client.search.SearchBehavior;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.Perspective;
 import org.uberfire.client.annotations.WorkbenchPerspective;
 import org.uberfire.client.mvp.PlaceManager;
@@ -41,6 +43,7 @@ import org.uberfire.workbench.model.impl.PerspectiveDefinitionImpl;
 
 @ApplicationScoped
 @WorkbenchPerspective(identifier = "LibraryPerspective")
+@LoadAsync(UberfireActivityFragment.class)
 public class LibraryPerspective {
 
     private LibraryPlaces libraryPlaces;

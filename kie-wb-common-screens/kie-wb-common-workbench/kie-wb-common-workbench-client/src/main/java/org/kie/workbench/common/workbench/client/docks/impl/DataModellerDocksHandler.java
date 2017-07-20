@@ -23,6 +23,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerContext;
 import org.kie.workbench.common.screens.datamodeller.client.context.DataModelerWorkbenchContext;
 import org.kie.workbench.common.screens.datamodeller.client.context.DataModelerWorkbenchContextChangeEvent;
@@ -30,6 +31,7 @@ import org.kie.workbench.common.screens.datamodeller.client.context.DataModelerW
 import org.kie.workbench.common.workbench.client.authz.WorkbenchFeatures;
 import org.kie.workbench.common.workbench.client.resources.i18n.DefaultWorkbenchConstants;
 import org.kie.workbench.common.workbench.client.resources.images.WorkbenchImageResources;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.workbench.docks.UberfireDock;
 import org.uberfire.client.workbench.docks.UberfireDockPosition;
 import org.uberfire.mvp.impl.DefaultPlaceRequest;
@@ -37,6 +39,7 @@ import org.uberfire.rpc.SessionInfo;
 import org.uberfire.security.authz.AuthorizationManager;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DataModellerDocksHandler extends AbstractWorkbenchDocksHandler {
 
     protected DefaultWorkbenchConstants constants = DefaultWorkbenchConstants.INSTANCE;

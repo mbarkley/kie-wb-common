@@ -29,6 +29,7 @@ import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.api.RemoteCallback;
 import org.jboss.errai.common.client.dom.HTMLElement;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.screens.datasource.management.client.resources.i18n.DataSourceManagementConstants;
 import org.kie.workbench.common.screens.datasource.management.client.util.InitializeCallback;
@@ -36,10 +37,12 @@ import org.kie.workbench.common.screens.datasource.management.metadata.DatabaseM
 import org.kie.workbench.common.screens.datasource.management.metadata.SchemaMetadata;
 import org.kie.workbench.common.screens.datasource.management.metadata.TableMetadata;
 import org.kie.workbench.common.screens.datasource.management.service.DatabaseMetadataService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.data.Pair;
 import org.uberfire.ext.widgets.common.client.callbacks.HasBusyIndicatorDefaultErrorCallback;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DatabaseObjectExplorer
         implements DatabaseObjectExplorerView.Presenter, IsElement {
 

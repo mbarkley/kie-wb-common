@@ -27,6 +27,7 @@ import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
 import org.jboss.errai.databinding.client.BindableProxy;
 import org.jboss.errai.databinding.client.HasProperties;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
@@ -45,9 +46,11 @@ import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.TableCo
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.multipleSubform.definition.MultipleSubFormFieldDefinition;
 import org.kie.workbench.common.forms.processing.engine.handling.FieldChangeHandler;
 import org.kie.workbench.common.forms.processing.engine.handling.IsNestedModel;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.table.client.ColumnMeta;
 
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class MultipleSubFormWidget extends Composite implements TakesValue<List<Object>>,
                                                                 IsNestedModel {
 
@@ -241,7 +244,7 @@ public class MultipleSubFormWidget extends Composite implements TakesValue<List<
                                               @Override
                                               public void onAccept() {
 
-                                                  bindingHelper.afterEdit((BindableProxy) formRenderer.getModel());
+                                                  bindingHelper.afterEdit(formRenderer.getModel());
 
                                                   values.set(index,
                                                              formRenderer.getModel());

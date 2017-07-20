@@ -31,6 +31,9 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.ProvidesKey;
+
+import javax.enterprise.context.Dependent;
+
 import org.gwtbootstrap3.client.ui.Button;
 import org.gwtbootstrap3.client.ui.HelpBlock;
 import org.gwtbootstrap3.client.ui.TextBox;
@@ -38,9 +41,13 @@ import org.gwtbootstrap3.client.ui.constants.ButtonSize;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.tables.PagedTable;
 
+@Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectClassListViewImpl
         extends Composite
         implements ProjectClassListView {
@@ -58,7 +65,7 @@ public class ProjectClassListViewImpl
     private boolean readOnly = false;
 
     @UiField(provided = true)
-    PagedTable<ClassRow> dataGrid = new PagedTable<ClassRow>( 10, new ProvidesKey<ClassRow>() {
+    PagedTable<ClassRow> dataGrid = new PagedTable<>( 10, new ProvidesKey<ClassRow>() {
         @Override
         public Object getKey( ClassRow item ) {
             return item.getClassName();

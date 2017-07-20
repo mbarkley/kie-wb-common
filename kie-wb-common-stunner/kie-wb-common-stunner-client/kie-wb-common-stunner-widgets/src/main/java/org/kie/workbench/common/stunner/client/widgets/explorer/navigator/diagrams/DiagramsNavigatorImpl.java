@@ -26,6 +26,8 @@ import javax.inject.Inject;
 
 import com.google.gwt.logging.client.LogConfiguration;
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.client.widgets.event.LoadDiagramEvent;
 import org.kie.workbench.common.stunner.client.widgets.explorer.navigator.Navigator;
@@ -40,8 +42,10 @@ import org.kie.workbench.common.stunner.core.lookup.LookupManager;
 import org.kie.workbench.common.stunner.core.lookup.diagram.DiagramLookupRequest;
 import org.kie.workbench.common.stunner.core.lookup.diagram.DiagramLookupRequestImpl;
 import org.kie.workbench.common.stunner.core.lookup.diagram.DiagramRepresentation;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DiagramsNavigatorImpl implements DiagramsNavigator {
 
     private static Logger LOGGER = Logger.getLogger(DiagramsNavigatorImpl.class.getName());
@@ -81,6 +85,7 @@ public class DiagramsNavigatorImpl implements DiagramsNavigator {
         return this;
     }
 
+    @Override
     public DiagramsNavigatorImpl show() {
         // Notify some processing starts.
         fireProcessingStarted();
@@ -108,6 +113,7 @@ public class DiagramsNavigatorImpl implements DiagramsNavigator {
         return this;
     }
 
+    @Override
     public DiagramsNavigatorImpl clear() {
         items.clear();
         view.clear();

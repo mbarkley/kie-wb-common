@@ -39,12 +39,15 @@ import org.gwtbootstrap3.client.ui.CheckBox;
 import org.gwtbootstrap3.client.ui.FormLabel;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.extras.select.client.ui.Select;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
 import org.kie.workbench.common.screens.datamodeller.client.util.UIUtil;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.data.Pair;
 import org.uberfire.ext.widgets.common.client.common.popups.BaseModal;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class NewFieldPopupViewImpl
         extends BaseModal
         implements NewFieldPopupView {

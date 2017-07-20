@@ -21,12 +21,15 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import org.gwtbootstrap3.client.ui.gwt.FlowPanel;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.widgets.metadata.client.KieEditorViewImpl;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectDiagramEditorView
         extends KieEditorViewImpl
         implements AbstractProjectDiagramEditor.View {

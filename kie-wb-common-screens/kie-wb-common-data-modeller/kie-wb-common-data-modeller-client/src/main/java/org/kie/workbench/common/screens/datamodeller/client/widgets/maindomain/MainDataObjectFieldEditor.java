@@ -27,6 +27,7 @@ import javax.inject.Inject;
 import com.google.gwt.user.client.ui.Widget;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerContext;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommand;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommandBuilder;
@@ -45,6 +46,7 @@ import org.kie.workbench.common.services.datamodeller.core.Annotation;
 import org.kie.workbench.common.services.datamodeller.core.DataModel;
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
 import org.kie.workbench.common.services.datamodeller.core.ObjectProperty;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.commons.data.Pair;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorCallback;
@@ -52,6 +54,7 @@ import org.uberfire.ext.editor.commons.client.validation.ValidatorWithReasonCall
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class MainDataObjectFieldEditor
         extends FieldEditor
         implements MainDataObjectFieldEditorView.Presenter {
@@ -82,6 +85,7 @@ public class MainDataObjectFieldEditor
         setReadonly( true );
     }
 
+    @Override
     public void onContextChange( DataModelerContext context ) {
         this.context = context;
         initTypeList();
@@ -103,6 +107,7 @@ public class MainDataObjectFieldEditor
         return getContext() != null ? getContext().getDataModel() : null;
     }
 
+    @Override
     public void setReadonly( boolean readonly ) {
         super.setReadonly( readonly );
         view.setReadonly( readonly );
@@ -359,6 +364,7 @@ public class MainDataObjectFieldEditor
         }
     }
 
+    @Override
     public void clear() {
         view.setNameOnError( false );
         view.setName( null );

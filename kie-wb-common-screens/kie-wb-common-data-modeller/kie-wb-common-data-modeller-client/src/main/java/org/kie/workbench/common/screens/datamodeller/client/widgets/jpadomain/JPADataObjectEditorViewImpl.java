@@ -27,7 +27,9 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.model.DataModelerPropertyEditorFieldInfo;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.properties.editor.client.PropertyEditorWidget;
 import org.uberfire.ext.properties.editor.model.PropertyEditorCategory;
 import org.uberfire.ext.properties.editor.model.PropertyEditorChangeEvent;
@@ -37,6 +39,7 @@ import org.uberfire.ext.widgets.common.client.common.popups.YesNoCancelPopup;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class JPADataObjectEditorViewImpl
         extends Composite
         implements JPADataObjectEditorView {
@@ -69,6 +72,7 @@ public class JPADataObjectEditorViewImpl
         this.presenter = presenter;
     }
 
+    @Override
     public void loadPropertyEditorCategories( List<PropertyEditorCategory> categories ) {
         propertyEditor.handle( new PropertyEditorEvent( getCurrentEditorEventId(), categories ) );
     }

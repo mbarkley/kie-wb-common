@@ -20,6 +20,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.server.controller.api.model.runtime.Container;
 import org.kie.server.controller.api.model.spec.ContainerSpecKey;
@@ -30,9 +31,11 @@ import org.kie.workbench.common.screens.server.management.client.widget.card.bod
 import org.kie.workbench.common.screens.server.management.client.widget.card.footer.FooterPresenter;
 import org.kie.workbench.common.screens.server.management.client.widget.card.title.InfoTitlePresenter;
 import org.kie.workbench.common.screens.server.management.client.widget.card.title.LinkTitlePresenter;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ContainerCardPresenter {
 
     private final ManagedInstance<Object> presenterProvider;

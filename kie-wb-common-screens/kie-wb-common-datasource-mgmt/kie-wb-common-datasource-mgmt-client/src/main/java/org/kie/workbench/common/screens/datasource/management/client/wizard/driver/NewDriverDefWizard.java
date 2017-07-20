@@ -29,11 +29,13 @@ import org.jboss.errai.bus.client.api.messaging.Message;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.ErrorCallback;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.screens.datasource.management.client.resources.i18n.DataSourceManagementConstants;
 import org.kie.workbench.common.screens.datasource.management.client.util.PopupsUtil;
 import org.kie.workbench.common.screens.datasource.management.model.DriverDef;
 import org.kie.workbench.common.screens.datasource.management.service.DriverDefEditorService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.client.callbacks.Callback;
 import org.uberfire.ext.widgets.common.client.callbacks.DefaultErrorCallback;
@@ -43,6 +45,7 @@ import org.uberfire.java.nio.file.FileAlreadyExistsException;
 import org.uberfire.workbench.events.NotificationEvent;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class NewDriverDefWizard
         extends AbstractWizard {
 

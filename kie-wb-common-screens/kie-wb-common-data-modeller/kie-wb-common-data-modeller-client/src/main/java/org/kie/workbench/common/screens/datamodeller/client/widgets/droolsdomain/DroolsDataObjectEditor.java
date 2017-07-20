@@ -28,6 +28,8 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommandBuilder;
 import org.kie.workbench.common.screens.datamodeller.client.handlers.DomainHandlerRegistry;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
@@ -44,11 +46,13 @@ import org.kie.workbench.common.screens.datamodeller.model.droolsdomain.DroolsDo
 import org.kie.workbench.common.services.datamodeller.core.Annotation;
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
 import org.kie.workbench.common.services.datamodeller.core.ObjectProperty;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.data.Pair;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorCallback;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DroolsDataObjectEditor
         extends ObjectEditor
         implements DroolsDataObjectEditorView.Presenter {
@@ -72,13 +76,13 @@ public class DroolsDataObjectEditor
     @PostConstruct
     protected void init() {
 
-        List<Pair<String, String>> roleOptions = new ArrayList<Pair<String, String>>( );
-        roleOptions.add( new Pair<String, String>( "EVENT", "EVENT" ) );
+        List<Pair<String, String>> roleOptions = new ArrayList<>( );
+        roleOptions.add( new Pair<>( "EVENT", "EVENT" ) );
         view.initRoleList( roleOptions, true );
 
-        List<Pair<String, String>> typeSafeOptions = new ArrayList<Pair<String, String>>( );
-        typeSafeOptions.add( new Pair<String, String>( "false", "false" ) );
-        typeSafeOptions.add( new Pair<String, String>( "true", "true" ) );
+        List<Pair<String, String>> typeSafeOptions = new ArrayList<>( );
+        typeSafeOptions.add( new Pair<>( "false", "false" ) );
+        typeSafeOptions.add( new Pair<>( "true", "true" ) );
         view.initTypeSafeList( typeSafeOptions, true );
 
         view.initTimeStampFieldList( new ArrayList<Pair<String, String>>(), true );
@@ -103,11 +107,13 @@ public class DroolsDataObjectEditor
         return DroolsDomainEditor.DROOLS_DOMAIN;
     }
 
+    @Override
     public void setReadonly( boolean readonly ) {
         super.setReadonly( readonly );
         view.setReadonly( readonly );
     }
 
+    @Override
     protected void loadDataObject( DataObject dataObject ) {
         clear();
         setReadonly( true );
@@ -329,7 +335,7 @@ public class DroolsDataObjectEditor
             return;
         }
 
-        List<String> types = new ArrayList<String>();
+        List<String> types = new ArrayList<>();
         types.add( "short" );
         types.add( "int" );
         types.add( "long" );
@@ -352,7 +358,7 @@ public class DroolsDataObjectEditor
             return;
         }
 
-        List<String> types = new ArrayList<String>();
+        List<String> types = new ArrayList<>();
         types.add( "long" );
         types.add( "java.lang.Long" );
         types.add( "java.util.Date" );
@@ -371,12 +377,12 @@ public class DroolsDataObjectEditor
     private List<Pair<String, String>> loadPropertyOptions( DataObject dataObject,
                                        List<String> types,
                                        String defaultValue ) {
-        List<Pair<String, String>> propertyOptions = new ArrayList<Pair<String, String>>( );
+        List<Pair<String, String>> propertyOptions = new ArrayList<>( );
 
         if ( dataObject != null ) {
 
             List<ObjectProperty> properties = DataModelerUtils.filterPropertiesByType( dataObject.getProperties(), types, true );
-            SortedMap<String, String> propertyNames = new TreeMap<String, String>();
+            SortedMap<String, String> propertyNames = new TreeMap<>();
 
             for ( ObjectProperty property : properties ) {
                 propertyNames.put( property.getName(), property.getName() );
@@ -393,6 +399,7 @@ public class DroolsDataObjectEditor
         return propertyOptions;
     }
 
+    @Override
     public void clear() {
         view.setRole( UIUtil.NOT_SELECTED );
         view.setClassReactive( false );

@@ -28,20 +28,23 @@ import com.google.gwt.user.client.ui.ComplexPanel;
 import com.google.gwt.user.client.ui.Panel;
 import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.constants.ColumnSize;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ioc.client.container.SyncBeanDef;
 import org.jboss.errai.ioc.client.container.SyncBeanManager;
 import org.kie.workbench.common.forms.dynamic.service.shared.FormRenderingContext;
 import org.kie.workbench.common.forms.model.FieldDefinition;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.layout.editor.api.editor.LayoutComponent;
 import org.uberfire.ext.layout.editor.client.api.LayoutDragComponent;
 import org.uberfire.ext.layout.editor.client.generator.AbstractLayoutGenerator;
 
 @Any
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class FormLayoutGenerator extends AbstractLayoutGenerator {
 
-    private List<FieldLayoutComponent> layoutComponents = new ArrayList<FieldLayoutComponent>();
+    private List<FieldLayoutComponent> layoutComponents = new ArrayList<>();
 
     private Map<String, Class<? extends LayoutDragComponent>> componentsCache = new HashMap<>();
 

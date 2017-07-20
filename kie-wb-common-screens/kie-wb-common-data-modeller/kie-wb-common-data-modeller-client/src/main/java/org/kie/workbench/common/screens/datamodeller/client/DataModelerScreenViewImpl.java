@@ -29,16 +29,19 @@ import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.ui.Column;
 import org.gwtbootstrap3.client.ui.Legend;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.editor.DataObjectBrowser;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.maindomain.MainDomainEditor;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.refactoring.ShowUsagesPopup;
 import org.kie.workbench.common.widgets.metadata.client.KieEditorViewImpl;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.ext.widgets.common.client.common.popups.YesNoCancelPopup;
 import org.uberfire.ext.widgets.common.client.resources.i18n.CommonConstants;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DataModelerScreenViewImpl
         extends KieEditorViewImpl
         implements DataModelerScreenPresenter.DataModelerScreenView {

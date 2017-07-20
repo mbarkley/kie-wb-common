@@ -22,12 +22,15 @@ import javax.inject.Inject;
 
 import org.guvnor.common.services.shared.validation.model.ValidationMessage;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.widgets.client.popups.validation.ValidationPopup;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.common.popups.YesNoCancelPopup;
 import org.uberfire.ext.widgets.common.client.resources.i18n.CommonConstants;
 import org.uberfire.mvp.Command;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class PopupsUtil {
 
     @Inject

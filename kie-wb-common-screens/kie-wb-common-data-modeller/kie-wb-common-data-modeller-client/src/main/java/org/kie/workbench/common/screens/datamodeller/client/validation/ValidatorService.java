@@ -22,6 +22,7 @@ import javax.inject.Inject;
 
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerContext;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerErrorCallback;
 import org.kie.workbench.common.screens.datamodeller.client.util.DataModelerUtils;
@@ -29,12 +30,14 @@ import org.kie.workbench.common.services.datamodeller.core.DataModel;
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
 import org.kie.workbench.common.services.datamodeller.core.ObjectProperty;
 import org.kie.workbench.common.services.shared.validation.ValidationService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorCallback;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorWithReasonCallback;
 
 import static org.kie.workbench.common.screens.datamodeller.client.util.DataModelerUtils.*;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class ValidatorService {
 
     private Caller<ValidationService> validationService;

@@ -35,14 +35,17 @@ import org.gwtbootstrap3.client.ui.TextArea;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ValidationState;
 import org.gwtbootstrap3.extras.select.client.ui.Select;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerContext;
 import org.kie.workbench.common.screens.datamodeller.client.util.UIUtil;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.packageselector.PackageSelector;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.packageselector.PackageSelectorView;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.data.Pair;
 import org.uberfire.ext.widgets.common.client.common.popups.errors.ErrorPopup;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class MainDataObjectEditorViewImpl
         extends MainEditorAbstractView<MainDataObjectEditorView.Presenter>
         implements MainDataObjectEditorView {

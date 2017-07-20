@@ -19,12 +19,15 @@ package org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.datePicker
 import java.util.Date;
 import javax.enterprise.context.Dependent;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.BasicTypeFieldProvider;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.datePicker.definition.DatePickerFieldDefinition;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.datePicker.type.DatePickerFieldType;
 import org.kie.workbench.common.forms.model.TypeInfo;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DatePickerFieldProvider extends BasicTypeFieldProvider<DatePickerFieldDefinition> {
 
     @Override

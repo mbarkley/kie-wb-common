@@ -30,15 +30,18 @@ import org.jboss.errai.common.client.dom.Button;
 import org.jboss.errai.common.client.dom.Div;
 import org.jboss.errai.common.client.dom.HTMLElement;
 import org.jboss.errai.common.client.ui.ElementWrapperWidget;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.EventHandler;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.widgets.client.resources.i18n.KieWorkbenchWidgetsConstants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.common.popups.BaseModal;
 
 @Dependent
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class ValidationPopupViewImpl implements ValidationPopupView {
 
     @DataField("view")

@@ -25,6 +25,7 @@ import javax.inject.Inject;
 
 import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.dom.HTMLElement;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.client.widgets.palette.categories.DefinitionPaletteCategoryWidget;
 import org.kie.workbench.common.stunner.client.widgets.palette.factory.BS3PaletteViewFactory;
@@ -39,11 +40,13 @@ import org.kie.workbench.common.stunner.core.client.service.ClientFactoryService
 import org.kie.workbench.common.stunner.core.client.shape.Shape;
 import org.kie.workbench.common.stunner.core.client.shape.factory.ShapeFactory;
 import org.kie.workbench.common.stunner.core.definition.shape.Glyph;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.validation.PortablePreconditions;
 
 import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class BS3PaletteWidgetImpl extends AbstractPalette<DefinitionSetPalette>
         implements BS3PaletteWidget,
                    IsElement {
@@ -107,6 +110,7 @@ public class BS3PaletteWidgetImpl extends AbstractPalette<DefinitionSetPalette>
         return this;
     }
 
+    @Override
     @SuppressWarnings("unchecked")
     public void onDragStart(final String definitionId,
                             final double x,
@@ -143,6 +147,7 @@ public class BS3PaletteWidgetImpl extends AbstractPalette<DefinitionSetPalette>
         return this;
     }
 
+    @Override
     public void unbind() {
         if (null != paletteDefinition) {
             view.clear();

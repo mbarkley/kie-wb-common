@@ -27,6 +27,7 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommand;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommandBuilder;
 import org.kie.workbench.common.screens.datamodeller.client.command.ValuePair;
@@ -44,6 +45,7 @@ import org.kie.workbench.common.services.datamodeller.core.Annotation;
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
 import org.kie.workbench.common.services.datamodeller.core.ObjectProperty;
 import org.kie.workbench.common.services.datamodeller.core.impl.AnnotationImpl;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.properties.editor.client.fields.BooleanField;
 import org.uberfire.ext.properties.editor.client.fields.TextField;
 import org.uberfire.ext.properties.editor.model.PropertyEditorCategory;
@@ -51,11 +53,12 @@ import org.uberfire.ext.widgets.common.client.resources.i18n.CommonConstants;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class JPADataObjectEditor
         extends ObjectEditor
         implements JPADataObjectEditorView.Presenter {
 
-    private static Map<String, DataModelerPropertyEditorFieldInfo> propertyEditorFields = new HashMap<String, DataModelerPropertyEditorFieldInfo>();
+    private static Map<String, DataModelerPropertyEditorFieldInfo> propertyEditorFields = new HashMap<>();
 
     private JPADataObjectEditorView view;
 
@@ -75,7 +78,7 @@ public class JPADataObjectEditor
         super( handlerRegistry, dataModelerEvent, commandBuilder );
         this.view = view;
         view.init( this );
-        List<String> domainQuery = new ArrayList<String>( );
+        List<String> domainQuery = new ArrayList<>( );
         domainQuery.add( getDomainName() );
         handler = (JPADomainHandler) handlerRegistry.getDomainHandlers( domainQuery ).get( 0 );
     }
@@ -236,7 +239,7 @@ public class JPADataObjectEditor
 
     protected List<PropertyEditorCategory> getPropertyEditorCategories() {
 
-        final List<PropertyEditorCategory> categories = new ArrayList<PropertyEditorCategory>();
+        final List<PropertyEditorCategory> categories = new ArrayList<>();
 
         PropertyEditorCategory category = new PropertyEditorCategory( getEntityCategoryName(), 1 );
         categories.add( category );
@@ -334,7 +337,7 @@ public class JPADataObjectEditor
     }
 
     private List<ObjectProperty> persistenceConfigurableFields( DataObject dataObject ) {
-        List<ObjectProperty> result = new ArrayList<ObjectProperty>(  );
+        List<ObjectProperty> result = new ArrayList<>(  );
         for ( ObjectProperty field : dataObject.getProperties() ) {
             if ( DataModelerUtils.isManagedProperty( field ) && ( field.isMultiple() || !field.isBaseType() ) ) {
                 result.add( field );

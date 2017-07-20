@@ -23,6 +23,8 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommandBuilder;
 import org.kie.workbench.common.screens.datamodeller.client.handlers.DomainHandlerRegistry;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
@@ -33,9 +35,11 @@ import org.kie.workbench.common.screens.datamodeller.model.droolsdomain.DroolsDo
 import org.kie.workbench.common.services.datamodeller.core.Annotation;
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
 import org.kie.workbench.common.services.datamodeller.core.ObjectProperty;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DroolsDataObjectFieldEditor
         extends FieldEditor
         implements DroolsDataObjectFieldEditorView.Presenter {
@@ -75,6 +79,7 @@ public class DroolsDataObjectFieldEditor
         return DroolsDomainEditor.DROOLS_DOMAIN;
     }
 
+    @Override
     public void setReadonly( boolean readonly ) {
         super.setReadonly( readonly );
         view.setReadonly( readonly );

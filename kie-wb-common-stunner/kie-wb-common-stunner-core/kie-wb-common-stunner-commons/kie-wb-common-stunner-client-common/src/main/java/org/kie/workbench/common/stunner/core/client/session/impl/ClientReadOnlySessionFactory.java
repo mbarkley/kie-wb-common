@@ -19,14 +19,17 @@ import java.util.logging.Logger;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.core.client.session.ClientReadOnlySession;
 import org.kie.workbench.common.stunner.core.client.session.ClientSessionFactory;
+import org.uberfire.async.UberfireActivityFragment;
 
 /**
  * Stunner's default session factory for sessions of type <code>ClientReadOnlySession</code>.
  */
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class ClientReadOnlySessionFactory implements ClientSessionFactory<ClientReadOnlySession> {
 
     private static Logger LOGGER = Logger.getLogger(ClientReadOnlySessionFactory.class.getName());

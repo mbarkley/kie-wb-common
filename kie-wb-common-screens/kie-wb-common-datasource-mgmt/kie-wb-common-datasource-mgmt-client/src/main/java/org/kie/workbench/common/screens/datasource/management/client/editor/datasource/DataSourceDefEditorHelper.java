@@ -28,6 +28,7 @@ import org.guvnor.common.services.project.model.Project;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.ErrorCallback;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.screens.datasource.management.client.resources.i18n.DataSourceManagementConstants;
 import org.kie.workbench.common.screens.datasource.management.client.util.PopupsUtil;
@@ -37,12 +38,14 @@ import org.kie.workbench.common.screens.datasource.management.model.DriverDefInf
 import org.kie.workbench.common.screens.datasource.management.model.TestResult;
 import org.kie.workbench.common.screens.datasource.management.service.DataSourceDefEditorService;
 import org.kie.workbench.common.screens.datasource.management.service.DataSourceDefQueryService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.data.Pair;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorCallback;
 import org.uberfire.mvp.Command;
 import org.uberfire.mvp.ParameterizedCommand;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DataSourceDefEditorHelper {
 
     private TranslationService translationService;

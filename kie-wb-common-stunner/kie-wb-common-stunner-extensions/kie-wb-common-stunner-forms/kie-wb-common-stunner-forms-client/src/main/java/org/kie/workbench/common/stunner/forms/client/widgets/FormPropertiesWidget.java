@@ -32,6 +32,7 @@ import org.jboss.errai.databinding.client.BindableProxy;
 import org.jboss.errai.databinding.client.BindableProxyFactory;
 import org.jboss.errai.databinding.client.HasProperties;
 import org.jboss.errai.databinding.client.api.DataBinder;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.dynamic.client.DynamicFormRenderer;
 import org.kie.workbench.common.forms.dynamic.service.shared.FormRenderingContext;
 import org.kie.workbench.common.forms.dynamic.service.shared.RenderMode;
@@ -54,12 +55,14 @@ import org.kie.workbench.common.stunner.core.graph.content.definition.Definition
 import org.kie.workbench.common.stunner.core.util.DefinitionUtils;
 import org.kie.workbench.common.stunner.forms.client.event.FormPropertiesOpened;
 import org.kie.workbench.common.stunner.forms.context.PathAwareFormContext;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.mvp.Command;
 
 import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class FormPropertiesWidget implements IsWidget {
 
     private static Logger LOGGER = Logger.getLogger(FormPropertiesWidget.class.getName());

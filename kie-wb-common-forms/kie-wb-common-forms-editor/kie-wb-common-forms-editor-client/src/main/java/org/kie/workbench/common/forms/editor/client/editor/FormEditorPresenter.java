@@ -27,6 +27,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import org.guvnor.common.services.shared.metadata.MetadataService;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.forms.dynamic.client.rendering.FieldLayoutComponent;
@@ -43,6 +44,7 @@ import org.kie.workbench.common.forms.model.FormModel;
 import org.kie.workbench.common.forms.model.HasFormModelProperties;
 import org.kie.workbench.common.widgets.metadata.client.KieEditor;
 import org.kie.workbench.common.widgets.metadata.client.KieEditorView;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.client.annotations.WorkbenchEditor;
 import org.uberfire.client.annotations.WorkbenchMenu;
@@ -64,6 +66,7 @@ import org.uberfire.workbench.type.FileNameUtil;
 
 @Dependent
 @WorkbenchEditor(identifier = "FormEditor", supportedTypes = {FormDefinitionResourceType.class})
+@LoadAsync(UberfireActivityFragment.class)
 public class FormEditorPresenter extends KieEditor {
 
     public interface FormEditorView extends KieEditorView {

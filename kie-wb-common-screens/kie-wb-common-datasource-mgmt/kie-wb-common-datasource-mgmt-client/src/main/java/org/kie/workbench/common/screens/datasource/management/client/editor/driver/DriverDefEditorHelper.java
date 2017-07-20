@@ -19,13 +19,16 @@ package org.kie.workbench.common.screens.datasource.management.client.editor.dri
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.screens.datasource.management.client.resources.i18n.DataSourceManagementConstants;
 import org.kie.workbench.common.screens.datasource.management.client.validation.ClientValidationService;
 import org.kie.workbench.common.screens.datasource.management.model.DriverDef;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorCallback;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DriverDefEditorHelper {
 
     private TranslationService translationService;

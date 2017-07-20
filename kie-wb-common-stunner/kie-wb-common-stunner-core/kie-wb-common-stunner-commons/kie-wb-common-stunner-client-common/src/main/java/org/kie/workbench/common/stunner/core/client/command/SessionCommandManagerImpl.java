@@ -19,6 +19,7 @@ package org.kie.workbench.common.stunner.core.client.command;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.api.AbstractClientSessionManager;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
 import org.kie.workbench.common.stunner.core.client.session.Session;
@@ -27,6 +28,7 @@ import org.kie.workbench.common.stunner.core.command.CommandListener;
 import org.kie.workbench.common.stunner.core.command.CommandResult;
 import org.kie.workbench.common.stunner.core.command.impl.CommandRegistryListener;
 import org.kie.workbench.common.stunner.core.registry.command.CommandRegistry;
+import org.uberfire.async.UberfireActivityFragment;
 
 /**
  * The default session command manager implementation.
@@ -35,6 +37,7 @@ import org.kie.workbench.common.stunner.core.registry.command.CommandRegistry;
  */
 @ApplicationScoped
 @Session
+@LoadAsync(UberfireActivityFragment.class)
 public class SessionCommandManagerImpl
         extends AbstractSessionCommandManager {
 

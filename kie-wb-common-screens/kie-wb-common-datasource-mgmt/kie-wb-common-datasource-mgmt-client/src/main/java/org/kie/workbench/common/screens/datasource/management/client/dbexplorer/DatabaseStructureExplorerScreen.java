@@ -21,8 +21,10 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import org.jboss.errai.common.client.ui.ElementWrapperWidget;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.screens.datasource.management.client.resources.i18n.DataSourceManagementConstants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
@@ -31,6 +33,7 @@ import org.uberfire.mvp.PlaceRequest;
 
 @Dependent
 @WorkbenchScreen( identifier = DatabaseStructureExplorerScreen.SCREEN_ID )
+@LoadAsync(UberfireActivityFragment.class)
 public class DatabaseStructureExplorerScreen
         implements DatabaseStructureExplorerScreenView.Presenter {
 

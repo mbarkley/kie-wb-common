@@ -22,9 +22,12 @@ import javax.inject.Inject;
 
 import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.dom.HTMLElement;
+import org.jboss.errai.ioc.client.api.LoadAsync;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.data.Pair;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DataSourceDefMainPanel
         implements DataSourceDefMainPanelView.Presenter,
                    IsElement {

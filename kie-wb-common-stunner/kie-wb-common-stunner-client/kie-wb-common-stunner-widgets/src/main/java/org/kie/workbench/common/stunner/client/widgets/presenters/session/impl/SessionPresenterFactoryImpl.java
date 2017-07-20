@@ -20,6 +20,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.client.widgets.event.SessionDiagramOpenedEvent;
 import org.kie.workbench.common.stunner.client.widgets.notification.NotificationsObserver;
@@ -40,8 +41,10 @@ import org.kie.workbench.common.stunner.core.client.session.impl.AbstractClientF
 import org.kie.workbench.common.stunner.core.client.session.impl.AbstractClientReadOnlySession;
 import org.kie.workbench.common.stunner.core.client.session.impl.AbstractClientSession;
 import org.kie.workbench.common.stunner.core.diagram.Diagram;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class SessionPresenterFactoryImpl implements SessionPresenterFactory<Diagram, AbstractClientReadOnlySession, AbstractClientFullSession> {
 
     private final SessionManager sessionManager;

@@ -22,11 +22,15 @@ import java.util.List;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.RequiresResize;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.ace.AceEditor;
 import org.uberfire.ext.widgets.common.client.ace.AceEditorCallback;
 import org.uberfire.ext.widgets.common.client.ace.AceEditorMode;
 import org.uberfire.ext.widgets.common.client.ace.AceEditorTheme;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class EditJavaSourceWidget
         extends Composite
         implements RequiresResize {
@@ -34,7 +38,7 @@ public class EditJavaSourceWidget
 
     private final AceEditor editor = new AceEditor( );
 
-    private final List<TextChangeHandler> handlers = new ArrayList<TextChangeHandler>();
+    private final List<TextChangeHandler> handlers = new ArrayList<>();
 
     private boolean disableHandlers = false;
 

@@ -28,6 +28,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.ErrorCallback;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.server.api.model.KieContainerStatus;
 import org.kie.server.controller.api.model.runtime.Container;
 import org.kie.server.controller.api.model.spec.Capability;
@@ -48,6 +49,7 @@ import org.kie.workbench.common.screens.server.management.model.ContainerSpecDat
 import org.kie.workbench.common.screens.server.management.service.RuntimeManagementService;
 import org.kie.workbench.common.screens.server.management.service.SpecManagementService;
 import org.slf4j.Logger;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.mvp.UberView;
 import org.uberfire.mvp.Command;
 import org.uberfire.workbench.events.NotificationEvent;
@@ -55,6 +57,7 @@ import org.uberfire.workbench.events.NotificationEvent;
 import static org.uberfire.commons.validation.PortablePreconditions.*;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ContainerPresenter {
 
     public interface View extends UberView<ContainerPresenter> {

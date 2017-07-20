@@ -21,6 +21,8 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerContext;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommandBuilder;
 import org.kie.workbench.common.screens.datamodeller.client.handlers.DomainHandlerRegistry;
@@ -29,8 +31,10 @@ import org.kie.workbench.common.screens.datamodeller.events.DataModelerEvent;
 import org.kie.workbench.common.services.datamodeller.core.Annotation;
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
 import org.kie.workbench.common.services.datamodeller.core.ElementType;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class AdvancedDataObjectEditor
         extends ObjectEditor
         implements AdvancedDataObjectEditorView.Presenter {
@@ -62,6 +66,7 @@ public class AdvancedDataObjectEditor
         return AdvancedDomainEditor.ADVANCED_DOMAIN;
     }
 
+    @Override
     protected void loadDataObject( DataObject dataObject ) {
         clear();
         setReadonly( context != null && context.isReadonly() );
@@ -117,6 +122,7 @@ public class AdvancedDataObjectEditor
         refresh();
     }
 
+    @Override
     public void clear() {
         view.clear();
     }

@@ -22,6 +22,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.api.AbstractClientSessionManager;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
 import org.kie.workbench.common.stunner.core.client.canvas.event.mouse.CanvasMouseDownEvent;
@@ -35,6 +36,7 @@ import org.kie.workbench.common.stunner.core.command.impl.CommandRegistryListene
 import org.kie.workbench.common.stunner.core.command.impl.CompositeCommandImpl;
 import org.kie.workbench.common.stunner.core.command.util.CommandUtils;
 import org.kie.workbench.common.stunner.core.registry.command.CommandRegistry;
+import org.uberfire.async.UberfireActivityFragment;
 
 import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull;
 
@@ -49,6 +51,7 @@ import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull
  */
 @ApplicationScoped
 @Request
+@LoadAsync(UberfireActivityFragment.class)
 public class RequestCommandManager extends AbstractSessionCommandManager {
 
     private static Logger LOGGER = Logger.getLogger(RequestCommandManager.class.getName());

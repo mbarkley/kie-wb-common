@@ -25,6 +25,7 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.CanvasControl;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.actions.CanvasInPlaceTextEditorControl;
@@ -41,6 +42,7 @@ import org.kie.workbench.common.stunner.core.client.canvas.controls.resize.Resiz
 import org.kie.workbench.common.stunner.core.client.canvas.controls.select.SelectionControl;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.ToolboxControl;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.zoom.ZoomControl;
+import org.uberfire.async.UberfireActivityFragment;
 
 /**
  * The Stunner's @Default Canvas Factory implementation.
@@ -51,6 +53,7 @@ import org.kie.workbench.common.stunner.core.client.canvas.controls.zoom.ZoomCon
  * singleton <code>CONTROL_TYPES</code> internal map.
  */
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class CanvasFactoryImpl implements CanvasFactory<AbstractCanvas, AbstractCanvasHandler> {
 
     private static Logger LOGGER = Logger.getLogger(CanvasFactoryImpl.class.getName());

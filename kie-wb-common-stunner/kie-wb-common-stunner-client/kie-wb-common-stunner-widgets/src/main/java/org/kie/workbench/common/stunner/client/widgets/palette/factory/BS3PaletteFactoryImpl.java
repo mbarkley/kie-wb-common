@@ -24,6 +24,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ioc.client.container.SyncBeanDef;
 import org.jboss.errai.ioc.client.container.SyncBeanManager;
@@ -37,8 +38,10 @@ import org.kie.workbench.common.stunner.core.client.canvas.controls.event.Canvas
 import org.kie.workbench.common.stunner.core.client.components.palette.factory.AbstractPaletteFactory;
 import org.kie.workbench.common.stunner.core.client.components.palette.factory.DefaultDefSetPaletteDefinitionFactory;
 import org.kie.workbench.common.stunner.core.client.components.palette.model.definition.DefinitionSetPalette;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class BS3PaletteFactoryImpl extends AbstractPaletteFactory<DefinitionSetPalette, BS3PaletteWidget>
         implements BS3PaletteFactory {
 
@@ -64,6 +67,7 @@ public class BS3PaletteFactoryImpl extends AbstractPaletteFactory<DefinitionSetP
         this.canvasShapeDragUpdateEvent = canvasShapeDragUpdateEvent;
     }
 
+    @Override
     @PostConstruct
     @SuppressWarnings("unchecked")
     public void init() {

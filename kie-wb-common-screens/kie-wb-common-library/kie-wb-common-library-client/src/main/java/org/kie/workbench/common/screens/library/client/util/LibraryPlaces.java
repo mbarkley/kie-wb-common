@@ -39,6 +39,7 @@ import org.guvnor.structure.organizationalunit.OrganizationalUnit;
 import org.guvnor.structure.repositories.Repository;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.screens.examples.client.wizard.ExamplesWizard;
@@ -54,6 +55,7 @@ import org.kie.workbench.common.screens.library.client.resources.i18n.LibraryCon
 import org.kie.workbench.common.screens.library.client.widgets.library.LibraryToolbarPresenter;
 import org.kie.workbench.common.widgets.client.handlers.NewResourceSuccessEvent;
 import org.kie.workbench.common.workbench.client.docks.AuthoringWorkbenchDocks;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.backend.vfs.VFSService;
@@ -76,6 +78,7 @@ import org.uberfire.workbench.events.NotificationEvent;
 import org.uberfire.workbench.model.impl.PartDefinitionImpl;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class LibraryPlaces {
 
     public static final String LIBRARY_PERSPECTIVE = "LibraryPerspective";

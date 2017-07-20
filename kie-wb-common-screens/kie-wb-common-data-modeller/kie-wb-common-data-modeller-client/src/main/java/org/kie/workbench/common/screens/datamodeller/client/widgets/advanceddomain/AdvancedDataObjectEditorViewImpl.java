@@ -28,12 +28,15 @@ import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.Widget;
 import org.kie.workbench.common.services.datamodeller.core.Annotation;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.annotationlisteditor.AdvancedAnnotationListEditor;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.annotationlisteditor.AdvancedAnnotationListEditorView;
 import org.kie.workbench.common.services.datamodeller.core.ElementType;
 import org.kie.workbench.common.services.shared.project.KieProject;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class AdvancedDataObjectEditorViewImpl
         extends Composite
         implements AdvancedDataObjectEditorView {
@@ -103,14 +106,17 @@ public class AdvancedDataObjectEditorViewImpl
         annotationListEditor.setReadonly( readonly );
     }
 
+    @Override
     public void loadAnnotations( List<Annotation> annotations ) {
         annotationListEditor.loadAnnotations( annotations );
     }
 
+    @Override
     public void removeAnnotation( Annotation annotation ) {
         annotationListEditor.removeAnnotation( annotation );
     }
 
+    @Override
     public void clear() {
         annotationListEditor.clear();
     }

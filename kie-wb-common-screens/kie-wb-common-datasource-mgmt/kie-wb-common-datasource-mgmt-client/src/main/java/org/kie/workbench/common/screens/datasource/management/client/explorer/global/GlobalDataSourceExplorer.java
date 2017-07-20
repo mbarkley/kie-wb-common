@@ -23,6 +23,7 @@ import javax.inject.Inject;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.dom.HTMLElement;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datasource.management.client.explorer.common.DefExplorerBase;
 import org.kie.workbench.common.screens.datasource.management.client.explorer.common.DefExplorerContent;
 import org.kie.workbench.common.screens.datasource.management.client.explorer.project.ProjectDataSourceExplorerView;
@@ -33,8 +34,10 @@ import org.kie.workbench.common.screens.datasource.management.events.BaseDriverE
 import org.kie.workbench.common.screens.datasource.management.service.DefExplorerQuery;
 import org.kie.workbench.common.screens.datasource.management.service.DefExplorerQueryResult;
 import org.kie.workbench.common.screens.datasource.management.service.DefExplorerQueryService;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class GlobalDataSourceExplorer
         extends DefExplorerBase
         implements ProjectDataSourceExplorerView.Presenter,
@@ -55,6 +58,7 @@ public class GlobalDataSourceExplorer
         this.view = view;
     }
 
+    @Override
     @PostConstruct
     protected void init() {
         super.init();

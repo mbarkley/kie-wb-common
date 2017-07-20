@@ -20,17 +20,20 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.jboss.errai.common.client.api.Caller;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.api.ShapeManager;
 import org.kie.workbench.common.stunner.core.diagram.Diagram;
 import org.kie.workbench.common.stunner.core.diagram.Metadata;
 import org.kie.workbench.common.stunner.core.graph.Graph;
 import org.kie.workbench.common.stunner.core.service.DiagramLookupService;
 import org.kie.workbench.common.stunner.core.service.DiagramService;
+import org.uberfire.async.UberfireActivityFragment;
 
 /**
  * A wrapper util class for handling different diagram services from client side.
  */
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class ClientDiagramService extends AbstractClientDiagramService<Metadata, Diagram<Graph, Metadata>, DiagramService> {
 
     protected ClientDiagramService() {

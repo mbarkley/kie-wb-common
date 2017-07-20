@@ -23,11 +23,14 @@ import javax.inject.Inject;
 import com.google.gwt.user.client.ui.IsWidget;
 import org.gwtbootstrap3.client.ui.FieldSet;
 import org.gwtbootstrap3.client.ui.Legend;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.dynamic.client.rendering.FieldRenderer;
 import org.kie.workbench.common.forms.dynamic.client.resources.i18n.FormRenderingConstants;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.multipleSubform.definition.MultipleSubFormFieldDefinition;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class MultipleSubFormFieldRenderer extends FieldRenderer<MultipleSubFormFieldDefinition> {
 
     private FieldSet container = new FieldSet();

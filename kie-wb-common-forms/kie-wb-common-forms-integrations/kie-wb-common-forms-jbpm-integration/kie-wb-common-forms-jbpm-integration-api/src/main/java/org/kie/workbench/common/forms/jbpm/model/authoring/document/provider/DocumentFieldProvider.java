@@ -18,13 +18,15 @@ package org.kie.workbench.common.forms.jbpm.model.authoring.document.provider;
 
 import javax.enterprise.context.Dependent;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.BasicTypeFieldProvider;
 import org.kie.workbench.common.forms.jbpm.model.authoring.document.definition.DocumentFieldDefinition;
 import org.kie.workbench.common.forms.jbpm.model.authoring.document.type.DocumentFieldType;
 import org.kie.workbench.common.forms.model.TypeInfo;
-import org.kie.workbench.common.forms.model.util.ModelPropertiesUtil;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DocumentFieldProvider extends BasicTypeFieldProvider<DocumentFieldDefinition> {
 
     @Override

@@ -18,12 +18,15 @@ package org.kie.workbench.common.stunner.bpmn.forms.service.fieldProviders;
 
 import javax.enterprise.inject.Model;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.BasicTypeFieldProvider;
 import org.kie.workbench.common.forms.model.TypeInfo;
 import org.kie.workbench.common.stunner.bpmn.forms.model.VariablesEditorFieldDefinition;
 import org.kie.workbench.common.stunner.bpmn.forms.model.VariablesEditorFieldType;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Model
+@LoadAsync(UberfireActivityFragment.class)
 public class VariablesEditorFieldProvider extends BasicTypeFieldProvider<VariablesEditorFieldDefinition> {
 
     @Override

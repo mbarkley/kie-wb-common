@@ -22,6 +22,7 @@ import javax.inject.Inject;
 
 import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.dom.HTMLElement;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.screens.datasource.management.client.dbexplorer.dbobjects.DatabaseObjectExplorer;
@@ -32,9 +33,11 @@ import org.kie.workbench.common.screens.datasource.management.client.dbexplorer.
 import org.kie.workbench.common.screens.datasource.management.client.resources.i18n.DataSourceManagementConstants;
 import org.kie.workbench.common.screens.datasource.management.client.util.InitializeCallback;
 import org.kie.workbench.common.screens.datasource.management.client.widgets.BreadcrumbItem;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DatabaseStructureExplorer
         implements DatabaseStructureExplorerView.Presenter, IsElement {
 

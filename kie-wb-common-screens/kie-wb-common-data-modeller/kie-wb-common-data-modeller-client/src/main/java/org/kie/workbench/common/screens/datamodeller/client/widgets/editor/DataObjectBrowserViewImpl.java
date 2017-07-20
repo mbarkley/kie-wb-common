@@ -45,6 +45,7 @@ import org.gwtbootstrap3.client.ui.constants.ButtonSize;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
 import org.kie.workbench.common.screens.datamodeller.client.resources.images.ImagesResources;
 import org.kie.workbench.common.screens.datamodeller.client.util.AnnotationValueHandler;
@@ -52,6 +53,7 @@ import org.kie.workbench.common.screens.datamodeller.client.widgets.refactoring.
 import org.kie.workbench.common.screens.datamodeller.model.maindomain.MainDomainAnnotations;
 import org.kie.workbench.common.services.datamodeller.core.ObjectProperty;
 import org.kie.workbench.common.widgets.client.popups.validation.ValidationPopup;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.ext.widgets.common.client.common.BusyPopup;
 import org.uberfire.ext.widgets.common.client.common.popups.YesNoCancelPopup;
@@ -59,6 +61,7 @@ import org.uberfire.ext.widgets.common.client.tables.SimpleTable;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DataObjectBrowserViewImpl
         extends Composite
         implements DataObjectBrowserView {
@@ -87,12 +90,12 @@ public class DataObjectBrowserViewImpl
     Button newPropertyButton;
 
     @UiField(provided = true)
-    SimpleTable<ObjectProperty> propertiesTable = new BrowserSimpleTable<ObjectProperty>(1000);
+    SimpleTable<ObjectProperty> propertiesTable = new BrowserSimpleTable<>(1000);
 
     @Inject
     private ValidationPopup validationPopup;
 
-    Map<Column<?, ?>, ColumnId> columnIds = new HashMap<Column<?, ?>, ColumnId>();
+    Map<Column<?, ?>, ColumnId> columnIds = new HashMap<>();
 
     ListDataProvider<ObjectProperty> dataProvider;
 
@@ -140,7 +143,7 @@ public class DataObjectBrowserViewImpl
         addSortHandler();
 
         //Init the selection model
-        SingleSelectionModel<ObjectProperty> selectionModel = new SingleSelectionModel<ObjectProperty>();
+        SingleSelectionModel<ObjectProperty> selectionModel = new SingleSelectionModel<>();
         propertiesTable.setSelectionModel(selectionModel);
         selectionModel.addSelectionChangeHandler(new SelectionChangeEvent.Handler() {
             @Override
@@ -166,18 +169,21 @@ public class DataObjectBrowserViewImpl
         this.dataProvider = dataProvider;
     }
 
+    @Override
     public void setObjectSelectorLabel(String label,
                                        String title) {
         objectButton.setText(label);
         objectButton.setTitle(title);
     }
 
+    @Override
     public void setReadonly(boolean readonly) {
         this.readonly = readonly;
         enableNewPropertyAction(!readonly);
         enableDeleteRowAction(!readonly);
     }
 
+    @Override
     public void enableNewPropertyAction(boolean enable) {
         newPropertyButton.setEnabled(enable);
     }
@@ -287,6 +293,7 @@ public class DataObjectBrowserViewImpl
         };
 
         column.setFieldUpdater(new FieldUpdater<ObjectProperty, ImageResource>() {
+            @Override
             public void update(final int index,
                                final ObjectProperty property,
                                final ImageResource value) {

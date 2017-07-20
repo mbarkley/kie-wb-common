@@ -30,6 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
 import org.guvnor.common.services.project.model.Project;
 import org.guvnor.structure.organizationalunit.OrganizationalUnit;
 import org.guvnor.structure.repositories.Repository;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.explorer.client.widgets.BaseViewImpl;
 import org.kie.workbench.common.screens.explorer.client.widgets.BaseViewPresenter;
 import org.kie.workbench.common.screens.explorer.client.widgets.View;
@@ -40,6 +41,7 @@ import org.kie.workbench.common.screens.explorer.client.widgets.tagSelector.TagC
 import org.kie.workbench.common.screens.explorer.client.widgets.tagSelector.TagSelector;
 import org.kie.workbench.common.screens.explorer.model.FolderItem;
 import org.kie.workbench.common.screens.explorer.model.FolderListing;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.mvp.PlaceManager;
 import org.uberfire.ext.widgets.common.client.common.BusyPopup;
 
@@ -47,6 +49,7 @@ import org.uberfire.ext.widgets.common.client.common.BusyPopup;
  * Technical View implementation
  */
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class TechnicalViewWidget
         extends BaseViewImpl
         implements View {

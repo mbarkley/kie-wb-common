@@ -19,6 +19,9 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.client.annotations.WorkbenchEditor;
 import org.uberfire.client.annotations.WorkbenchMenu;
@@ -33,6 +36,7 @@ import org.uberfire.workbench.model.menu.Menus;
 
 @Dependent
 @WorkbenchEditor(identifier = "GuvnorTextEditor", supportedTypes = { TextResourceType.class, XmlResourceType.class, PackageNameWhiteListResourceType.class }, priority = 1)
+@LoadAsync(UberfireActivityFragment.class)
 public class KieTextEditorScreenPresenter
         extends KieTextEditorPresenter {
 
@@ -52,6 +56,7 @@ public class KieTextEditorScreenPresenter
 
     private AceEditorMode mode;
 
+    @Override
     @OnStartup
     public void onStartup( final ObservablePath path,
                            final PlaceRequest place ) {
@@ -73,11 +78,13 @@ public class KieTextEditorScreenPresenter
         }
     }
 
+    @Override
     @WorkbenchPartTitle
     public String getTitleText() {
         return super.getTitleText();
     }
 
+    @Override
     @WorkbenchPartTitleDecoration
     public IsWidget getTitle() {
         return super.getTitle();
@@ -88,6 +95,7 @@ public class KieTextEditorScreenPresenter
         return super.getWidget();
     }
 
+    @Override
     @WorkbenchMenu
     public Menus getMenus() {
         return menus;

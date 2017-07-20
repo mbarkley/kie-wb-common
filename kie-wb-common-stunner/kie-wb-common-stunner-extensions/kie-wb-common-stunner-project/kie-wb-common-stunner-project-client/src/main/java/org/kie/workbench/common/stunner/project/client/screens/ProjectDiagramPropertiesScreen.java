@@ -25,12 +25,15 @@ import javax.inject.Inject;
 
 import com.google.gwt.logging.client.LogConfiguration;
 import com.google.gwt.user.client.ui.IsWidget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.api.AbstractClientSessionManager;
 import org.kie.workbench.common.stunner.core.client.session.ClientSession;
 import org.kie.workbench.common.stunner.core.client.session.impl.AbstractClientFullSession;
 import org.kie.workbench.common.stunner.forms.client.event.FormPropertiesOpened;
 import org.kie.workbench.common.stunner.forms.client.widgets.FormPropertiesWidget;
 import org.kie.workbench.common.stunner.project.client.view.ProjectScreenView;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchContextId;
 import org.uberfire.client.annotations.WorkbenchMenu;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
@@ -50,6 +53,7 @@ import org.uberfire.workbench.model.menu.Menus;
  */
 @Dependent
 @WorkbenchScreen(identifier = ProjectDiagramPropertiesScreen.SCREEN_ID)
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectDiagramPropertiesScreen {
 
     private static Logger LOGGER = Logger.getLogger(ProjectDiagramPropertiesScreen.class.getName());

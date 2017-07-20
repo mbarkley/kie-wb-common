@@ -25,14 +25,17 @@ import org.jboss.errai.common.client.dom.DOMUtil;
 import org.jboss.errai.common.client.dom.Div;
 import org.jboss.errai.common.client.dom.Event;
 import org.jboss.errai.common.client.dom.Label;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.EventHandler;
 import org.jboss.errai.ui.shared.api.annotations.ForEvent;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.screens.datasource.management.client.editor.common.DefEditorBaseViewImpl;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class DataSourceDefEditorViewImpl
         extends DefEditorBaseViewImpl
         implements DataSourceDefEditorView {
@@ -78,6 +81,7 @@ public class DataSourceDefEditorViewImpl
         DOMUtil.removeAllChildren(contentPanel);
     }
 
+    @Override
     public void setContent(IsElement content) {
         contentPanel.appendChild(content.getElement());
     }

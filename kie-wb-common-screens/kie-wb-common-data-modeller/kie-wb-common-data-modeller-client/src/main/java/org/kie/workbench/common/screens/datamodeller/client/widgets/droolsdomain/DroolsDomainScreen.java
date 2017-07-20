@@ -20,12 +20,16 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
 
 @ApplicationScoped
 @WorkbenchScreen( identifier = "DroolsDomainScreen" )
+@LoadAsync(UberfireActivityFragment.class)
 public class DroolsDomainScreen {
 
     private DroolsDomainScreenView view;

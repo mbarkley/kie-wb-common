@@ -21,6 +21,7 @@ import java.util.List;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.command.ToolboxCommand;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.toolbox.command.ToolboxCommandFactory;
@@ -30,6 +31,7 @@ import org.kie.workbench.common.stunner.core.client.components.toolbox.ToolboxFa
 import org.kie.workbench.common.stunner.core.client.components.toolbox.builder.ToolboxBuilder;
 import org.kie.workbench.common.stunner.core.client.components.toolbox.builder.ToolboxButtonGridBuilder;
 import org.kie.workbench.common.stunner.core.graph.Element;
+import org.uberfire.async.UberfireActivityFragment;
 
 /**
  * A toolbox control provider implementation that provides buttons for common actions that
@@ -39,6 +41,7 @@ import org.kie.workbench.common.stunner.core.graph.Element;
  * - Removing the element.
  */
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ActionsToolboxControlProvider extends AbstractToolboxControlProvider {
 
     private RemoveToolboxCommand removeToolboxCommand;

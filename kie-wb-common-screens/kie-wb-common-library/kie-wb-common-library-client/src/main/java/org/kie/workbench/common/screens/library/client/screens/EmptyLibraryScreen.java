@@ -20,16 +20,19 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.guvnor.common.services.project.client.security.ProjectController;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.security.shared.api.identity.User;
 import org.kie.workbench.common.screens.examples.model.ExampleProject;
 import org.kie.workbench.common.screens.library.client.util.ExamplesUtils;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
 import org.uberfire.client.mvp.UberElement;
 
 @WorkbenchScreen(identifier = LibraryPlaces.EMPTY_LIBRARY_SCREEN)
+@LoadAsync(UberfireActivityFragment.class)
 public class EmptyLibraryScreen {
 
     public interface View extends UberElement<EmptyLibraryScreen> {

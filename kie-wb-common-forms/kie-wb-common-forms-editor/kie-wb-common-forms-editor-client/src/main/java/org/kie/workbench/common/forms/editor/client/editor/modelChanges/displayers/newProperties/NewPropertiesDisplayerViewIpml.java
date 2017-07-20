@@ -22,11 +22,14 @@ import org.jboss.errai.common.client.dom.DOMUtil;
 import org.jboss.errai.common.client.dom.Document;
 import org.jboss.errai.common.client.dom.HTMLElement;
 import org.jboss.errai.common.client.dom.UnorderedList;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class NewPropertiesDisplayerViewIpml implements NewPropertiesDisplayerView,
                                                        IsElement {
 

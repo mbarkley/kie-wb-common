@@ -25,10 +25,14 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import com.google.gwt.view.client.AsyncDataProvider;
 import com.google.gwt.view.client.HasData;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
 import org.kie.workbench.common.screens.datamodeller.client.util.DataModelerUtils;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectClassList
         implements IsWidget,
                     ProjectClassListView.Presenter {
@@ -111,7 +115,7 @@ public class ProjectClassList
             loadClassesHandler.onLoadClass( newClassName );
         } else {
             if ( classes == null ) {
-                classes = new ArrayList<ClassRow>(  );
+                classes = new ArrayList<>(  );
             }
             classes.add( new ClassRowImpl( newClassName ) );
             setClasses( classes );

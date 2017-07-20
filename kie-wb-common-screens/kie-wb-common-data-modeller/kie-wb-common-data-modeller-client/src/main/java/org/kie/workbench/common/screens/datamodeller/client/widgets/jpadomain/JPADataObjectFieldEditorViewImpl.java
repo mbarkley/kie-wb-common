@@ -26,7 +26,10 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.model.DataModelerPropertyEditorFieldInfo;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.properties.editor.client.PropertyEditorWidget;
 import org.uberfire.ext.properties.editor.model.PropertyEditorCategory;
 import org.uberfire.ext.properties.editor.model.PropertyEditorChangeEvent;
@@ -34,6 +37,7 @@ import org.uberfire.ext.properties.editor.model.PropertyEditorEvent;
 import org.uberfire.ext.properties.editor.model.PropertyEditorFieldInfo;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class JPADataObjectFieldEditorViewImpl
         extends Composite
         implements JPADataObjectFieldEditorView {

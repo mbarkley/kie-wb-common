@@ -28,6 +28,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.annotationlisteditor.item.AnnotationListItem;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.valuepaireditor.ValuePairEditorPopup;
@@ -44,10 +45,12 @@ import org.kie.workbench.common.services.datamodeller.driver.model.AnnotationSou
 import org.kie.workbench.common.services.datamodeller.driver.model.AnnotationSourceResponse;
 import org.kie.workbench.common.services.datamodeller.driver.model.DriverError;
 import org.kie.workbench.common.services.shared.project.KieProject;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.callbacks.Callback;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class AdvancedAnnotationListEditor
     implements IsWidget,
                 AdvancedAnnotationListEditorView.Presenter {
@@ -72,9 +75,9 @@ public class AdvancedAnnotationListEditor
 
     private List<Annotation> annotations;
 
-    private Map< Annotation, AnnotationListItem > annotationItems = new HashMap< Annotation, AnnotationListItem >( );
+    private Map< Annotation, AnnotationListItem > annotationItems = new HashMap< >( );
 
-    private Map< String, Boolean > annotationStatus = new HashMap< String, Boolean >( );
+    private Map< String, Boolean > annotationStatus = new HashMap< >( );
 
     private KieProject project;
 

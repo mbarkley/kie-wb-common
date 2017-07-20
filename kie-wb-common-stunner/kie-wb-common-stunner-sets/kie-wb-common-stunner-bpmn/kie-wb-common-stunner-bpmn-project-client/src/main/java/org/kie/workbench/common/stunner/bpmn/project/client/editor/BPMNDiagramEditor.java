@@ -22,6 +22,8 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.bpmn.factory.BPMNGraphFactory;
 import org.kie.workbench.common.stunner.bpmn.project.client.type.BPMNDiagramResourceType;
 import org.kie.workbench.common.stunner.client.widgets.presenters.session.SessionPresenterFactory;
@@ -35,6 +37,7 @@ import org.kie.workbench.common.stunner.project.client.editor.ProjectDiagramEdit
 import org.kie.workbench.common.stunner.project.client.editor.event.OnDiagramFocusEvent;
 import org.kie.workbench.common.stunner.project.client.editor.event.OnDiagramLoseFocusEvent;
 import org.kie.workbench.common.stunner.project.client.service.ClientProjectDiagramService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.client.annotations.WorkbenchEditor;
 import org.uberfire.client.annotations.WorkbenchMenu;
@@ -56,6 +59,7 @@ import org.uberfire.workbench.model.menu.Menus;
 
 @Dependent
 @WorkbenchEditor(identifier = BPMNDiagramEditor.EDITOR_ID, supportedTypes = {BPMNDiagramResourceType.class})
+@LoadAsync(UberfireActivityFragment.class)
 public class BPMNDiagramEditor extends AbstractProjectDiagramEditor<BPMNDiagramResourceType> {
 
     public static final String EDITOR_ID = "BPMNDiagramEditor";
@@ -131,21 +135,25 @@ public class BPMNDiagramEditor extends AbstractProjectDiagramEditor<BPMNDiagramR
         super.doLostFocus();
     }
 
+    @Override
     @WorkbenchPartTitleDecoration
     public IsWidget getTitle() {
         return super.getTitle();
     }
 
+    @Override
     @WorkbenchPartTitle
     public String getTitleText() {
         return super.getTitleText();
     }
 
+    @Override
     @WorkbenchMenu
     public Menus getMenus() {
         return super.getMenus();
     }
 
+    @Override
     @WorkbenchPartView
     public Widget getWidget() {
         return getView().asWidget();

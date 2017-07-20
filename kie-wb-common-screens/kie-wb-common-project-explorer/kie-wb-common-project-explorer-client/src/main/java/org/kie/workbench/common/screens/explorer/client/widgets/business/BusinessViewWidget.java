@@ -45,6 +45,7 @@ import org.gwtbootstrap3.client.ui.PanelBody;
 import org.gwtbootstrap3.client.ui.PanelCollapse;
 import org.gwtbootstrap3.client.ui.PanelGroup;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.security.shared.api.identity.User;
 import org.kie.workbench.common.screens.explorer.client.resources.i18n.ProjectExplorerConstants;
 import org.kie.workbench.common.screens.explorer.client.resources.images.ProjectExplorerImageResources;
@@ -60,6 +61,7 @@ import org.kie.workbench.common.screens.explorer.model.FolderItem;
 import org.kie.workbench.common.screens.explorer.model.FolderItemType;
 import org.kie.workbench.common.screens.explorer.model.FolderListing;
 import org.kie.workbench.common.screens.explorer.utils.Sorters;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.mvp.PlaceManager;
 import org.uberfire.client.workbench.type.AnyResourceType;
 import org.uberfire.client.workbench.type.ClientResourceType;
@@ -70,12 +72,13 @@ import org.uberfire.ext.widgets.common.client.common.BusyPopup;
  * Business View implementation
  */
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class BusinessViewWidget extends BaseViewImpl implements View {
 
     private static final String ID_CLEANUP_PATTERN = "[^a-zA-Z0-9]";
     private static BusinessViewImplBinder uiBinder = GWT.create(BusinessViewImplBinder.class);
     //TreeSet sorts members upon insertion
-    private final Set<FolderItem> sortedFolderItems = new TreeSet<FolderItem>(Sorters.ITEM_SORTER);
+    private final Set<FolderItem> sortedFolderItems = new TreeSet<>(Sorters.ITEM_SORTER);
     private final NavigatorOptions businessOptions = new NavigatorOptions() {{
         showFiles(false);
         showHiddenFiles(false);

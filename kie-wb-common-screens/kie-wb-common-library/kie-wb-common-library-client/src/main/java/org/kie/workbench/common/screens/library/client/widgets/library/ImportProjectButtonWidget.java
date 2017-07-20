@@ -20,12 +20,15 @@ import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
 import org.guvnor.common.services.project.client.security.ProjectController;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.examples.model.ExampleProject;
 import org.kie.workbench.common.screens.library.client.util.ExamplesUtils;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.mvp.UberElement;
 import org.uberfire.mvp.Command;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class ImportProjectButtonWidget {
 
     public interface View extends UberElement<ImportProjectButtonWidget> {

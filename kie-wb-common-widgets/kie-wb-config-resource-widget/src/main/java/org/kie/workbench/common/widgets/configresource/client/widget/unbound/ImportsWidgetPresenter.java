@@ -21,9 +21,12 @@ import javax.inject.Inject;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import org.guvnor.common.services.project.model.ProjectImports;
+import org.jboss.errai.ioc.client.api.LoadAsync;
+import org.uberfire.async.UberfireActivityFragment;
 
 import static org.uberfire.commons.validation.PortablePreconditions.*;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class ImportsWidgetPresenter
         implements ImportsWidgetView.Presenter,
                    IsWidget {

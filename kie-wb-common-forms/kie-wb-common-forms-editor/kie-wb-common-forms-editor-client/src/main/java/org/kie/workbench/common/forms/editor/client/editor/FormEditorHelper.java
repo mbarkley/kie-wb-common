@@ -28,6 +28,7 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.forms.editor.client.editor.rendering.EditorFieldLayoutComponent;
 import org.kie.workbench.common.forms.editor.model.FormModelerContent;
@@ -39,9 +40,11 @@ import org.kie.workbench.common.forms.model.FormDefinition;
 import org.kie.workbench.common.forms.model.FormModel;
 import org.kie.workbench.common.forms.model.HasFormModelProperties;
 import org.kie.workbench.common.forms.service.shared.FieldManager;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.data.Pair;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class FormEditorHelper {
 
     public static final String UNBOUND_FIELD_NAME_PREFFIX = "__unbound_field_";

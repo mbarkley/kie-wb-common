@@ -24,15 +24,19 @@ import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiFactory;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.explorer.client.utils.IdHelper;
 import org.kie.workbench.common.screens.explorer.client.widgets.business.BusinessViewWidget;
 import org.kie.workbench.common.screens.explorer.client.widgets.technical.TechnicalViewWidget;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.common.BusyPopup;
 
 /**
  * The Explorer's view implementation
  */
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class ExplorerViewImpl
         extends Composite
         implements ExplorerView {

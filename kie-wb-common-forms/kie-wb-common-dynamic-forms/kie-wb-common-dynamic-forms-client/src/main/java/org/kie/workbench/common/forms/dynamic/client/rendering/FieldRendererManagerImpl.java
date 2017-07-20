@@ -24,13 +24,16 @@ import javax.annotation.PreDestroy;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ioc.client.container.IOC;
 import org.jboss.errai.ioc.client.container.SyncBeanDef;
 import org.kie.workbench.common.forms.model.FieldDefinition;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.validation.PortablePreconditions;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class FieldRendererManagerImpl implements FieldRendererManager {
 
     private ManagedInstance<FieldRenderer> renderers;

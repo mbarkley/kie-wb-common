@@ -22,12 +22,14 @@ import com.google.gwt.user.client.ui.IsWidget;
 import org.guvnor.common.services.project.model.ProjectImports;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.projectimportsscreen.client.resources.i18n.ProjectConfigScreenConstants;
 import org.kie.workbench.common.screens.projectimportsscreen.client.type.ProjectImportsResourceType;
 import org.kie.workbench.common.services.shared.project.ProjectImportsContent;
 import org.kie.workbench.common.services.shared.project.ProjectImportsService;
 import org.kie.workbench.common.widgets.client.resources.i18n.CommonConstants;
 import org.kie.workbench.common.widgets.metadata.client.KieEditor;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.client.annotations.WorkbenchEditor;
@@ -45,6 +47,7 @@ import org.uberfire.workbench.events.NotificationEvent;
 import org.uberfire.workbench.model.menu.Menus;
 
 @WorkbenchEditor(identifier = "projectConfigScreen", supportedTypes = {ProjectImportsResourceType.class})
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectImportsScreenPresenter
         extends KieEditor {
 
@@ -124,6 +127,7 @@ public class ProjectImportsScreenPresenter
                             new HasBusyIndicatorDefaultErrorCallback(view)).loadContent(versionRecordManager.getCurrentPath());
     }
 
+    @Override
     protected void save() {
         savePopUpPresenter.show(versionRecordManager.getCurrentPath(),
                                 new ParameterizedCommand<String>() {
@@ -152,6 +156,7 @@ public class ProjectImportsScreenPresenter
         };
     }
 
+    @Override
     @WorkbenchPartTitle
     public String getTitleText() {
         return ProjectConfigScreenConstants.INSTANCE.ExternalImports();

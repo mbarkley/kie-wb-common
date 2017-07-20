@@ -18,11 +18,13 @@ package org.kie.workbench.common.screens.explorer.client;
 import javax.inject.Inject;
 
 import org.guvnor.common.services.project.context.ProjectContext;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.explorer.client.resources.i18n.ProjectExplorerConstants;
 import org.kie.workbench.common.screens.explorer.client.widgets.ActiveContextOptions;
 import org.kie.workbench.common.screens.explorer.client.widgets.BaseViewPresenter;
 import org.kie.workbench.common.screens.explorer.client.widgets.business.BusinessViewPresenter;
 import org.kie.workbench.common.screens.explorer.client.widgets.technical.TechnicalViewPresenter;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.DefaultPosition;
 import org.uberfire.client.annotations.WorkbenchMenu;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
@@ -40,6 +42,7 @@ import org.uberfire.workbench.model.menu.Menus;
  * Repository, Package, Folder and File explorer
  */
 @WorkbenchScreen(identifier = "org.kie.guvnor.explorer")
+@LoadAsync(UberfireActivityFragment.class)
 public class ExplorerPresenter {
 
     private ExplorerView view;

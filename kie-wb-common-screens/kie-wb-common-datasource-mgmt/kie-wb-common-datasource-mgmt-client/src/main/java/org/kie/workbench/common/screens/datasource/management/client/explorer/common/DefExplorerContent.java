@@ -22,15 +22,18 @@ import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
 import org.jboss.errai.common.client.dom.HTMLElement;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ui.client.local.api.IsElement;
 import org.kie.workbench.common.screens.datasource.management.client.dbexplorer.DatabaseStructureExplorerScreen;
 import org.kie.workbench.common.screens.datasource.management.model.DataSourceDefInfo;
 import org.kie.workbench.common.screens.datasource.management.model.DriverDefInfo;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.mvp.PlaceManager;
 import org.uberfire.mvp.PlaceRequest;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DefExplorerContent
         implements IsElement,
                    DefExplorerContentView.Presenter {

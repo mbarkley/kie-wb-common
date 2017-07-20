@@ -18,11 +18,14 @@ package org.kie.workbench.common.stunner.client.widgets.menu.dev.impl;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.client.widgets.menu.dev.AbstractMenuDevCommand;
 import org.kie.workbench.common.stunner.core.client.api.AbstractClientSessionManager;
 import org.kie.workbench.common.stunner.core.util.StunnerLogger;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class LogGraphDevCommand extends AbstractMenuDevCommand {
 
     protected LogGraphDevCommand() {

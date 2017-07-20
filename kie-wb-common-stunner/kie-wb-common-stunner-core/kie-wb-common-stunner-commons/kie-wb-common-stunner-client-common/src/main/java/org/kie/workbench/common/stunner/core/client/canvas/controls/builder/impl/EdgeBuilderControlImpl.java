@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.api.ClientDefinitionManager;
 import org.kie.workbench.common.stunner.core.client.api.ShapeManager;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
@@ -43,8 +44,10 @@ import org.kie.workbench.common.stunner.core.graph.Node;
 import org.kie.workbench.common.stunner.core.graph.content.view.Magnet;
 import org.kie.workbench.common.stunner.core.graph.content.view.MagnetImpl;
 import org.kie.workbench.common.stunner.core.graph.content.view.View;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class EdgeBuilderControlImpl extends AbstractCanvasHandlerControl<AbstractCanvasHandler> implements EdgeBuilderControl<AbstractCanvasHandler> {
 
     private static Logger LOGGER = Logger.getLogger(EdgeBuilderControlImpl.class.getName());

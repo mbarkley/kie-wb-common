@@ -27,6 +27,7 @@ import org.gwtbootstrap3.client.ui.Container;
 import org.gwtbootstrap3.client.ui.Form;
 import org.gwtbootstrap3.client.ui.Row;
 import org.gwtbootstrap3.client.ui.constants.ColumnSize;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.valuepaireditor.booleans.BooleanValuePairEditor;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.valuepaireditor.enums.EnumValuePairEditor;
@@ -36,9 +37,11 @@ import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddoma
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.valuepaireditor.numeric.NumericValuePairEditor;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.valuepaireditor.string.AbstractStringValuePairEditor;
 import org.kie.workbench.common.services.datamodeller.core.AnnotationValuePairDefinition;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.common.popups.BaseModal;
 import org.uberfire.ext.widgets.common.client.common.popups.footers.ModalFooterOKCancelButtons;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class ValuePairEditorPopupViewImpl
         extends BaseModal
         implements ValuePairEditorPopupView {
@@ -156,12 +159,12 @@ public class ValuePairEditorPopupViewImpl
         } else if ( valuePairEditor instanceof MultipleEnumValuePairEditor ) {
             List<String> enumValues = null;
             if ( value instanceof List ) {
-                enumValues = new ArrayList<String>();
+                enumValues = new ArrayList<>();
                 for ( Object enumItem : ( (List) value ) ) {
                     enumValues.add( enumItem != null ? enumItem.toString() : null );
                 }
             } else if ( value != null ) {
-                enumValues = new ArrayList<String>();
+                enumValues = new ArrayList<>();
                 enumValues.add( value.toString() );
             }
             ( (MultipleEnumValuePairEditor) valuePairEditor ).setValue( enumValues );

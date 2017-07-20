@@ -21,14 +21,17 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import org.gwtbootstrap3.client.ui.gwt.FlowPanel;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.forms.dynamic.service.shared.FormRenderingContext;
 import org.kie.workbench.common.forms.model.FieldDefinition;
 import org.kie.workbench.common.forms.model.FormLayoutComponent;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.layout.editor.client.api.LayoutDragComponent;
 import org.uberfire.ext.layout.editor.client.api.RenderingContext;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class FieldLayoutComponent implements FormLayoutComponent,
                                              LayoutDragComponent {
 

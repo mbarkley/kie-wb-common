@@ -18,13 +18,16 @@ package org.kie.workbench.common.screens.library.client.widgets.project;
 
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.library.client.util.ResourceUtils;
 import org.kie.workbench.common.widgets.client.handlers.NewResourceHandler;
 import org.kie.workbench.common.widgets.client.handlers.NewResourcePresenter;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.mvp.UberElement;
 
 import static org.kie.workbench.common.screens.library.client.util.ResourceUtils.isProjectHandler;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class AssetsActionsWidget {
 
     public interface View extends UberElement<AssetsActionsWidget> {

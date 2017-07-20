@@ -23,6 +23,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datasource.management.client.resources.i18n.DataSourceManagementConstants;
 import org.kie.workbench.common.screens.datasource.management.client.type.DriverDefType;
 import org.kie.workbench.common.screens.datasource.management.client.util.PopupsUtil;
@@ -30,6 +31,7 @@ import org.kie.workbench.common.screens.datasource.management.model.DriverDefEdi
 import org.kie.workbench.common.screens.datasource.management.model.DriverDeploymentInfo;
 import org.kie.workbench.common.screens.datasource.management.service.DataSourceRuntimeManagerClientService;
 import org.kie.workbench.common.screens.datasource.management.service.DriverDefEditorService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.client.annotations.WorkbenchEditor;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
@@ -51,6 +53,7 @@ import org.uberfire.workbench.events.NotificationEvent;
 @Dependent
 @WorkbenchEditor( identifier = "DriverDefEditor",
         supportedTypes = { DriverDefType.class } )
+@LoadAsync(UberfireActivityFragment.class)
 public class DriverDefEditor
         extends BaseEditor
         implements DriverDefEditorView.Presenter {
@@ -113,11 +116,13 @@ public class DriverDefEditor
                 false );
     }
 
+    @Override
     @WorkbenchPartTitleDecoration
     public IsWidget getTitle( ) {
         return super.getTitle( );
     }
 
+    @Override
     @WorkbenchPartTitle
     public String getTitleText( ) {
         return super.getTitleText( );
@@ -160,6 +165,7 @@ public class DriverDefEditor
         safeDelete( versionRecordManager.getCurrentPath( ) );
     }
 
+    @Override
     protected void save( ) {
         safeSave( );
     }

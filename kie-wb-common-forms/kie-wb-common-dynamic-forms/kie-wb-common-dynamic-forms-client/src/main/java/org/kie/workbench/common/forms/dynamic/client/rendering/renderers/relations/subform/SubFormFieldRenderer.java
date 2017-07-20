@@ -24,14 +24,17 @@ import javax.inject.Inject;
 import com.google.gwt.user.client.ui.IsWidget;
 import org.gwtbootstrap3.client.ui.FieldSet;
 import org.gwtbootstrap3.client.ui.Legend;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.dynamic.client.rendering.FieldRenderer;
 import org.kie.workbench.common.forms.dynamic.client.rendering.renderers.relations.subform.widget.SubFormWidget;
 import org.kie.workbench.common.forms.dynamic.client.resources.i18n.FormRenderingConstants;
 import org.kie.workbench.common.forms.dynamic.service.shared.FormRenderingContext;
 import org.kie.workbench.common.forms.dynamic.service.shared.RenderMode;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.subForm.definition.SubFormFieldDefinition;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class SubFormFieldRenderer extends FieldRenderer<SubFormFieldDefinition> {
 
     private FieldSet container = new FieldSet();

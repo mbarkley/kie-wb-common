@@ -28,12 +28,14 @@ import org.jboss.errai.common.client.dom.Select;
 import org.jboss.errai.common.client.dom.Span;
 import org.jboss.errai.common.client.dom.TextInput;
 import org.jboss.errai.common.client.dom.Window;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.EventHandler;
 import org.jboss.errai.ui.shared.api.annotations.ForEvent;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.data.Pair;
 
 import static org.kie.workbench.common.screens.datasource.management.client.resources.i18n.DataSourceManagementConstants.DataSourceDefMainPanelViewImpl_emptyOption;
@@ -43,6 +45,7 @@ import static org.kie.workbench.common.screens.datasource.management.client.util
 
 @Dependent
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class DataSourceDefMainPanelViewImpl
         implements DataSourceDefMainPanelView,
                    IsElement {
@@ -134,6 +137,7 @@ public class DataSourceDefMainPanelViewImpl
         return nameTextBox.getValue();
     }
 
+    @Override
     public void setNameErrorMessage(final String message) {
         setGroupOnError(nameFormGroup,
                         true);
@@ -141,6 +145,7 @@ public class DataSourceDefMainPanelViewImpl
                        message);
     }
 
+    @Override
     public void clearNameErrorMessage() {
         setGroupOnError(nameFormGroup,
                         false);

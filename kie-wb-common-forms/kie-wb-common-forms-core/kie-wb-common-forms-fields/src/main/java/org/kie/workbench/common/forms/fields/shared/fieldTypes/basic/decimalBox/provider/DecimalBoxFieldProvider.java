@@ -19,12 +19,15 @@ package org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.decimalBox
 import java.math.BigDecimal;
 import javax.enterprise.context.Dependent;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.BasicTypeFieldProvider;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.decimalBox.definition.DecimalBoxFieldDefinition;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.decimalBox.type.DecimalBoxFieldType;
 import org.kie.workbench.common.forms.model.TypeInfo;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DecimalBoxFieldProvider extends BasicTypeFieldProvider<DecimalBoxFieldDefinition> {
 
     @Override

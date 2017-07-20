@@ -29,12 +29,15 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 import org.gwtbootstrap3.client.ui.CheckBox;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.handlers.DomainHandler;
 import org.kie.workbench.common.screens.datamodeller.client.handlers.jpadomain.JPADomainHandler;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.common.domain.ResourceOptions;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.views.pfly.widgets.HelpIcon;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class JPANewResourceOptions
         extends Composite
         implements ResourceOptions {
@@ -97,7 +100,7 @@ public class JPANewResourceOptions
 
     @Override
     public Map<String, Object> getOptions() {
-        Map<String, Object> options = new HashMap<String, Object>();
+        Map<String, Object> options = new HashMap<>();
         options.put( "persistable", isPersitable() );
         if ( isPersitable() && handler.isDataObjectAuditEnabled() ) {
             options.put( "audited", getAudited() );

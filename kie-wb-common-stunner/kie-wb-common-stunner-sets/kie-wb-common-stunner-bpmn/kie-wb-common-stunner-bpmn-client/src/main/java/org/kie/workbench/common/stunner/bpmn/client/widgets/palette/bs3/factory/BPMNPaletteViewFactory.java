@@ -20,14 +20,17 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.enterprise.context.ApplicationScoped;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.bpmn.BPMNDefinitionSet;
 import org.kie.workbench.common.stunner.bpmn.client.resources.BPMNImageResources;
 import org.kie.workbench.common.stunner.bpmn.definition.Categories;
 import org.kie.workbench.common.stunner.client.widgets.palette.factory.AbstractBS3PaletteViewFactory;
 import org.kie.workbench.common.stunner.core.client.shape.SvgDataUriGlyph;
 import org.kie.workbench.common.stunner.core.definition.shape.Glyph;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class BPMNPaletteViewFactory extends AbstractBS3PaletteViewFactory {
 
     private static final Map<String, Glyph> CATEGORY_GLYPHS = new HashMap<String, Glyph>(5) {{

@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -25,11 +25,13 @@ import org.guvnor.common.services.project.client.type.POMResourceType;
 import org.guvnor.common.services.project.service.DeploymentMode;
 import org.guvnor.common.services.project.service.GAVAlreadyExistsException;
 import org.jboss.errai.common.client.api.Caller;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.defaulteditor.client.editor.KieTextEditorPresenter;
 import org.kie.workbench.common.screens.defaulteditor.client.editor.KieTextEditorView;
 import org.kie.workbench.common.screens.projecteditor.service.PomEditorService;
 import org.kie.workbench.common.widgets.client.callbacks.CommandWithThrowableDrivenErrorCallback;
 import org.kie.workbench.common.widgets.client.resources.i18n.CommonConstants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.client.annotations.WorkbenchEditor;
 import org.uberfire.client.annotations.WorkbenchMenu;
@@ -43,6 +45,7 @@ import org.uberfire.mvp.PlaceRequest;
 import org.uberfire.workbench.model.menu.Menus;
 
 @WorkbenchEditor(identifier = "pomScreen", supportedTypes = { POMResourceType.class }, priority = 2)
+@LoadAsync(UberfireActivityFragment.class)
 public class PomEditorScreenPresenter
         extends KieTextEditorPresenter {
 
@@ -58,6 +61,7 @@ public class PomEditorScreenPresenter
         this.conflictingRepositoriesPopup = conflictingRepositoriesPopup;
     }
 
+    @Override
     @OnStartup
     public void onStartup( final ObservablePath path,
                            final PlaceRequest place ) {
@@ -65,16 +69,19 @@ public class PomEditorScreenPresenter
                          place );
     }
 
+    @Override
     @WorkbenchMenu
     public Menus getMenus() {
         return super.getMenus();
     }
 
+    @Override
     @WorkbenchPartTitleDecoration
     public IsWidget getTitle() {
         return super.getTitle();
     }
 
+    @Override
     @WorkbenchPartTitle
     public String getTitleText() {
         return super.getTitleText();

@@ -24,13 +24,17 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerContext;
 import org.kie.workbench.common.screens.datamodeller.client.util.DataModelerUtils;
 import org.kie.workbench.common.screens.datamodeller.client.util.UIUtil;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.data.Pair;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class PackageSelector
         implements
         PackageSelectorView.Presenter,
@@ -38,11 +42,11 @@ public class PackageSelector
 
     private DataModelerContext context;
 
-    private List<String> packageList = new ArrayList<String>(  );
+    private List<String> packageList = new ArrayList<>(  );
 
     private PackageSelectorView view;
 
-    private List<PackageSelectorView.PackageSelectorHandler> handlers = new ArrayList<PackageSelectorView.PackageSelectorHandler>(  );
+    private List<PackageSelectorView.PackageSelectorHandler> handlers = new ArrayList<>(  );
 
     @Inject
     public PackageSelector( PackageSelectorView view ) {
@@ -162,9 +166,9 @@ public class PackageSelector
 
         Collections.sort( packageList );
 
-        List<Pair<String, String>> packageOptions = new ArrayList<Pair<String, String>>( packageList.size() );
+        List<Pair<String, String>> packageOptions = new ArrayList<>( packageList.size() );
         for ( String packageName : packageList ) {
-            packageOptions.add( new Pair<String, String>( packageName, packageName ) );
+            packageOptions.add( new Pair<>( packageName, packageName ) );
         }
 
         view.initPackageList( packageOptions, currentPackage, enableEmptyPackageOption );

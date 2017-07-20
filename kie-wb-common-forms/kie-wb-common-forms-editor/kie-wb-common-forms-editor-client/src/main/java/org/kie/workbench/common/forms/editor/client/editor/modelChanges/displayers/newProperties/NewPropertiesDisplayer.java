@@ -22,10 +22,13 @@ import javax.inject.Inject;
 
 import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.dom.HTMLElement;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.model.FieldDefinition;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.validation.PortablePreconditions;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class NewPropertiesDisplayer implements IsElement,
                                                NewPropertiesDisplayerView.Presenter {
 

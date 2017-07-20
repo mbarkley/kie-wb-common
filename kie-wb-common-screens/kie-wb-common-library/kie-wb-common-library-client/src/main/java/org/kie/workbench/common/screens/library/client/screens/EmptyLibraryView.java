@@ -22,6 +22,7 @@ import com.google.gwt.user.client.Event;
 import org.jboss.errai.common.client.dom.Anchor;
 import org.jboss.errai.common.client.dom.Div;
 import org.jboss.errai.common.client.dom.Heading;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.jboss.errai.ui.client.local.api.IsElement;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
@@ -34,8 +35,10 @@ import org.kie.workbench.common.screens.library.client.resources.i18n.LibraryCon
 import org.kie.workbench.common.screens.library.client.widgets.library.ImportExampleButtonWidget;
 import org.kie.workbench.common.screens.library.client.widgets.library.ImportProjectButtonWidget;
 import org.kie.workbench.common.screens.library.client.widgets.library.NewProjectButtonWidget;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class EmptyLibraryView implements EmptyLibraryScreen.View,
                                          IsElement {
 

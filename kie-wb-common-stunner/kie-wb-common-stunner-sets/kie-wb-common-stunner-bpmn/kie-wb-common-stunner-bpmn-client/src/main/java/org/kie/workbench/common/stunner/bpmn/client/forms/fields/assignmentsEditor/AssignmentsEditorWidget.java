@@ -38,6 +38,7 @@ import org.jboss.errai.bus.client.api.BusErrorCallback;
 import org.jboss.errai.bus.client.api.base.MessageBuilder;
 import org.jboss.errai.bus.client.api.messaging.Message;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.marshalling.client.Marshalling;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.EventHandler;
@@ -57,10 +58,12 @@ import org.kie.workbench.common.stunner.core.client.api.SessionManager;
 import org.kie.workbench.common.stunner.core.diagram.Diagram;
 import org.kie.workbench.common.stunner.core.graph.Element;
 import org.kie.workbench.common.stunner.core.graph.content.view.View;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.workbench.events.NotificationEvent;
 
 @Dependent
 @Templated
+@LoadAsync(UberfireActivityFragment.class)
 public class AssignmentsEditorWidget extends Composite implements HasValue<String> {
 
     @Inject
@@ -168,6 +171,7 @@ public class AssignmentsEditorWidget extends Composite implements HasValue<Strin
         final String simpleDataTypes = "Boolean:Boolean,Float:Float,Integer:Integer,Object:Object,String:String";
         MessageBuilder.createCall(
                 new RemoteCallback<List<String>>() {
+                    @Override
                     public void callback(List<String> dataTypes) {
                         String formattedDataTypes = formatDataTypes(dataTypes);
                         String allDataTypes = simpleDataTypes + "," + formattedDataTypes;
@@ -175,6 +179,7 @@ public class AssignmentsEditorWidget extends Composite implements HasValue<Strin
                     }
                 },
                 new BusErrorCallback() {
+                    @Override
                     public boolean error(Message message,
                                          Throwable t) {
                         notification.fire(new NotificationEvent(StunnerFormsClientFieldsConstants.INSTANCE.Error_retrieving_datatypes(),
@@ -286,7 +291,7 @@ public class AssignmentsEditorWidget extends Composite implements HasValue<Strin
     protected String formatDataTypes(final List<String> dataTypes) {
         StringBuilder sb = new StringBuilder();
         if (dataTypes != null && !dataTypes.isEmpty()) {
-            List<String> formattedDataTypes = new ArrayList<String>(dataTypes.size());
+            List<String> formattedDataTypes = new ArrayList<>(dataTypes.size());
             for (String dataType : dataTypes) {
                 int i = dataType.lastIndexOf('.');
                 StringBuilder formattedDataType = new StringBuilder(StringUtils.createDataTypeDisplayName(dataType));
@@ -303,7 +308,7 @@ public class AssignmentsEditorWidget extends Composite implements HasValue<Strin
     }
 
     protected Map<String, String> parseAssignmentsInfo() {
-        Map<String, String> properties = new HashMap<String, String>();
+        Map<String, String> properties = new HashMap<>();
         if (assignmentsInfo != null) {
             String[] parts = assignmentsInfo.split("\\|");
             if (parts.length > 0 && parts[0] != null && parts[0].length() > 0) {

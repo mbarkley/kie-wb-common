@@ -24,6 +24,7 @@ import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
 import org.jboss.errai.common.client.api.Assert;
 import org.jboss.errai.databinding.client.api.Converter;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.crud.client.component.formDisplay.IsFormView;
 import org.kie.workbench.common.forms.dynamic.client.init.FormHandlerGeneratorManager;
 import org.kie.workbench.common.forms.dynamic.client.rendering.FieldLayoutComponent;
@@ -37,10 +38,12 @@ import org.kie.workbench.common.forms.fields.shared.fieldTypes.relations.subForm
 import org.kie.workbench.common.forms.model.FieldDefinition;
 import org.kie.workbench.common.forms.processing.engine.handling.FieldChangeHandler;
 import org.kie.workbench.common.forms.processing.engine.handling.FormHandler;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.commons.validation.PortablePreconditions;
 import org.uberfire.mvp.Command;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DynamicFormRenderer implements IsWidget,
                                             IsFormView {
 
@@ -205,10 +208,12 @@ public class DynamicFormRenderer implements IsWidget,
         }
     }
 
+    @Override
     public void setModel(Object model) {
         bind(model);
     }
 
+    @Override
     public Object getModel() {
         if (formHandler != null) {
             return formHandler.getModel();
@@ -234,6 +239,7 @@ public class DynamicFormRenderer implements IsWidget,
         }
     }
 
+    @Override
     public boolean isValid() {
         return formHandler.validate();
     }

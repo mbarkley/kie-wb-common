@@ -24,10 +24,12 @@ import javax.inject.Inject;
 import com.google.gwt.user.client.ui.Widget;
 import org.guvnor.common.services.project.model.Project;
 import org.jboss.errai.common.client.ui.ElementWrapperWidget;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datasource.management.client.editor.datasource.DataSourceDefEditorHelper;
 import org.kie.workbench.common.screens.datasource.management.client.editor.datasource.DataSourceDefMainPanel;
 import org.kie.workbench.common.screens.datasource.management.client.editor.datasource.DataSourceDefMainPanelView;
 import org.kie.workbench.common.screens.datasource.management.model.DataSourceDef;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.callbacks.Callback;
 import org.uberfire.ext.widgets.core.client.wizards.WizardPage;
 import org.uberfire.ext.widgets.core.client.wizards.WizardPageStatusChangeEvent;
@@ -35,6 +37,7 @@ import org.uberfire.mvp.Command;
 import org.uberfire.mvp.ParameterizedCommand;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DataSourceDefPage
         implements WizardPage,
                    DataSourceDefPageView.Presenter {

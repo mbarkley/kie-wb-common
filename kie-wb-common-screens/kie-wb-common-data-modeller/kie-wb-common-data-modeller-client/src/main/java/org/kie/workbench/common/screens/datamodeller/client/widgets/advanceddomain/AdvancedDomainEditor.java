@@ -19,9 +19,12 @@ package org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddom
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.common.domain.ContextAwareBaseDomainEditor;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class AdvancedDomainEditor extends ContextAwareBaseDomainEditor {
 
     public static final String ADVANCED_DOMAIN = "ADVANCED";

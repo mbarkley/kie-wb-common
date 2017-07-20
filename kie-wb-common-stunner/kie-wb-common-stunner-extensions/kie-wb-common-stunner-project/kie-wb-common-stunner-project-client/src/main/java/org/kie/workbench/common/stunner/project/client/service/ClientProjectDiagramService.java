@@ -22,6 +22,7 @@ import javax.inject.Inject;
 import org.guvnor.common.services.shared.metadata.model.Metadata;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.api.ShapeManager;
 import org.kie.workbench.common.stunner.core.client.service.AbstractClientDiagramService;
 import org.kie.workbench.common.stunner.core.client.service.ClientRuntimeError;
@@ -30,12 +31,14 @@ import org.kie.workbench.common.stunner.core.service.DiagramLookupService;
 import org.kie.workbench.common.stunner.project.diagram.ProjectDiagram;
 import org.kie.workbench.common.stunner.project.diagram.ProjectMetadata;
 import org.kie.workbench.common.stunner.project.service.ProjectDiagramService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 
 /**
  * A wrapper util class for handling different diagram services for the current Guvnor Project from client side.
  */
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class ClientProjectDiagramService extends AbstractClientDiagramService<ProjectMetadata, ProjectDiagram, ProjectDiagramService> {
 
     protected ClientProjectDiagramService() {

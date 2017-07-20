@@ -15,24 +15,29 @@
  */
 package org.kie.workbench.common.forms.dynamic.client.service;
 
-import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Any;
+import javax.inject.Inject;
 
-import org.jboss.errai.ioc.client.container.IOC;
-import org.jboss.errai.ioc.client.container.SyncBeanDef;
+import org.jboss.errai.ioc.client.api.LoadAsync;
+import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.forms.fields.shared.AbstractFieldManager;
 import org.kie.workbench.common.forms.fields.shared.FieldProvider;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class ClientFieldManagerImpl extends AbstractFieldManager {
+
+    @Inject
+    @Any
+    private ManagedInstance<FieldProvider<?>> providers;
 
     @PostConstruct
     protected void init() {
-        Collection<SyncBeanDef<FieldProvider>> providers = IOC.getBeanManager().lookupBeans(FieldProvider.class);
-
-        for (SyncBeanDef<FieldProvider> provider : providers) {
-            registerFieldProvider(provider.newInstance());
+        for (FieldProvider<?> provider : providers) {
+            registerFieldProvider(provider);
         }
     }
 }

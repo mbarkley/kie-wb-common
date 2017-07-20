@@ -27,6 +27,7 @@ import javax.inject.Inject;
 import com.google.gwt.user.client.ui.IsWidget;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.server.controller.api.model.events.ServerInstanceDeleted;
 import org.kie.server.controller.api.model.events.ServerTemplateDeleted;
 import org.kie.server.controller.api.model.events.ServerTemplateUpdated;
@@ -48,6 +49,7 @@ import org.kie.workbench.common.screens.server.management.client.util.ClientCont
 import org.kie.workbench.common.screens.server.management.model.ContainerUpdateEvent;
 import org.kie.workbench.common.screens.server.management.service.SpecManagementService;
 import org.slf4j.Logger;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
@@ -56,6 +58,7 @@ import org.uberfire.workbench.events.NotificationEvent;
 
 @ApplicationScoped
 @WorkbenchScreen(identifier = "ServerManagementBrowser")
+@LoadAsync(UberfireActivityFragment.class)
 public class ServerManagementBrowserPresenter {
 
     public interface View extends IsWidget {

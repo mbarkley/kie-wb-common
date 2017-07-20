@@ -21,10 +21,12 @@ import javax.inject.Inject;
 
 import org.dashbuilder.displayer.client.Displayer;
 import org.guvnor.common.services.project.model.POM;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.library.api.ProjectInfo;
 import org.kie.workbench.common.screens.library.client.events.ProjectDetailEvent;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
 import org.kie.workbench.common.screens.library.client.util.ProjectMetricsFactory;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
@@ -32,6 +34,7 @@ import org.uberfire.client.mvp.UberElement;
 import org.uberfire.lifecycle.OnClose;
 
 @WorkbenchScreen(identifier = LibraryPlaces.PROJECT_DETAIL_SCREEN)
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectsDetailScreen {
 
     public interface View extends UberElement<ProjectsDetailScreen> {

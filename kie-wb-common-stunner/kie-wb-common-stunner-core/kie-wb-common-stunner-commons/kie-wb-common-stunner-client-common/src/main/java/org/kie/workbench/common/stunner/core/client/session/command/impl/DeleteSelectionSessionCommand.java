@@ -24,6 +24,8 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
 import com.google.gwt.logging.client.LogConfiguration;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.api.SessionManager;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.select.SelectionControl;
@@ -38,6 +40,7 @@ import org.kie.workbench.common.stunner.core.client.session.command.AbstractClie
 import org.kie.workbench.common.stunner.core.graph.Edge;
 import org.kie.workbench.common.stunner.core.graph.Element;
 import org.kie.workbench.common.stunner.core.graph.Node;
+import org.uberfire.async.UberfireActivityFragment;
 
 import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull;
 
@@ -46,6 +49,7 @@ import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull
  * It also captures the <code>DELETE</code> keyboard event and fires the delete operation as well.
  */
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DeleteSelectionSessionCommand extends AbstractClientSessionCommand<ClientFullSession> {
 
     private static Logger LOGGER = Logger.getLogger(DeleteSelectionSessionCommand.class.getName());

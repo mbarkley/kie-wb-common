@@ -21,6 +21,9 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Label;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartTitleDecoration;
 import org.uberfire.client.annotations.WorkbenchPartView;
@@ -28,6 +31,7 @@ import org.uberfire.client.annotations.WorkbenchScreen;
 
 @ApplicationScoped
 @WorkbenchScreen ( identifier = "JPADomainScreen")
+@LoadAsync(UberfireActivityFragment.class)
 public class JPADomainScreen {
 
     JPADomainScreenView view;

@@ -26,6 +26,8 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
 import org.kie.workbench.common.stunner.core.client.canvas.controls.AbstractCanvasHandlerRegistrationControl;
@@ -49,12 +51,14 @@ import org.kie.workbench.common.stunner.core.client.shape.view.event.DragEvent;
 import org.kie.workbench.common.stunner.core.client.shape.view.event.DragHandler;
 import org.kie.workbench.common.stunner.core.client.shape.view.event.ViewEventType;
 import org.kie.workbench.common.stunner.core.graph.Element;
+import org.uberfire.async.UberfireActivityFragment;
 
 import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull;
 
 // TODO: Update / rebuild toolbox/buttons after the source element has been updated.
 // TODO: Destroy toolbox command instances as well once removing the toolbox for a given element (missing call to ToolboxCommand::destroy method).
 
+@LoadAsync(UberfireActivityFragment.class)
 public class CanvasToolboxControl extends AbstractCanvasHandlerRegistrationControl<AbstractCanvasHandler>
         implements ToolboxControl<AbstractCanvasHandler, Element>,
                    IsWidget {

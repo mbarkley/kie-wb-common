@@ -17,38 +17,37 @@
 package org.kie.workbench.common.screens.datamodeller.client.handlers;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 
-import org.jboss.errai.ioc.client.container.SyncBeanDef;
-import org.jboss.errai.ioc.client.container.SyncBeanManager;
+import org.jboss.errai.ioc.client.api.LoadAsync;
+import org.jboss.errai.ioc.client.api.ManagedInstance;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class DomainHandlerRegistry {
 
-    private List<DomainHandler> domainHandlers = new ArrayList<DomainHandler>(  );
+    private List<DomainHandler> domainHandlers = new ArrayList<>(  );
 
-    private SyncBeanManager iocBeanManager;
+    private ManagedInstance<DomainHandler> handlerProvider;
 
     @Inject
-    public DomainHandlerRegistry( SyncBeanManager iocBeanManager ) {
-        this.iocBeanManager = iocBeanManager;
+    public DomainHandlerRegistry( @Any ManagedInstance<DomainHandler> handlerProvider ) {
+        this.handlerProvider = handlerProvider;
     }
 
     @PostConstruct
     private void init() {
 
-        final Collection<SyncBeanDef<DomainHandler>> handlerBeans = iocBeanManager.lookupBeans( DomainHandler.class );
-        if ( handlerBeans != null && handlerBeans.size() > 0 ) {
-            for ( SyncBeanDef<DomainHandler> beanDef : handlerBeans ) {
-                domainHandlers.add( beanDef.getInstance() );
-            }
+        for ( DomainHandler handler : handlerProvider ) {
+            domainHandlers.add( handler );
         }
         Collections.sort( domainHandlers, new Comparator<DomainHandler>() {
             @Override public int compare( DomainHandler handler1, DomainHandler handler2 ) {
@@ -61,7 +60,7 @@ public class DomainHandlerRegistry {
     }
 
     public List<DomainHandler> getDomainHandlers( String excludeDomain ) {
-        List<DomainHandler> result = new ArrayList<DomainHandler>(  );
+        List<DomainHandler> result = new ArrayList<>(  );
         for ( DomainHandler handler : domainHandlers ) {
             if ( !excludeDomain.equals( handler.getName() ) ) {
                 result.add( handler );
@@ -71,7 +70,7 @@ public class DomainHandlerRegistry {
     }
 
     public List<DomainHandler> getDomainHandlers( List<String> includedDomains ) {
-        List<DomainHandler> result = new ArrayList<DomainHandler>(  );
+        List<DomainHandler> result = new ArrayList<>(  );
         for ( DomainHandler handler : domainHandlers ) {
             if ( includedDomains.contains( handler.getName() ) ) {
                 result.add( handler );

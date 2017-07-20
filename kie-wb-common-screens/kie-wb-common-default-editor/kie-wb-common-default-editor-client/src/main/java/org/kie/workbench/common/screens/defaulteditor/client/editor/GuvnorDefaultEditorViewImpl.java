@@ -18,10 +18,13 @@ package org.kie.workbench.common.screens.defaulteditor.client.editor;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.widgets.metadata.client.KieEditorViewImpl;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.ext.widgets.core.client.editors.defaulteditor.DefaultFileEditorPresenter;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class GuvnorDefaultEditorViewImpl
         extends KieEditorViewImpl
         implements GuvnorDefaultEditorView {

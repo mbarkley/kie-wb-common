@@ -29,6 +29,7 @@ import org.guvnor.common.services.project.client.security.ProjectController;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.screens.explorer.client.utils.Classifier;
 import org.kie.workbench.common.screens.explorer.client.utils.Utils;
@@ -43,6 +44,7 @@ import org.kie.workbench.common.screens.library.client.events.ProjectDetailEvent
 import org.kie.workbench.common.screens.library.client.perspective.LibraryPerspective;
 import org.kie.workbench.common.screens.library.client.resources.i18n.LibraryConstants;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
@@ -57,6 +59,7 @@ import org.uberfire.util.URIUtil;
 
 @WorkbenchScreen(identifier = LibraryPlaces.PROJECT_SCREEN,
         owningPerspective = LibraryPerspective.class)
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectScreen {
 
     public interface View extends UberElement<ProjectScreen> {

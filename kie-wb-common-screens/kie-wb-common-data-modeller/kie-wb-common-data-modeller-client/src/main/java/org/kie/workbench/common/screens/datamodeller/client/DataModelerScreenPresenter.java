@@ -32,6 +32,7 @@ import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.jboss.errai.bus.client.api.messaging.Message;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.context.DataModelerWorkbenchContext;
 import org.kie.workbench.common.screens.datamodeller.client.context.DataModelerWorkbenchFocusEvent;
 import org.kie.workbench.common.screens.datamodeller.client.resources.i18n.Constants;
@@ -66,6 +67,7 @@ import org.kie.workbench.common.services.shared.validation.ValidationService;
 import org.kie.workbench.common.widgets.client.popups.validation.ValidationPopup;
 import org.kie.workbench.common.widgets.metadata.client.KieEditor;
 import org.kie.workbench.common.widgets.metadata.client.KieEditorView;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.client.annotations.WorkbenchEditor;
@@ -97,6 +99,7 @@ import org.uberfire.workbench.model.menu.Menus;
 @WorkbenchEditor(identifier = "DataModelerEditor",
         supportedTypes = {JavaResourceType.class},
         priority = Integer.MAX_VALUE)
+@LoadAsync(UberfireActivityFragment.class)
 public class DataModelerScreenPresenter
         extends KieEditor {
 
@@ -208,11 +211,13 @@ public class DataModelerScreenPresenter
 
     private String editorId;
 
+    @Override
     @WorkbenchPartTitle
     public String getTitleText() {
         return super.getTitleText();
     }
 
+    @Override
     @WorkbenchPartTitleDecoration
     public IsWidget getTitle() {
         return super.getTitle();
@@ -292,6 +297,7 @@ public class DataModelerScreenPresenter
         return true;
     }
 
+    @Override
     @OnClose
     public void OnClose() {
         versionRecordManager.clear();
@@ -499,6 +505,7 @@ public class DataModelerScreenPresenter
         };
     }
 
+    @Override
     protected Command onValidate() {
         return new Command() {
             @Override
@@ -586,6 +593,7 @@ public class DataModelerScreenPresenter
         };
     }
 
+    @Override
     protected void save() {
         validationService.call(checkMessages -> {
             if (((List<ValidationMessage>) checkMessages).isEmpty()) {

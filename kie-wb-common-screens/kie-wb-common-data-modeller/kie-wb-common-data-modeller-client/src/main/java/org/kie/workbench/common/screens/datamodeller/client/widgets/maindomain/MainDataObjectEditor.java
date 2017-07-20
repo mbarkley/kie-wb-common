@@ -26,6 +26,7 @@ import com.google.gwt.user.client.Command;
 import com.google.gwt.user.client.ui.Widget;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.DataModelerContext;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommand;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommandBuilder;
@@ -42,10 +43,12 @@ import org.kie.workbench.common.screens.datamodeller.service.DataModelerService;
 import org.kie.workbench.common.services.datamodeller.core.Annotation;
 import org.kie.workbench.common.services.datamodeller.core.DataModel;
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorCallback;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class MainDataObjectEditor
         extends ObjectEditor
         implements MainDataObjectEditorView.Presenter {
@@ -90,6 +93,7 @@ public class MainDataObjectEditor
         return MainDomainEditor.MAIN_DOMAIN;
     }
 
+    @Override
     public void onContextChange( DataModelerContext context ) {
         this.context = context;
         view.initPackageSelector( context );
@@ -104,6 +108,7 @@ public class MainDataObjectEditor
         initSuperClassList( keepSelection );
     }
 
+    @Override
     public void setReadonly( boolean readonly ) {
         super.setReadonly( readonly );
         view.setReadonly( readonly );
@@ -383,6 +388,7 @@ public class MainDataObjectEditor
 
     }
 
+    @Override
     public void clear() {
         view.setNameOnError( false );
         view.setName( null );

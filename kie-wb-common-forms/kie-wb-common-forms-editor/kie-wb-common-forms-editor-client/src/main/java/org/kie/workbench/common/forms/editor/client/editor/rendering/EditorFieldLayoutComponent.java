@@ -26,6 +26,7 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import org.gwtbootstrap3.client.ui.Modal;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.dynamic.client.rendering.FieldLayoutComponent;
 import org.kie.workbench.common.forms.dynamic.service.shared.FormRenderingContext;
 import org.kie.workbench.common.forms.editor.client.editor.FormEditorContext;
@@ -36,6 +37,7 @@ import org.kie.workbench.common.forms.editor.client.editor.properties.FieldPrope
 import org.kie.workbench.common.forms.editor.service.shared.FormEditorRenderingContext;
 import org.kie.workbench.common.forms.model.FieldDefinition;
 import org.kie.workbench.common.forms.service.shared.FieldManager;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.ext.layout.editor.client.api.HasDragAndDropSettings;
 import org.uberfire.ext.layout.editor.client.api.HasModalConfiguration;
@@ -45,6 +47,7 @@ import org.uberfire.ext.layout.editor.client.infra.LayoutDragComponentHelper;
 
 @Specializes
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class EditorFieldLayoutComponent extends FieldLayoutComponent implements HasDragAndDropSettings,
                                                                                 HasModalConfiguration {
 

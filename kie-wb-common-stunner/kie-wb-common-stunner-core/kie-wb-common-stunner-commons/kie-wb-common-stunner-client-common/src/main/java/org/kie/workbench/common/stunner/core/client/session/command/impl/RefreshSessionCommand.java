@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
 import org.kie.workbench.common.stunner.core.client.command.SessionCommandManager;
 import org.kie.workbench.common.stunner.core.client.service.ClientDiagramService;
@@ -34,12 +35,14 @@ import org.kie.workbench.common.stunner.core.command.util.CommandUtils;
 import org.kie.workbench.common.stunner.core.diagram.Diagram;
 import org.kie.workbench.common.stunner.core.diagram.Metadata;
 import org.kie.workbench.common.stunner.core.graph.Graph;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.mvp.ParameterizedCommand;
 
 import static org.uberfire.commons.validation.PortablePreconditions.checkNotNull;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class RefreshSessionCommand extends AbstractClientSessionCommand<ClientFullSession> {
 
     private static Logger LOGGER = Logger.getLogger(RefreshSessionCommand.class.getName());

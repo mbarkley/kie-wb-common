@@ -42,10 +42,13 @@ import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.CellTable;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.widgets.configresource.client.resources.i18n.ImportConstants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.mvp.LockRequiredEvent;
 import org.uberfire.ext.widgets.common.client.common.BusyPopup;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class ImportsWidgetViewImpl
         extends Composite
         implements ImportsWidgetView {
@@ -61,7 +64,7 @@ public class ImportsWidgetViewImpl
     Button addImportButton;
 
     @UiField(provided = true)
-    CellTable<Import> table = new CellTable<Import>();
+    CellTable<Import> table = new CellTable<>();
 
     @Inject
     private AddImportPopup addImportPopup;
@@ -69,8 +72,8 @@ public class ImportsWidgetViewImpl
     @Inject
     private javax.enterprise.event.Event<LockRequiredEvent> lockRequired;
 
-    private List<Import> importTypes = new ArrayList<Import>();
-    private ListDataProvider<Import> dataProvider = new ListDataProvider<Import>();
+    private List<Import> importTypes = new ArrayList<>();
+    private ListDataProvider<Import> dataProvider = new ListDataProvider<>();
     private final Command addImportCommand = makeAddImportCommand();
 
     private ImportsWidgetView.Presenter presenter;
@@ -109,6 +112,7 @@ public class ImportsWidgetViewImpl
             }
         };
         deleteImportColumn.setFieldUpdater( new FieldUpdater<Import, String>() {
+            @Override
             public void update( final int index,
                                 final Import importType,
                                 final String value ) {

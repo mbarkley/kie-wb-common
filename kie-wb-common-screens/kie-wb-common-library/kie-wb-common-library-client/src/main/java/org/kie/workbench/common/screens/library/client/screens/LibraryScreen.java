@@ -28,6 +28,7 @@ import org.guvnor.common.services.project.model.Project;
 import org.guvnor.structure.repositories.Repository;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.library.api.LibraryInfo;
 import org.kie.workbench.common.screens.library.api.LibraryService;
 import org.kie.workbench.common.screens.library.api.ProjectInfo;
@@ -35,6 +36,7 @@ import org.kie.workbench.common.screens.library.api.search.FilterUpdateEvent;
 import org.kie.workbench.common.screens.library.client.events.ProjectDetailEvent;
 import org.kie.workbench.common.screens.library.client.perspective.LibraryPerspective;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
@@ -44,6 +46,7 @@ import org.uberfire.mvp.Command;
 
 @WorkbenchScreen(identifier = LibraryPlaces.LIBRARY_SCREEN,
         owningPerspective = LibraryPerspective.class)
+@LoadAsync(UberfireActivityFragment.class)
 public class LibraryScreen {
 
     public interface View extends UberElement<LibraryScreen> {

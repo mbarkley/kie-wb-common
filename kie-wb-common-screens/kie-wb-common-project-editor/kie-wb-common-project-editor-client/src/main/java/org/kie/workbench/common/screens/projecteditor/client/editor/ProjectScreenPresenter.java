@@ -52,6 +52,7 @@ import org.jboss.errai.bus.client.api.messaging.Message;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
 import org.jboss.errai.common.client.util.CreationalCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ioc.client.container.IOC;
 import org.jboss.errai.ioc.client.container.async.AsyncBeanDef;
 import org.jboss.errai.ioc.client.container.async.AsyncBeanManager;
@@ -68,6 +69,7 @@ import org.kie.workbench.common.widgets.client.callbacks.CommandBuilder;
 import org.kie.workbench.common.widgets.client.callbacks.CommandDrivenErrorCallback;
 import org.kie.workbench.common.widgets.client.callbacks.CommandWithThrowableDrivenErrorCallback;
 import org.kie.workbench.common.widgets.client.resources.i18n.CommonConstants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.backend.vfs.PathFactory;
@@ -112,6 +114,7 @@ import static org.uberfire.ext.widgets.common.client.common.ConcurrentChangePopu
 import static org.uberfire.ext.widgets.common.client.common.ConcurrentChangePopup.newConcurrentUpdate;
 
 @WorkbenchScreen(identifier = "projectScreen")
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectScreenPresenter
         implements ProjectScreenView.Presenter {
 
@@ -149,7 +152,7 @@ public class ProjectScreenPresenter
     private ProjectContextChangeHandle projectContextChangeHandle;
 
     private Instance<LockManager> lockManagerInstanceProvider;
-    private Map<Widget, LockManager> lockManagers = new HashMap<Widget, LockManager>();
+    private Map<Widget, LockManager> lockManagers = new HashMap<>();
 
     private Runnable reloadRunnable;
 
@@ -293,7 +296,7 @@ public class ProjectScreenPresenter
         Collection<BuildOptionExtension> allExtensions = pair.getK1();
         Collection<BuildOptionExtension> dependentScopedExtensions = pair.getK2();
 
-        buildExtensions = new ArrayList<Widget>(allExtensions.size());
+        buildExtensions = new ArrayList<>(allExtensions.size());
 
         for (BuildOptionExtension ext : allExtensions) {
             for (Widget option : ext.getBuildOptions(project)) {
@@ -331,8 +334,8 @@ public class ProjectScreenPresenter
     protected Pair<Collection<BuildOptionExtension>, Collection<BuildOptionExtension>> getBuildExtensions() {
         AsyncBeanManager beanManager = IOC.getAsyncBeanManager();
         Collection<AsyncBeanDef<BuildOptionExtension>> beans = beanManager.lookupBeans(BuildOptionExtension.class);
-        final Collection<BuildOptionExtension> dependentScoped = new ArrayList<BuildOptionExtension>(beans.size());
-        final Collection<BuildOptionExtension> instances = new ArrayList<BuildOptionExtension>(beans.size());
+        final Collection<BuildOptionExtension> dependentScoped = new ArrayList<>(beans.size());
+        final Collection<BuildOptionExtension> instances = new ArrayList<>(beans.size());
 
         for (final AsyncBeanDef<BuildOptionExtension> bean : beans) {
             /*
@@ -351,7 +354,7 @@ public class ProjectScreenPresenter
             });
         }
 
-        return new Pair<Collection<BuildOptionExtension>, Collection<BuildOptionExtension>>(instances,
+        return new Pair<>(instances,
                                                                                             dependentScoped);
     }
 
@@ -1008,7 +1011,7 @@ public class ProjectScreenPresenter
     @Override
     public void onPersistenceDescriptorSelected() {
 
-        Map<String, Object> attrs = new HashMap<String, Object>();
+        Map<String, Object> attrs = new HashMap<>();
         attrs.put(PathFactory.VERSION_PROPERTY,
                   new Boolean(true));
 

@@ -26,6 +26,8 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommandBuilder;
 import org.kie.workbench.common.screens.datamodeller.client.handlers.DomainHandlerRegistry;
 import org.kie.workbench.common.screens.datamodeller.client.handlers.jpadomain.util.RelationshipAnnotationValueHandler;
@@ -47,16 +49,18 @@ import org.kie.workbench.common.screens.datamodeller.model.jpadomain.RelationTyp
 import org.kie.workbench.common.services.datamodeller.core.Annotation;
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
 import org.kie.workbench.common.services.datamodeller.core.ObjectProperty;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.properties.editor.client.fields.BooleanField;
 import org.uberfire.ext.properties.editor.client.fields.TextField;
 import org.uberfire.ext.properties.editor.model.PropertyEditorCategory;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class JPADataObjectFieldEditor
         extends FieldEditor
         implements JPADataObjectFieldEditorView.Presenter {
 
-    private static Map<String, DataModelerPropertyEditorFieldInfo> propertyEditorFields = new HashMap<String, DataModelerPropertyEditorFieldInfo>();
+    private static Map<String, DataModelerPropertyEditorFieldInfo> propertyEditorFields = new HashMap<>();
 
     private JPADataObjectFieldEditorView view;
 
@@ -257,7 +261,7 @@ public class JPADataObjectFieldEditor
 
     protected List<PropertyEditorCategory> getPropertyEditorCategories() {
 
-        final List<PropertyEditorCategory> categories = new ArrayList<PropertyEditorCategory>();
+        final List<PropertyEditorCategory> categories = new ArrayList<>();
 
         PropertyEditorCategory category = new PropertyEditorCategory( getIdentifierCategoryName(), 1 );
         categories.add( category );
@@ -504,6 +508,7 @@ public class JPADataObjectFieldEditor
         return true;
     }
 
+    @Override
     public void clear() {
         clearIdentifierField();
         clearGeneratedValueField();

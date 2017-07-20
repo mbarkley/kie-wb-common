@@ -22,10 +22,13 @@ import javax.inject.Inject;
 
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.services.shared.validation.ValidationService;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorCallback;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class ClientValidationService {
 
     private Caller<ValidationService> validationService;

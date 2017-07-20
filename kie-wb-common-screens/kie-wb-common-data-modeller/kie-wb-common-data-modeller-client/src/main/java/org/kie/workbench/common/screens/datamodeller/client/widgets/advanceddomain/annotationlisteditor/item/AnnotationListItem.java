@@ -25,12 +25,16 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwt.user.client.ui.Widget;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.advanceddomain.annotationlisteditor.AdvancedAnnotationListEditorView;
 import org.kie.workbench.common.services.datamodeller.core.Annotation;
 import org.kie.workbench.common.services.datamodeller.core.AnnotationValuePairDefinition;
 import org.kie.workbench.common.services.datamodeller.driver.model.AnnotationSource;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class AnnotationListItem
         implements AnnotationListItemView.Presenter, IsWidget {
 
@@ -46,7 +50,7 @@ public class AnnotationListItem
 
     private AdvancedAnnotationListEditorView.CollapseChangeHandler collapseChangeHandler;
 
-    private List<AnnotationValuePairListItem> items = new ArrayList<AnnotationValuePairListItem>( );
+    private List<AnnotationValuePairListItem> items = new ArrayList<>( );
 
     private Instance<AnnotationValuePairListItem> itemInstance;
 

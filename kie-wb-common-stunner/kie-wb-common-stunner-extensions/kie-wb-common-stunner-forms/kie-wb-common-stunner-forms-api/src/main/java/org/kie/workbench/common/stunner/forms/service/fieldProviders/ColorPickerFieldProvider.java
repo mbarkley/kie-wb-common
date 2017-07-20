@@ -16,11 +16,14 @@
 
 package org.kie.workbench.common.stunner.forms.service.fieldProviders;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.BasicTypeFieldProvider;
 import org.kie.workbench.common.forms.model.TypeInfo;
 import org.kie.workbench.common.stunner.forms.model.ColorPickerFieldDefinition;
 import org.kie.workbench.common.stunner.forms.model.ColorPickerFieldType;
+import org.uberfire.async.UberfireActivityFragment;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class ColorPickerFieldProvider extends BasicTypeFieldProvider<ColorPickerFieldDefinition> {
 
     @Override

@@ -19,13 +19,16 @@ package org.kie.workbench.common.screens.datamodeller.client.validation;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.editor.commons.client.validation.Validator;
 import org.uberfire.ext.editor.commons.client.validation.ValidatorCallback;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.services.shared.validation.ValidationService;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class JavaFileNameValidator implements Validator {
 
     @Inject

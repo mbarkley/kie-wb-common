@@ -32,9 +32,12 @@ import org.gwtbootstrap3.client.ui.CheckBox;
 import org.gwtbootstrap3.client.ui.FormGroup;
 import org.gwtbootstrap3.client.ui.TextBox;
 import org.gwtbootstrap3.client.ui.constants.ValidationState;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.util.ErrorPopupHelper;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DroolsDataObjectFieldEditorViewImpl
         extends Composite
         implements DroolsDataObjectFieldEditorView {
@@ -115,6 +118,7 @@ public class DroolsDataObjectFieldEditorViewImpl
         position.selectAll();
     }
 
+    @Override
     public void setReadonly( boolean readonly ) {
         boolean value = !readonly;
         equalsSelector.setEnabled( value );

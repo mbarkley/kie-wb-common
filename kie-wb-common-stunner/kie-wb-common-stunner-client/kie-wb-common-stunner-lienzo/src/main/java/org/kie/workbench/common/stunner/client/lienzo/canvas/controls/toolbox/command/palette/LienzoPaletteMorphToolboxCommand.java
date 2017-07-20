@@ -22,6 +22,8 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import com.ait.lienzo.client.core.shape.Shape;
+
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.client.lienzo.canvas.LienzoLayer;
 import org.kie.workbench.common.stunner.client.lienzo.components.palette.LienzoGlyphsHoverPalette;
 import org.kie.workbench.common.stunner.client.lienzo.components.palette.LienzoPalette;
@@ -42,8 +44,10 @@ import org.kie.workbench.common.stunner.core.client.service.ClientFactoryService
 import org.kie.workbench.common.stunner.core.graph.processing.index.bounds.GraphBoundsIndexer;
 import org.kie.workbench.common.stunner.core.lookup.util.CommonLookups;
 import org.kie.workbench.common.stunner.core.util.DefinitionUtils;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class LienzoPaletteMorphToolboxCommand extends AbstractPaletteMorphCommand<Shape<?>> {
 
     private static final int ICON_SIZE = 20;
@@ -52,30 +56,30 @@ public class LienzoPaletteMorphToolboxCommand extends AbstractPaletteMorphComman
     private final CanvasTooltip<String> canvasTooltip;
 
     @Inject
-    public LienzoPaletteMorphToolboxCommand(final DefinitionUtils definitionUtils,
-                                            final CanvasCommandFactory<AbstractCanvasHandler> commandFactory,
-                                            final ClientFactoryService clientFactoryServices,
-                                            final CommonLookups commonLookups,
-                                            final ShapeManager shapeManager,
-                                            final DefinitionsPaletteBuilder definitionsPaletteBuilder,
-                                            final LienzoGlyphsHoverPalette palette,
-                                            final NodeDragProxy<AbstractCanvasHandler> nodeDragProxyFactory,
-                                            final NodeBuilderControl<AbstractCanvasHandler> nodeBuilderControl,
-                                            final GraphBoundsIndexer graphBoundsIndexer,
-                                            final Event<CanvasElementSelectedEvent> elementSelectedEvent,
-                                            final CanvasTooltip<String> canvasTooltip) {
-        super(definitionUtils,
-              commandFactory,
-              clientFactoryServices,
-              commonLookups,
-              shapeManager,
-              definitionsPaletteBuilder,
-              palette,
-              nodeDragProxyFactory,
-              nodeBuilderControl,
-              graphBoundsIndexer,
-              LirnzoSvgPaths.createSVGIcon(LirnzoSvgPaths.getGearIcon()),
-              elementSelectedEvent);
+    public LienzoPaletteMorphToolboxCommand( final DefinitionUtils definitionUtils,
+                                             final CanvasCommandFactory<AbstractCanvasHandler> commandFactory,
+                                             final ClientFactoryService clientFactoryServices,
+                                             final CommonLookups commonLookups,
+                                             final ShapeManager shapeManager,
+                                             final DefinitionsPaletteBuilder definitionsPaletteBuilder,
+                                             final LienzoGlyphsHoverPalette palette,
+                                             final NodeDragProxy<AbstractCanvasHandler> nodeDragProxyFactory,
+                                             final NodeBuilderControl<AbstractCanvasHandler> nodeBuilderControl,
+                                             final GraphBoundsIndexer graphBoundsIndexer,
+                                             final Event<CanvasElementSelectedEvent> elementSelectedEvent,
+                                             final CanvasTooltip<String> canvasTooltip ) {
+        super( definitionUtils,
+               commandFactory,
+               clientFactoryServices,
+               commonLookups,
+               shapeManager,
+               definitionsPaletteBuilder,
+               palette,
+               nodeDragProxyFactory,
+               nodeBuilderControl,
+               graphBoundsIndexer,
+               LirnzoSvgPaths.createSVGIcon( LirnzoSvgPaths.getGearIcon() ),
+               elementSelectedEvent );
         this.canvasTooltip = canvasTooltip;
     }
 
@@ -83,37 +87,37 @@ public class LienzoPaletteMorphToolboxCommand extends AbstractPaletteMorphComman
     public void init() {
         // Initialize some lienzo palette layout stuff.
         getLienzoPalette()
-                .collapse()
-                .setExpandable(false)
-                .setIconSize(ICON_SIZE)
-                .setPadding(PADDING)
-                .setLayout(LienzoPalette.Layout.HORIZONTAL);
-        getLienzoPalette().getTooltip().setPrefix("Convert to ");
+                          .collapse()
+                          .setExpandable( false )
+                          .setIconSize( ICON_SIZE )
+                          .setPadding( PADDING )
+                          .setLayout( LienzoPalette.Layout.HORIZONTAL );
+        getLienzoPalette().getTooltip().setPrefix( "Convert to " );
     }
 
     @Override
-    protected void beforeBindPalette(final DefinitionsPalette paletteDefinition,
-                                     final Context<AbstractCanvasHandler> context) {
-        super.beforeBindPalette(paletteDefinition,
-                                context);
+    protected void beforeBindPalette( final DefinitionsPalette paletteDefinition,
+                                      final Context<AbstractCanvasHandler> context ) {
+        super.beforeBindPalette( paletteDefinition,
+                                 context );
         final String ssid = canvasHandler.getDiagram().getMetadata().getShapeSetId();
-        getLienzoPalette().setShapeSetId(ssid);
-        getLienzoPalette().getTooltip().configure(canvasHandler);
+        getLienzoPalette().setShapeSetId( ssid );
+        getLienzoPalette().getTooltip().configure( canvasHandler );
     }
 
     @Override
-    protected void showPaletteViewAt(final double x,
-                                     final double y) {
+    protected void showPaletteViewAt( final double x,
+                                      final double y ) {
         // Adjust the palette view taking into account the lienzo shape size used as icon.
-        super.showPaletteViewAt(x - ICON_SIZE + PADDING,
-                                y + ICON_SIZE);
+        super.showPaletteViewAt( x - ICON_SIZE + PADDING,
+                                 y + ICON_SIZE );
     }
 
     @Override
     @SuppressWarnings("unchecked")
     protected void attachPaletteView() {
         final LienzoLayer lienzoLayer = (LienzoLayer) canvasHandler.getCanvas().getLayer();
-        getPaletteView().attach(lienzoLayer.getLienzoLayer());
+        getPaletteView().attach( lienzoLayer.getLienzoLayer() );
     }
 
     @Override

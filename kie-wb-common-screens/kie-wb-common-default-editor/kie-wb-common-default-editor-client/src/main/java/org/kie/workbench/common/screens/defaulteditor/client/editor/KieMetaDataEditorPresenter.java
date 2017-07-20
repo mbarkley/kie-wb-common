@@ -20,8 +20,10 @@ import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.IsWidget;
 import org.guvnor.common.services.shared.security.AppRoles;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.security.shared.api.RoleImpl;
 import org.jboss.errai.security.shared.api.identity.User;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.backend.vfs.ObservablePath;
 import org.uberfire.client.annotations.WorkbenchEditor;
 import org.uberfire.client.annotations.WorkbenchMenu;
@@ -35,6 +37,7 @@ import org.uberfire.workbench.model.menu.Menus;
 
 @Dependent
 @WorkbenchEditor(identifier = "KieMetaFileTextEditor", supportedTypes = { DotResourceType.class }, priority = Integer.MAX_VALUE - 1)
+@LoadAsync(UberfireActivityFragment.class)
 public class KieMetaDataEditorPresenter
         extends KieTextEditorPresenter {
 
@@ -49,6 +52,7 @@ public class KieMetaDataEditorPresenter
         super( baseView );
     }
 
+    @Override
     @OnStartup
     public void onStartup( final ObservablePath path,
                            final PlaceRequest place ) {
@@ -65,11 +69,13 @@ public class KieMetaDataEditorPresenter
                                    "true" );
     }
 
+    @Override
     @WorkbenchPartTitle
     public String getTitleText() {
         return super.getTitleText();
     }
 
+    @Override
     @WorkbenchPartTitleDecoration
     public IsWidget getTitle() {
         return super.getTitle();
@@ -80,6 +86,7 @@ public class KieMetaDataEditorPresenter
         return super.getWidget();
     }
 
+    @Override
     @WorkbenchMenu
     public Menus getMenus() {
         return menus;

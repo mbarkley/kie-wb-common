@@ -18,12 +18,15 @@ package org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.image.prov
 
 import javax.enterprise.context.Dependent;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.BasicTypeFieldProvider;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.image.definition.PictureFieldDefinition;
 import org.kie.workbench.common.forms.fields.shared.fieldTypes.basic.image.type.PictureFieldType;
 import org.kie.workbench.common.forms.model.TypeInfo;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class PictureFieldProvider extends BasicTypeFieldProvider<PictureFieldDefinition> {
 
     @Override

@@ -20,7 +20,9 @@ import javax.enterprise.context.ApplicationScoped;
 
 import com.google.gwt.user.client.Window;
 import org.guvnor.common.services.project.model.Project;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.uberfire.annotations.FallbackImplementation;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.mvp.Command;
 import org.uberfire.mvp.ParameterizedCommand;
 
@@ -29,6 +31,7 @@ import org.uberfire.mvp.ParameterizedCommand;
  */
 @ApplicationScoped
 @FallbackImplementation
+@LoadAsync(UberfireActivityFragment.class)
 public class DefaultDataSourceSelector implements DataSourceSelector {
 
     public DefaultDataSourceSelector() {

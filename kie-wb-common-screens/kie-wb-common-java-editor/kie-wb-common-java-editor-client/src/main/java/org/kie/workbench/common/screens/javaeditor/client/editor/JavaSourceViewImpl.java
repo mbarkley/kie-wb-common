@@ -19,11 +19,12 @@ package org.kie.workbench.common.screens.javaeditor.client.editor;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
-import com.google.gwt.user.client.Window;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.javaeditor.client.widget.ViewJavaSourceWidget;
-import org.kie.workbench.common.widgets.client.resources.i18n.CommonConstants;
 import org.kie.workbench.common.widgets.metadata.client.KieEditorViewImpl;
+import org.uberfire.async.UberfireActivityFragment;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class JavaSourceViewImpl
         extends KieEditorViewImpl
         implements JavaSourceView {

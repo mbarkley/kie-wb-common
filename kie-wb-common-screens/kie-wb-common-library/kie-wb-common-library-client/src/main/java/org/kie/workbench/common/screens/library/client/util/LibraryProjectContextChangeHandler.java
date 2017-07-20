@@ -20,16 +20,17 @@ import javax.inject.Inject;
 
 import org.guvnor.common.services.project.context.ProjectContext;
 import org.guvnor.common.services.project.context.ProjectContextChangeHandler;
+import org.jboss.errai.ioc.client.api.AsyncBeanLoader;
 import org.jboss.errai.ioc.client.api.EntryPoint;
 
 @EntryPoint
 public class LibraryProjectContextChangeHandler implements ProjectContextChangeHandler {
 
-    private LibraryPlaces libraryPlaces;
+    private AsyncBeanLoader<LibraryPlaces> libraryPlaces;
 
     @Inject
     public LibraryProjectContextChangeHandler(final ProjectContext projectContext,
-                                              final LibraryPlaces libraryPlaces) {
+                                              final AsyncBeanLoader<LibraryPlaces> libraryPlaces) {
         this.libraryPlaces = libraryPlaces;
 
         projectContext.addChangeHandler(this);
@@ -37,6 +38,6 @@ public class LibraryProjectContextChangeHandler implements ProjectContextChangeH
 
     @Override
     public void onChange() {
-        libraryPlaces.projectContextChange();
+        libraryPlaces.call(lp -> lp.projectContextChange());
     }
 }

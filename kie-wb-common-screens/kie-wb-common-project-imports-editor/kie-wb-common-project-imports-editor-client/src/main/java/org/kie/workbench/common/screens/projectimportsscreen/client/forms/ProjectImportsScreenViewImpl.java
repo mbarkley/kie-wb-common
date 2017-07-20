@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -18,9 +18,12 @@ package org.kie.workbench.common.screens.projectimportsscreen.client.forms;
 import javax.inject.Inject;
 
 import org.guvnor.common.services.project.model.ProjectImports;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.widgets.configresource.client.widget.unbound.ImportsWidgetPresenter;
 import org.kie.workbench.common.widgets.metadata.client.KieEditorViewImpl;
+import org.uberfire.async.UberfireActivityFragment;
 
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectImportsScreenViewImpl
         extends KieEditorViewImpl
         implements ProjectImportsScreenView {

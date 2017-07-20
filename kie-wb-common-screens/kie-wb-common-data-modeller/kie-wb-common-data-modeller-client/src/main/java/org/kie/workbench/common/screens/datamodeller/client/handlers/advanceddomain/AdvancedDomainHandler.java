@@ -18,11 +18,14 @@ package org.kie.workbench.common.screens.datamodeller.client.handlers.advanceddo
 
 import javax.enterprise.context.ApplicationScoped;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.datamodeller.client.command.DataModelCommand;
 import org.kie.workbench.common.screens.datamodeller.client.handlers.DomainHandler;
 import org.kie.workbench.common.screens.datamodeller.client.widgets.common.domain.ResourceOptions;
+import org.uberfire.async.UberfireActivityFragment;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class AdvancedDomainHandler implements DomainHandler {
 
     public AdvancedDomainHandler() {

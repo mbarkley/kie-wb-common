@@ -48,6 +48,7 @@ import org.gwtbootstrap3.client.ui.constants.ButtonSize;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.constants.IconType;
 import org.gwtbootstrap3.client.ui.constants.Toggle;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.screens.projecteditor.client.forms.KModuleEditorPanel;
 import org.kie.workbench.common.screens.projecteditor.client.forms.dependencies.DependencyGrid;
 import org.kie.workbench.common.screens.projecteditor.client.forms.repositories.RepositoriesWidgetPresenter;
@@ -58,12 +59,14 @@ import org.kie.workbench.common.widgets.client.resources.i18n.CommonConstants;
 import org.kie.workbench.common.widgets.client.widget.InfoWidget;
 import org.kie.workbench.common.widgets.configresource.client.widget.unbound.ImportsWidgetPresenter;
 import org.kie.workbench.common.widgets.metadata.client.widget.MetadataWidget;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.common.BusyIndicatorView;
 import org.uberfire.ext.widgets.common.client.common.BusyPopup;
 import org.uberfire.ext.widgets.common.client.common.popups.YesNoCancelPopup;
 import org.uberfire.ext.widgets.common.client.common.popups.errors.ErrorPopup;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class ProjectScreenViewImpl
         extends Composite
         implements ProjectScreenView {
@@ -175,6 +178,7 @@ public class ProjectScreenViewImpl
         addPOMEditorChangeHandlers();
     }
 
+    @Override
     public void setPresenter(Presenter presenter) {
         this.presenter = presenter;
     }

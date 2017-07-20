@@ -19,14 +19,17 @@ package org.kie.workbench.common.stunner.core.client.components.palette.factory;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.api.ShapeManager;
 import org.kie.workbench.common.stunner.core.client.components.palette.model.definition.DefinitionSetPaletteBuilder;
+import org.uberfire.async.UberfireActivityFragment;
 
 /**
  * The default PaletteDefinition factory for a DefinitionSetPalette model.
  * It does not accepts any identifier, it's purpose is for being injected where necessary.
  */
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DefaultDefSetPaletteDefinitionFactory extends AbstractPaletteDefinitionFactory<DefinitionSetPaletteBuilder>
         implements DefSetPaletteDefinitionFactory {
 

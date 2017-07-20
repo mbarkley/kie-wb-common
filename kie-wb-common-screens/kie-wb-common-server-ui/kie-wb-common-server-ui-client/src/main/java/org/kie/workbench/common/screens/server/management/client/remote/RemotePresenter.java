@@ -26,6 +26,7 @@ import javax.inject.Inject;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.ErrorCallback;
 import org.jboss.errai.common.client.api.RemoteCallback;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.server.controller.api.model.events.ServerInstanceUpdated;
 import org.kie.server.controller.api.model.runtime.Container;
 import org.kie.server.controller.api.model.runtime.ServerInstanceKey;
@@ -34,12 +35,14 @@ import org.kie.workbench.common.screens.server.management.client.remote.empty.Re
 import org.kie.workbench.common.screens.server.management.service.RuntimeManagementService;
 import org.kie.workbench.common.screens.server.management.service.SpecManagementService;
 import org.slf4j.Logger;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.client.mvp.UberView;
 import org.uberfire.workbench.events.NotificationEvent;
 
 import static org.kie.workbench.common.screens.server.management.client.util.Convert.*;
 
 @ApplicationScoped
+@LoadAsync(UberfireActivityFragment.class)
 public class RemotePresenter {
 
     public interface View extends UberView<RemotePresenter> {

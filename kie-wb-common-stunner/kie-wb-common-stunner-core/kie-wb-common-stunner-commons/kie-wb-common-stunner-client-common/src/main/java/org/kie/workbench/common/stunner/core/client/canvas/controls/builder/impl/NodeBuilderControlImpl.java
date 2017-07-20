@@ -21,6 +21,7 @@ import javax.enterprise.context.Dependent;
 import javax.enterprise.inject.Default;
 import javax.inject.Inject;
 
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.kie.workbench.common.stunner.core.client.api.ClientDefinitionManager;
 import org.kie.workbench.common.stunner.core.client.api.ShapeManager;
 import org.kie.workbench.common.stunner.core.client.canvas.AbstractCanvasHandler;
@@ -47,8 +48,10 @@ import org.kie.workbench.common.stunner.core.graph.content.view.Magnet;
 import org.kie.workbench.common.stunner.core.graph.content.view.Point2D;
 import org.kie.workbench.common.stunner.core.graph.content.view.View;
 import org.kie.workbench.common.stunner.core.graph.content.view.ViewConnector;
+import org.uberfire.async.UberfireActivityFragment;
 
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class NodeBuilderControlImpl extends AbstractCanvasHandlerControl<AbstractCanvasHandler> implements NodeBuilderControl<AbstractCanvasHandler> {
 
     private final ClientDefinitionManager clientDefinitionManager;

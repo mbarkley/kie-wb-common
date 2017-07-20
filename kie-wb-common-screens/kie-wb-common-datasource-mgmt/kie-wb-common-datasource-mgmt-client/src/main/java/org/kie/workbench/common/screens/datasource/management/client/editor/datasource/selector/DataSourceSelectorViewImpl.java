@@ -31,15 +31,18 @@ import org.gwtbootstrap3.client.ui.constants.ButtonSize;
 import org.gwtbootstrap3.client.ui.constants.ButtonType;
 import org.gwtbootstrap3.client.ui.gwt.ButtonCell;
 import org.gwtbootstrap3.client.ui.gwt.FlowPanel;
+import org.jboss.errai.ioc.client.api.LoadAsync;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
 import org.kie.workbench.common.screens.datasource.management.client.resources.i18n.DataSourceManagementConstants;
+import org.uberfire.async.UberfireActivityFragment;
 import org.uberfire.ext.widgets.common.client.common.popups.BaseModal;
 import org.uberfire.ext.widgets.common.client.tables.PagedTable;
 
 @Templated
 @Dependent
+@LoadAsync(UberfireActivityFragment.class)
 public class DataSourceSelectorViewImpl
         extends Composite
         implements DataSourceSelectorView {
@@ -132,6 +135,7 @@ public class DataSourceSelectorViewImpl
         return selectedRow;
     }
 
+    @Override
     public void show() {
         cancelNextHiddenEvent = false;
         modal.show();
