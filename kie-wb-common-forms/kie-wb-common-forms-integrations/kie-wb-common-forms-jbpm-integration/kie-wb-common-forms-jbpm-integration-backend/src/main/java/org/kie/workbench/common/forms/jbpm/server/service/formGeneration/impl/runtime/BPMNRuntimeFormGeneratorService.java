@@ -46,9 +46,9 @@ import org.kie.workbench.common.forms.model.impl.ModelPropertyImpl;
 import org.kie.workbench.common.forms.model.impl.TypeInfoImpl;
 import org.kie.workbench.common.forms.model.util.formModel.FormModelPropertiesUtil;
 import org.kie.workbench.common.forms.service.shared.FieldManager;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.projects.ClassFactBuilder;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.projects.FactBuilder;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.projects.ProjectDataModelOracleBuilder;
+import org.uberfire.backend.server.datamodel.ClassFactBuilder;
+import org.uberfire.backend.server.datamodel.FactBuilder;
+import org.uberfire.backend.server.datamodel.ProjectDataModelOracleBuilder;
 
 @Runtime
 @Dependent

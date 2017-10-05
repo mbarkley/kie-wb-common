@@ -17,7 +17,7 @@ package org.kie.workbench.common.services.datamodel.service;
 
 import org.jboss.errai.bus.server.annotations.Remote;
 import org.kie.soup.project.datamodel.imports.Imports;
-import org.kie.workbench.common.services.datamodel.model.PackageDataModelOracleIncrementalPayload;
+import org.kie.soup.project.datamodel.model.PackageDataModelOracleIncrementalPayload;
 import org.uberfire.backend.vfs.Path;
 
 /**

@@ -30,6 +30,7 @@ import org.kie.soup.project.datamodel.commons.util.RawMVELEvaluator;
 import org.kie.soup.project.datamodel.imports.HasImports;
 import org.kie.soup.project.datamodel.imports.Import;
 import org.kie.soup.project.datamodel.imports.Imports;
+import org.kie.soup.project.datamodel.model.PackageDataModelOracleBaselinePayload;
 import org.kie.soup.project.datamodel.oracle.DataType;
 import org.kie.soup.project.datamodel.oracle.MethodInfo;
 import org.kie.soup.project.datamodel.oracle.ModelField;
@@ -37,10 +38,6 @@ import org.kie.soup.project.datamodel.oracle.PackageDataModelOracle;
 import org.kie.soup.project.datamodel.oracle.ProjectDataModelOracle;
 import org.kie.soup.project.datamodel.oracle.TypeSource;
 import org.kie.workbench.common.services.datamodel.backend.server.builder.packages.PackageDataModelOracleBuilder;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.projects.ClassFactBuilder;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.projects.FactBuilder;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.projects.ProjectDataModelOracleBuilder;
-import org.kie.workbench.common.services.datamodel.model.PackageDataModelOracleBaselinePayload;
 import org.kie.workbench.common.services.datamodel.service.IncrementalDataModelService;
 import org.kie.workbench.common.widgets.client.datamodel.testclasses.Product;
 import org.kie.workbench.common.widgets.client.datamodel.testclasses.TestDataTypes;
@@ -50,6 +47,9 @@ import org.kie.workbench.common.widgets.client.datamodel.testclasses.TestIndirec
 import org.kie.workbench.common.widgets.client.datamodel.testclasses.TestSubClass;
 import org.kie.workbench.common.widgets.client.datamodel.testclasses.TestSuperClass;
 import org.mockito.Mock;
+import org.uberfire.backend.server.datamodel.ClassFactBuilder;
+import org.uberfire.backend.server.datamodel.FactBuilder;
+import org.uberfire.backend.server.datamodel.ProjectDataModelOracleBuilder;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.client.callbacks.Callback;
 

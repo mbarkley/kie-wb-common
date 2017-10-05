@@ -21,9 +21,9 @@ import java.util.Set;
 import org.drools.workbench.models.datamodel.oracle.DSLActionSentence;
 import org.drools.workbench.models.datamodel.oracle.DSLConditionSentence;
 import org.kie.soup.project.datamodel.imports.HasImports;
+import org.kie.soup.project.datamodel.model.PackageDataModelOracleBaselinePayload;
 import org.kie.soup.project.datamodel.oracle.MethodInfo;
 import org.kie.soup.project.datamodel.oracle.ModelField;
-import org.kie.workbench.common.services.datamodel.model.PackageDataModelOracleBaselinePayload;
 import org.uberfire.backend.vfs.Path;
 
 import static org.junit.Assert.*;

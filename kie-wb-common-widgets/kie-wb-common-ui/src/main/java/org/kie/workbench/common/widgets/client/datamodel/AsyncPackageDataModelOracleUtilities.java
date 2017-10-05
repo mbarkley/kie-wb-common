@@ -23,12 +23,12 @@ import java.util.Set;
 
 import org.kie.soup.project.datamodel.imports.Import;
 import org.kie.soup.project.datamodel.imports.Imports;
+import org.kie.soup.project.datamodel.model.LazyModelField;
+import org.kie.soup.project.datamodel.model.PackageDataModelOracleIncrementalPayload;
 import org.kie.soup.project.datamodel.oracle.Annotation;
 import org.kie.soup.project.datamodel.oracle.MethodInfo;
 import org.kie.soup.project.datamodel.oracle.ModelField;
 import org.kie.soup.project.datamodel.oracle.TypeSource;
-import org.kie.workbench.common.services.datamodel.model.LazyModelField;
-import org.kie.workbench.common.services.datamodel.model.PackageDataModelOracleIncrementalPayload;
 
 public class AsyncPackageDataModelOracleUtilities {
 

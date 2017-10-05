@@ -28,13 +28,13 @@ import org.kie.soup.project.datamodel.oracle.ProjectDataModelOracle;
 import org.kie.soup.project.datamodel.oracle.TypeSource;
 import org.kie.workbench.common.services.backend.builder.core.TypeSourceResolver;
 import org.kie.workbench.common.services.backend.builder.service.BuildInfo;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.projects.ProjectDataModelOracleBuilder;
 import org.kie.workbench.common.services.shared.project.KieProject;
 import org.kie.workbench.common.services.shared.project.ProjectImportsService;
 import org.kie.workbench.common.services.shared.whitelist.PackageNameWhiteListService;
 import org.kie.workbench.common.services.shared.whitelist.WhiteList;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.uberfire.backend.server.datamodel.ProjectDataModelOracleBuilder;
 import org.uberfire.backend.server.util.Paths;
 import org.uberfire.java.nio.file.Files;
 

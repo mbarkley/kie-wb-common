@@ -19,10 +19,10 @@ import org.junit.Test;
 import org.kie.soup.project.datamodel.commons.oracle.ProjectDataModelOracleImpl;
 import org.kie.soup.project.datamodel.commons.util.RawMVELEvaluator;
 import org.kie.soup.project.datamodel.oracle.TypeSource;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.projects.ClassFactBuilder;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.projects.ProjectDataModelOracleBuilder;
 import org.kie.workbench.common.services.datamodel.backend.server.testclasses.Product;
 import org.kie.workbench.common.services.datamodel.backend.server.testclasses.ProductOrder;
+import org.uberfire.backend.server.datamodel.ClassFactBuilder;
+import org.uberfire.backend.server.datamodel.ProjectDataModelOracleBuilder;
 
 import static org.junit.Assert.*;
 import static org.kie.workbench.common.services.datamodel.backend.server.ProjectDataModelOracleTestUtils.*;

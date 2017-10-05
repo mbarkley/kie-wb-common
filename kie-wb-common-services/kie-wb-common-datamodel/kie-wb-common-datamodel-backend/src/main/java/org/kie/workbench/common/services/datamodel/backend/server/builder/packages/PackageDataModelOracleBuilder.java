@@ -26,8 +26,8 @@ import org.kie.soup.project.datamodel.commons.util.MVELEvaluator;
 import org.kie.soup.project.datamodel.oracle.ExtensionKind;
 import org.kie.soup.project.datamodel.oracle.PackageDataModelOracle;
 import org.kie.soup.project.datamodel.oracle.ProjectDataModelOracle;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.util.DataEnumLoader;
 import org.kie.workbench.common.services.datamodel.backend.server.builder.util.GlobalsParser;
+import org.uberfire.backend.server.util.DataEnumLoader;
 import org.uberfire.commons.data.Pair;
 
 /**

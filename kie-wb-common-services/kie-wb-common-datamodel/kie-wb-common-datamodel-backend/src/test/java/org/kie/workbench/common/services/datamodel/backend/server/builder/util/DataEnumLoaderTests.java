@@ -17,6 +17,7 @@ package org.kie.workbench.common.services.datamodel.backend.server.builder.util;
 
 import org.junit.Test;
 import org.kie.soup.project.datamodel.commons.util.RawMVELEvaluator;
+import org.uberfire.backend.server.util.DataEnumLoader;
 
 import static org.jgroups.util.Util.*;
 

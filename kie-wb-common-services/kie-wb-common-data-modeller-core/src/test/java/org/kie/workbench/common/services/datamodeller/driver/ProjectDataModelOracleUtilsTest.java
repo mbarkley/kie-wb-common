@@ -26,7 +26,6 @@ import org.junit.Test;
 import org.kie.soup.project.datamodel.commons.util.RawMVELEvaluator;
 import org.kie.soup.project.datamodel.oracle.ProjectDataModelOracle;
 import org.kie.soup.project.datamodel.oracle.TypeSource;
-import org.kie.workbench.common.services.datamodel.backend.server.builder.projects.ProjectDataModelOracleBuilder;
 import org.kie.workbench.common.services.datamodeller.core.DataModel;
 import org.kie.workbench.common.services.datamodeller.core.DataObject;
 import org.kie.workbench.common.services.datamodeller.core.JavaEnum;
@@ -40,6 +39,7 @@ import org.kie.workbench.common.services.datamodeller.driver.testclasses.Externa
 import org.kie.workbench.common.services.datamodeller.driver.testclasses.ExternalEnum2;
 import org.kie.workbench.common.services.datamodeller.driver.testclasses.ExternalPojo1;
 import org.kie.workbench.common.services.datamodeller.driver.testclasses.ExternalPojo2;
+import org.uberfire.backend.server.datamodel.ProjectDataModelOracleBuilder;
 
 import static org.junit.Assert.*;
 
