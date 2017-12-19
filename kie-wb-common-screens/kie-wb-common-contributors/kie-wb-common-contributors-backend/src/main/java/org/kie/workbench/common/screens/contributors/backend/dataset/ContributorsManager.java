@@ -138,11 +138,13 @@ public class ContributorsManager implements DataSetGenerator {
             final Collection<WorkspaceProject> projects = projectService.getAllWorkspaceProjects(orgUnit);
 
             if (projects.isEmpty()) {
-                dsBuilder.row(org,
-                              null,
-                              null,
-                              "Empty organizational unit",
-                              null);
+                dsBuilder.row(org,//org
+                              null,//repo
+                              null,//project
+                              null,//author
+                              "Empty organizational unit",//message
+                              null);//date
+
             } else {
 
                 for (final WorkspaceProject project : projects) {
@@ -153,13 +155,12 @@ public class ContributorsManager implements DataSetGenerator {
                     final List<VersionRecord> recordList = recordService.loadVersionRecords(projectRoot);
 
                     if (recordList.isEmpty()) {
-                        dsBuilder.row(org,
-                                      repoAlias,
-                                      null,
-                                      null,
-                                      null,
-                                      "Empty project",
-                                      null);
+                        dsBuilder.row(org, //org
+                                      repoAlias,//repo
+                                      null,//project
+                                      null,//author
+                                      "Empty project", //mesage
+                                      null);//date
                     } else {
                         for (VersionRecord record : recordList) {
                             String alias = record.author();
