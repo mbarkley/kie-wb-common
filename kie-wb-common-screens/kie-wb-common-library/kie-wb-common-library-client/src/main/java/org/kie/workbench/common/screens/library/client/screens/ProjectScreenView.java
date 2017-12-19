@@ -22,6 +22,7 @@ import org.jboss.errai.common.client.dom.Div;
 import org.jboss.errai.common.client.dom.HTMLElement;
 import org.jboss.errai.ui.shared.api.annotations.DataField;
 import org.jboss.errai.ui.shared.api.annotations.Templated;
+import org.uberfire.ext.widgets.common.client.common.BusyPopup;
 
 @Templated
 public class ProjectScreenView
@@ -35,6 +36,16 @@ public class ProjectScreenView
     public void setContent(HTMLElement element) {
         DOMUtil.removeAllChildren(content);
         content.appendChild(element);
+    }
+
+    @Override
+    public void showBusyIndicator(final String message) {
+        BusyPopup.showMessage(message);
+    }
+
+    @Override
+    public void hideBusyIndicator() {
+        BusyPopup.close();
     }
 
     @Override

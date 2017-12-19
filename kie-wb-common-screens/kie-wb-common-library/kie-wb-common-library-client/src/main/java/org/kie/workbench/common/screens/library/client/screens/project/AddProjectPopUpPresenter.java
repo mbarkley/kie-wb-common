@@ -308,7 +308,6 @@ public class AddProjectPopUpPresenter {
     private RemoteCallback<WorkspaceProject> getSuccessCallback() {
         return project -> {
             newProjectEvent.fire(new NewProjectEvent(project));
-            view.hideBusyIndicator();
             view.hide();
             notifySuccess();
             libraryPlaces.goToProject(project);

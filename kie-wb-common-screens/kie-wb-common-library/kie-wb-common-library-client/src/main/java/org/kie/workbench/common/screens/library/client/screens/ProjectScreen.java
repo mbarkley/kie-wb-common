@@ -34,6 +34,7 @@ import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
 import org.uberfire.client.workbench.events.PlaceGainFocusEvent;
+import org.uberfire.ext.widgets.common.client.common.HasBusyIndicator;
 import org.uberfire.lifecycle.OnStartup;
 
 @WorkbenchScreen(identifier = LibraryPlaces.PROJECT_SCREEN,
@@ -43,7 +44,8 @@ public class ProjectScreen {
     private WorkspaceProject project;
 
     public interface View
-            extends IsElement {
+            extends IsElement,
+                    HasBusyIndicator {
 
         void setContent(HTMLElement element);
     }
@@ -122,6 +124,8 @@ public class ProjectScreen {
                 } else {
                     showEmptyProject();
                 }
+
+                view.hideBusyIndicator();
             }).hasAssets(project);
         }
     }
