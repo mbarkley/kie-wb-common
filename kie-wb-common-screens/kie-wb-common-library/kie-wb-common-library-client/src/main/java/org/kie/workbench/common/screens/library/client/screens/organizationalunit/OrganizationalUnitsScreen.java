@@ -158,17 +158,10 @@ public class OrganizationalUnitsScreen {
                                             error -> {
                                             });
 
-            if (teamAlreadySelected(info)) {
-                libraryPlaces.goToLibrary();
-            } else {
-                final WorkspaceProjectContextChangeEvent event = new WorkspaceProjectContextChangeEvent(info.getSelectedOrganizationalUnit());
-                projectContextChangeEvent.fire(event);
-            }
+            final WorkspaceProjectContextChangeEvent event = new WorkspaceProjectContextChangeEvent(info.getSelectedOrganizationalUnit());
+            projectContextChangeEvent.fire(event);
+            libraryPlaces.goToLibrary();
         }).getOrganizationalUnitRepositoryInfo(organizationalUnit);
-    }
-
-    private boolean teamAlreadySelected(OrganizationalUnitRepositoryInfo info) {
-        return info.getSelectedOrganizationalUnit().equals(projectContext.getActiveOrganizationalUnit());
     }
 
     public void createOrganizationalUnit() {

@@ -442,7 +442,6 @@ public class LibraryPlaces implements WorkspaceProjectContextChangeHandler {
     public void refresh(final Command callback) {
         breadcrumbs.clearBreadcrumbs(LibraryPlaces.LIBRARY_PERSPECTIVE);
         translationUtils.refresh(() -> {
-
             libraryToolbar.init(() -> {
                 if (callback != null) {
                     callback.execute();
@@ -453,7 +452,6 @@ public class LibraryPlaces implements WorkspaceProjectContextChangeHandler {
 
     public void goToOrganizationalUnits() {
         if (closeAllPlacesOrNothing()) {
-
             PortablePreconditions.checkNotNull("libraryPerspective.closeAllPlacesOrNothing",
                                                libraryPerspective);
 
@@ -469,20 +467,15 @@ public class LibraryPlaces implements WorkspaceProjectContextChangeHandler {
     }
 
     public void goToLibrary() {
-
         if (projectContext.getActiveOrganizationalUnit() == null) {
-
             libraryService.call(
-                    new RemoteCallback<OrganizationalUnit>() {
-                        @Override
-                        public void callback(OrganizationalUnit organizationalUnit) {
-
-
-                            projectContextChangeEvent.fire(new WorkspaceProjectContextChangeEvent(organizationalUnit));
-                            setupLibraryPerspective();
-                        }
+                new RemoteCallback<OrganizationalUnit>() {
+                    @Override
+                    public void callback(OrganizationalUnit organizationalUnit) {
+                        projectContextChangeEvent.fire(new WorkspaceProjectContextChangeEvent(organizationalUnit));
+                        setupLibraryPerspective();
                     }
-
+                }
             ).getDefaultOrganizationalUnit();
         } else {
             setupLibraryPerspective();
@@ -490,39 +483,36 @@ public class LibraryPlaces implements WorkspaceProjectContextChangeHandler {
     }
 
     private Boolean setupLibraryPerspective() {
-        return libraryService.call(new RemoteCallback<Boolean>() {
-            @Override
-            public void callback(final Boolean hasProjects) {
+        return libraryService.call(hasProjects -> {
+            PortablePreconditions.checkNotNull("libraryPerspective",
+                                               libraryPerspective);
 
-                PortablePreconditions.checkNotNull("libraryPerspective",
-                                                   libraryPerspective);
+            final PlaceRequest placeRequest = new DefaultPlaceRequest(LibraryPlaces.LIBRARY_SCREEN);
+            final PartDefinitionImpl part = new PartDefinitionImpl(placeRequest);
+            part.setSelectable(false);
 
-                final PlaceRequest placeRequest = new DefaultPlaceRequest(LibraryPlaces.LIBRARY_SCREEN);
-                final PartDefinitionImpl part = new PartDefinitionImpl(placeRequest);
-                part.setSelectable(false);
-
+            if (projectContext.getActiveWorkspaceProject() == null) {
                 projectContextChangeEvent.fire(new WorkspaceProjectContextChangeEvent(projectContext.getActiveOrganizationalUnit()));
-
-                closeLibraryPlaces();
-                placeManager.goTo(part,
-                                  libraryPerspective.getRootPanel());
-
-                setupLibraryBreadCrumbs();
-
-                hideDocks();
             }
+
+            closeLibraryPlaces();
+            placeManager.goTo(part,
+                              libraryPerspective.getRootPanel());
+
+            setupLibraryBreadCrumbs();
+
+            hideDocks();
         }).hasProjects(projectContext.getActiveOrganizationalUnit());
     }
 
     public void goToProject(final WorkspaceProject project) {
-
         if (!project.equals(projectContext.getActiveWorkspaceProject())) {
-
-            closeAllPlacesOrNothing();
-
-            projectContextChangeEvent.fire(new WorkspaceProjectContextChangeEvent(project,
-                                                                                  project.getMainModule()));
-
+            if (closeAllPlacesOrNothing()) {
+                projectContextChangeEvent.fire(new WorkspaceProjectContextChangeEvent(project,
+                                                                                      project.getMainModule()));
+                goToProject();
+            }
+        } else {
             goToProject();
         }
     }
@@ -534,7 +524,6 @@ public class LibraryPlaces implements WorkspaceProjectContextChangeHandler {
     }
 
     private void goToProject(final Command callback) {
-
         lastViewedProject = projectContext.getActiveWorkspaceProject();
         setupLibraryBreadCrumbs();
 

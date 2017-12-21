@@ -195,7 +195,6 @@ public class AddProjectPopUpPresenterTest {
 
         verify(view).showBusyIndicator(anyString());
         verify(newProjectEvent).fire(any(NewProjectEvent.class));
-        verify(view).hideBusyIndicator();
         verify(view).hide();
         verify(notificationEvent).fire(any(NotificationEvent.class));
         verify(libraryPlaces).goToProject(any(WorkspaceProject.class));

@@ -470,7 +470,11 @@ public class LibraryPlacesTest {
     }
 
     @Test
-    public void goToLibraryTest() {
+    public void goToLibraryWithDefaultOrganizationalUnitTest() {
+        doReturn(null).when(projectContext).getActiveOrganizationalUnit();
+        doReturn(null).when(projectContext).getActiveWorkspaceProject();
+        doReturn(null).when(projectContext).getActiveModule();
+
         final PlaceRequest placeRequest = new DefaultPlaceRequest(LibraryPlaces.LIBRARY_SCREEN);
         final PartDefinitionImpl part = new PartDefinitionImpl(placeRequest);
         part.setSelectable(false);
@@ -481,7 +485,52 @@ public class LibraryPlacesTest {
         verify(placeManager).goTo(eq(part),
                                   any(PanelDefinition.class));
         verify(libraryPlaces).setupLibraryBreadCrumbs();
-        verify(projectContextChangeEvent).fire(any(WorkspaceProjectContextChangeEvent.class));
+        verify(projectContextChangeEvent,
+               times(2)).fire(any(WorkspaceProjectContextChangeEvent.class));
+    }
+
+    @Test
+    public void goToLibraryFromOrganizationalUnitsScreenTest() {
+        doReturn(activeOrganizationalUnit).when(projectContext).getActiveOrganizationalUnit();
+        doReturn(null).when(projectContext).getActiveWorkspaceProject();
+        doReturn(null).when(projectContext).getActiveModule();
+
+        final PlaceRequest placeRequest = new DefaultPlaceRequest(LibraryPlaces.LIBRARY_SCREEN);
+        final PartDefinitionImpl part = new PartDefinitionImpl(placeRequest);
+        part.setSelectable(false);
+
+        libraryPlaces.goToLibrary();
+
+        verify(libraryPlaces).closeLibraryPlaces();
+        verify(placeManager).goTo(eq(part),
+                                  any(PanelDefinition.class));
+        verify(libraryPlaces).setupLibraryBreadCrumbs();
+        verify(projectContextChangeEvent,
+               times(1)).fire(any(WorkspaceProjectContextChangeEvent.class));
+    }
+
+    @Test
+    public void goToLibraryWhenGoingBackFromProjectTest() {
+        doReturn(activeOrganizationalUnit).when(projectContext).getActiveOrganizationalUnit();
+        activeProject = new WorkspaceProject(activeOrganizationalUnit,
+                                             activeRepository,
+                                             activeBranch,
+                                             activeModule);
+        doReturn(activeProject).when(projectContext).getActiveWorkspaceProject();
+        doReturn(activeModule).when(projectContext).getActiveModule();
+
+        final PlaceRequest placeRequest = new DefaultPlaceRequest(LibraryPlaces.LIBRARY_SCREEN);
+        final PartDefinitionImpl part = new PartDefinitionImpl(placeRequest);
+        part.setSelectable(false);
+
+        libraryPlaces.goToLibrary();
+
+        verify(libraryPlaces).closeLibraryPlaces();
+        verify(placeManager).goTo(eq(part),
+                                  any(PanelDefinition.class));
+        verify(libraryPlaces).setupLibraryBreadCrumbs();
+        verify(projectContextChangeEvent,
+               never()).fire(any(WorkspaceProjectContextChangeEvent.class));
     }
 
     @Test
