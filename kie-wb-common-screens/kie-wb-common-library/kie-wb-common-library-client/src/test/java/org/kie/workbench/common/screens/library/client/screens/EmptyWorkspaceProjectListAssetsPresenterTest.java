@@ -34,6 +34,7 @@ import org.kie.workbench.common.widgets.client.handlers.NewResourcePresenter;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.uberfire.client.mvp.PlaceManager;
+import org.uberfire.ext.widgets.common.client.common.BusyIndicatorView;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
@@ -60,6 +61,9 @@ public class EmptyWorkspaceProjectListAssetsPresenterTest {
     @Mock
     private ProjectsDetailScreen projectsDetailScreen;
 
+    @Mock
+    private BusyIndicatorView busyIndicatorView;
+
     private EmptyWorkspaceProjectPresenter emptyWorkspaceProjectPresenter;
 
     @Before
@@ -69,7 +73,8 @@ public class EmptyWorkspaceProjectListAssetsPresenterTest {
                                                                                 newResourcePresenter,
                                                                                 placeManager,
                                                                                 libraryPlaces,
-                                                                                projectsDetailScreen));
+                                                                                projectsDetailScreen,
+                                                                                busyIndicatorView));
     }
 
     @Test
@@ -110,6 +115,7 @@ public class EmptyWorkspaceProjectListAssetsPresenterTest {
 
         verify(view).setProjectName("projectName");
         verify(placeManager).closePlace(LibraryPlaces.LIBRARY_SCREEN);
+        verify(busyIndicatorView).hideBusyIndicator();
     }
 
     @Test

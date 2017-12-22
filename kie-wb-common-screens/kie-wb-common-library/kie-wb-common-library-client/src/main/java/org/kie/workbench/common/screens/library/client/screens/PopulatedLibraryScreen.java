@@ -36,15 +36,18 @@ import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.kie.workbench.common.screens.library.api.LibraryInfo;
 import org.kie.workbench.common.screens.library.api.LibraryService;
 import org.kie.workbench.common.screens.library.client.events.ProjectDetailEvent;
+import org.kie.workbench.common.screens.library.client.resources.i18n.LibraryConstants;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
 import org.kie.workbench.common.screens.library.client.widgets.common.TileWidget;
 import org.kie.workbench.common.screens.library.client.widgets.library.AddProjectButtonPresenter;
 import org.uberfire.client.mvp.UberElement;
+import org.uberfire.ext.widgets.common.client.common.HasBusyIndicator;
 import org.uberfire.mvp.Command;
 
 public class PopulatedLibraryScreen {
 
-    public interface View extends UberElement<PopulatedLibraryScreen> {
+    public interface View extends UberElement<PopulatedLibraryScreen>,
+                                  HasBusyIndicator {
 
         void clearProjects();
 
@@ -55,6 +58,8 @@ public class PopulatedLibraryScreen {
         void clearFilterText();
 
         String getNumberOfAssetsMessage(int numberOfAssets);
+
+        String getLoadingAssetsMessage();
     }
 
     private View view;
@@ -165,6 +170,7 @@ public class PopulatedLibraryScreen {
 
     Command selectCommand(final WorkspaceProject project) {
         return () -> {
+            view.showBusyIndicator(view.getLoadingAssetsMessage());
             libraryPlaces.goToProject(project);
         };
     }

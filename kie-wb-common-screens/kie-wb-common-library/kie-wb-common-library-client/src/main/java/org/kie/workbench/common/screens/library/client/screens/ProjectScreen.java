@@ -99,7 +99,6 @@ public class ProjectScreen {
     }
 
     private void setup() {
-
         if (project != null && project.equals(projectContext.getActiveWorkspaceProject())) {
             return;
         }
@@ -111,10 +110,8 @@ public class ProjectScreen {
         libraryPlaces.setUpBranches();
 
         if (projectContext.getActiveWorkspaceProject().getMainModule() == null) {
-
             showMigration();
         } else {
-
             projectDetailEvent.fire(new ProjectDetailEvent(project));
 
             libraryService.call(hasAssets -> {
@@ -124,8 +121,6 @@ public class ProjectScreen {
                 } else {
                     showEmptyProject();
                 }
-
-                view.hideBusyIndicator();
             }).hasAssets(project);
         }
     }

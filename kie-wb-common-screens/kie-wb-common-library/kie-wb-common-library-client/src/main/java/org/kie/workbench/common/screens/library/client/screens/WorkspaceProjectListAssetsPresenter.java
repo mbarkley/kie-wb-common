@@ -192,8 +192,6 @@ public class WorkspaceProjectListAssetsPresenter {
             return;
         }
 
-        busyIndicatorView.showBusyIndicator(ts.getTranslation(LibraryConstants.LoadingAssets));
-
         isProjectLoadInProgress = true;
 
         libraryService.call(new RemoteCallback<List<AssetInfo>>() {
@@ -204,8 +202,6 @@ public class WorkspaceProjectListAssetsPresenter {
 
                 setupAssets(assets);
 
-                busyIndicatorView.hideBusyIndicator();
-
                 isProjectLoadInProgress = false;
 
                 if (isProjectLoadPending) {
@@ -214,6 +210,8 @@ public class WorkspaceProjectListAssetsPresenter {
                 } else {
                     reloader.check(assetsList);
                 }
+
+                busyIndicatorView.hideBusyIndicator();
             }
         }).getProjectAssets(new ProjectAssetsQuery(project,
                                                    view.getFilterValue(),

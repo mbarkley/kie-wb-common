@@ -84,7 +84,6 @@ public class WorkspaceProjectListAssetsPresenterTest
 
     @Test
     public void onStartupTest() {
-        verify(busyIndicatorView).showBusyIndicator(anyString());
         verify(libraryService).getProjectAssets(queryArgumentCaptor.capture());
         assertEquals(project,
                      queryArgumentCaptor.getValue().getProject());
@@ -120,8 +119,6 @@ public class WorkspaceProjectListAssetsPresenterTest
     public void refreshOnFocusTest() {
         workspaceProjectListAssetsPresenter.loadProjectInfo();
 
-        verify(busyIndicatorView,
-               times(2)).showBusyIndicator(anyString());
         verify(libraryService,
                times(2)).getProjectAssets(any(ProjectAssetsQuery.class));
         verify(view,

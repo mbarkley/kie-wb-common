@@ -26,6 +26,7 @@ import org.kie.workbench.common.screens.library.client.util.ResourceUtils;
 import org.kie.workbench.common.widgets.client.handlers.NewResourceHandler;
 import org.kie.workbench.common.widgets.client.handlers.NewResourcePresenter;
 import org.uberfire.client.mvp.PlaceManager;
+import org.uberfire.ext.widgets.common.client.common.BusyIndicatorView;
 
 import static org.kie.workbench.common.screens.library.client.util.ResourceUtils.isPackageHandler;
 import static org.kie.workbench.common.screens.library.client.util.ResourceUtils.isProjectHandler;
@@ -58,19 +59,23 @@ public class EmptyWorkspaceProjectPresenter {
 
     private ProjectsDetailScreen projectsDetailScreen;
 
+    private BusyIndicatorView busyIndicatorView;
+
     @Inject
     public EmptyWorkspaceProjectPresenter(final View view,
                                           final ResourceUtils resourceUtils,
                                           final NewResourcePresenter newResourcePresenter,
                                           final PlaceManager placeManager,
                                           final LibraryPlaces libraryPlaces,
-                                          final ProjectsDetailScreen projectsDetailScreen) {
+                                          final ProjectsDetailScreen projectsDetailScreen,
+                                          final BusyIndicatorView busyIndicatorView) {
         this.view = view;
         this.resourceUtils = resourceUtils;
         this.newResourcePresenter = newResourcePresenter;
         this.placeManager = placeManager;
         this.libraryPlaces = libraryPlaces;
         this.projectsDetailScreen = projectsDetailScreen;
+        this.busyIndicatorView = busyIndicatorView;
     }
 
     public void show(final WorkspaceProject project) {
@@ -93,6 +98,7 @@ public class EmptyWorkspaceProjectPresenter {
         view.setProjectName(project.getName());
         view.setProjectDetails(projectsDetailScreen.getView());
         placeManager.closePlace(LibraryPlaces.LIBRARY_SCREEN);
+        busyIndicatorView.hideBusyIndicator();
     }
 
     public void goToSettings() {
