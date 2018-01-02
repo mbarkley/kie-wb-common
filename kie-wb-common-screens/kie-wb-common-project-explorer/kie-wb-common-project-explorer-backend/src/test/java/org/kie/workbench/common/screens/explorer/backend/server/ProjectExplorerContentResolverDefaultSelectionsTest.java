@@ -224,7 +224,8 @@ public class ProjectExplorerContentResolverDefaultSelectionsTest {
     }
 
     private GitRepository getGitRepository(final String alias) {
-        final GitRepository repository = new GitRepository(alias);
+        final GitRepository repository = new GitRepository(alias,
+                                                           "scheme");
         final HashMap<String, Branch> branches = new HashMap<>();
         final Path path = PathFactory.newPath("/",
                                               "file://master@module/");

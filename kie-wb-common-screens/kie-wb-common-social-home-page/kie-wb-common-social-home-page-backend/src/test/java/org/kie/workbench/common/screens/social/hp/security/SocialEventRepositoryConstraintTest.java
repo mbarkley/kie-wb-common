@@ -76,7 +76,8 @@ public class SocialEventRepositoryConstraintTest {
                                                                      "groupid");
         final OrganizationalUnitImpl ouSpy = spy(ou);
         Collection<Repository> repositories = new ArrayList<Repository>();
-        repository = new GitRepository("repo");
+        repository = new GitRepository("repo",
+                                       "space");
         repositories.add(repository);
         ous.add(ouSpy);
 

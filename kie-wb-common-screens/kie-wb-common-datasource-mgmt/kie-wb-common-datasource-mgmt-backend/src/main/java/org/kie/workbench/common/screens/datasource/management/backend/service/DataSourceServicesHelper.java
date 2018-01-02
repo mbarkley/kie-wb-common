@@ -26,6 +26,7 @@ import javax.inject.Named;
 import org.guvnor.common.services.project.model.Module;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.uberfire.backend.server.spaces.SpacesAPIImpl;
 import org.uberfire.backend.server.util.Paths;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.io.IOService;
@@ -47,6 +48,9 @@ public class DataSourceServicesHelper {
     @Inject
     private DefRegistry defRegistry;
 
+    @Inject
+    protected SpacesAPIImpl spacesAPI;
+
     /**
      * Root to the platform data sources and drivers repository.
      */
@@ -63,10 +67,12 @@ public class DataSourceServicesHelper {
 
     @PostConstruct
     protected void init() {
-        String repositoryURI = null;
+        URI repositoryURI = null;
         try {
-            repositoryURI = "default://" + getGlobalFileSystemName();
-            fileSystem = ioService.newFileSystem(URI.create(repositoryURI),
+            repositoryURI = spacesAPI.resolveFileSystemURI(SpacesAPIImpl.Scheme.DEFAULT,
+                                                           SpacesAPIImpl.Space.DEFAULT,
+                                                           getGlobalFileSystemName());
+            fileSystem = ioService.newFileSystem(repositoryURI,
                                                  new HashMap<String, Object>() {{
                                                      put("init",
                                                          Boolean.TRUE);
@@ -79,7 +85,7 @@ public class DataSourceServicesHelper {
         } catch (FileSystemAlreadyExistsException e) {
             logger.debug("Data sources platform repository: {} already exits and will be used.",
                          repositoryURI);
-            fileSystem = ioService.getFileSystem(URI.create(repositoryURI));
+            fileSystem = ioService.getFileSystem(repositoryURI);
         }
         this.root = fileSystem.getRootDirectories().iterator().next();
     }

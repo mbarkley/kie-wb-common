@@ -27,4 +27,5 @@ public class NewWorkspaceProjectUtils {
         return projectName != null ? projectName.replaceAll("[^A-Za-z0-9_\\-.]",
                                                             "") : projectName;
     }
+
 }

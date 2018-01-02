@@ -46,6 +46,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.security.authz.AuthorizationManager;
+import org.uberfire.spaces.SpacesAPI;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -375,8 +376,13 @@ public class DefExplorerQueryServiceTest {
         }
 
         @Override
-        public String getScheme() {
-            return null;
+        public SpacesAPI.Scheme getScheme() {
+            return SpacesAPI.Scheme.DEFAULT;
+        }
+
+        @Override
+        public String getSpace() {
+            return "space";
         }
 
         @Override
