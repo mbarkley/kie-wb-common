@@ -579,7 +579,11 @@ public class LibraryPlaces implements WorkspaceProjectContextChangeHandler {
     }
 
     public void goToTrySamples() {
-        final DefaultPlaceRequest placeRequest = new DefaultPlaceRequest(LibraryPlaces.IMPORT_PROJECTS_SCREEN);
+        Map<String, String> params = new HashMap<>();
+        params.put("trySamples",
+                   "true");
+        final DefaultPlaceRequest placeRequest = new DefaultPlaceRequest(LibraryPlaces.IMPORT_PROJECTS_SCREEN,
+                                                                         params);
         final PartDefinitionImpl part = new PartDefinitionImpl(placeRequest);
         part.setSelectable(false);
 
@@ -592,8 +596,10 @@ public class LibraryPlaces implements WorkspaceProjectContextChangeHandler {
         Map<String, String> params = new HashMap<>();
         params.put("title",
                    ts.getTranslation(LibraryConstants.ImportProjects));
-        params.put("repositoryUrl",
-                   repositoryUrl);
+        if (repositoryUrl != null) {
+            params.put("repositoryUrl",
+                       repositoryUrl);
+        }
         final DefaultPlaceRequest placeRequest = new DefaultPlaceRequest(LibraryPlaces.IMPORT_PROJECTS_SCREEN,
                                                                          params);
         final PartDefinitionImpl part = new PartDefinitionImpl(placeRequest);

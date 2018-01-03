@@ -236,11 +236,21 @@ public class ExamplesServiceImpl implements ExamplesService {
         if (exampleRepository.equals(playgroundRepository)) {
             return clonedRepositories.stream().filter(r -> exampleRepository.getUrl().equals(r.getEnvironment().get("origin"))).findFirst().orElseGet(() -> cloneRepository(exampleRepository.getUrl()));
         } else {
-            return cloneRepository(exampleRepository.getUrl());
+            return cloneRepository(exampleRepository.getUrl(),
+                                   exampleRepository.getUserName(),
+                                   exampleRepository.getPassword());
         }
     }
 
     private Repository cloneRepository(final String repositoryURL) {
+        return cloneRepository(repositoryURL,
+                               null,
+                               null);
+    }
+
+    private Repository cloneRepository(final String repositoryURL,
+                                       final String userName,
+                                       final String password) {
         Repository repository = null;
         try {
             final String alias = getExampleAlias(repositoryURL);
@@ -251,6 +261,14 @@ public class ExamplesServiceImpl implements ExamplesService {
                     GitRepository.SCHEME.toString());
                 put("replaceIfExists",
                     true);
+                if (userName != null) {
+                    put(EnvironmentParameters.USER_NAME,
+                        userName);
+                }
+                if (password != null) {
+                    put("password",
+                        password);
+                }
             }};
 
             final ConfigGroup repositoryConfig = configurationFactory.newConfigGroup(REPOSITORY,

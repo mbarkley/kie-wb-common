@@ -61,6 +61,10 @@ public interface LibraryService {
 
     Set<ExampleProject> getProjects(final String repositoryUrl);
 
+    Set<ExampleProject> getProjects(final String repositoryUrl,
+                                    final String userName,
+                                    final String password);
+
     WorkspaceProject importProject(final OrganizationalUnit organizationalUnit,
                                    final ExampleProject exampleProject);
 

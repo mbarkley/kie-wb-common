@@ -21,10 +21,12 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kie.workbench.common.screens.library.api.LibraryService;
+import org.kie.workbench.common.screens.library.client.screens.samples.ImportProjectsSetupEvent;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.uberfire.mocks.CallerMock;
+import org.uberfire.mocks.EventSourceMock;
 
 import static org.mockito.Mockito.*;
 
@@ -41,6 +43,9 @@ public class ImportRepositoryPopUpPresenterTest {
     private LibraryService libraryService;
     private Caller<LibraryService> libraryServiceCaller;
 
+    @Mock
+    private EventSourceMock<ImportProjectsSetupEvent> importProjectsSetupEvent;
+
     private ImportRepositoryPopUpPresenter presenter;
 
     @Before
@@ -48,7 +53,8 @@ public class ImportRepositoryPopUpPresenterTest {
         libraryServiceCaller = new CallerMock<>(libraryService);
         presenter = new ImportRepositoryPopUpPresenter(view,
                                                        libraryPlaces,
-                                                       libraryServiceCaller);
+                                                       libraryServiceCaller,
+                                                       importProjectsSetupEvent);
     }
 
     @Test
