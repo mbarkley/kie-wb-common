@@ -106,6 +106,9 @@ public class MigrationTool {
             else if (!dirFile.isDirectory()) {
                 errorMessage = Optional.of(String.format("The target path is not a directory. Given: %s", niogitDir));
             }
+            else if (niogitDir.resolve("system").resolve("system.git").toFile().exists()) {
+                errorMessage = Optional.of(String.format("The target path looks like it already contains an updated filesystem. Given: %s", niogitDir));
+            }
         } catch (UnsupportedOperationException e) {
             errorMessage = Optional.of(String.format("The target path must be a file. Given: %s", niogitDir));
         }
