@@ -79,12 +79,15 @@ public class ImportRepositoryPopUpPresenterTest {
 
         verify(view).hideBusyIndicator();
         verify(view).hide();
-        verify(libraryPlaces).goToImportProjects("repoUrl");
+        verify(libraryPlaces).goToImportProjects(null);
+        verify(importProjectsSetupEvent).fire(any());
     }
 
     @Test
     public void importInvalidRepositoryTest() {
-        doThrow(new RuntimeException()).when(libraryService).getProjects(any());
+        doThrow(new RuntimeException()).when(libraryService).getProjects(any(),
+                                                                         any(),
+                                                                         any());
         doReturn("repoUrl").when(view).getRepositoryURL();
 
         presenter.importRepository();

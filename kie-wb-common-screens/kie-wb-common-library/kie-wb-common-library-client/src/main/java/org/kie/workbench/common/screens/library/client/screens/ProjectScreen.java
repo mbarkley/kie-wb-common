@@ -90,19 +90,13 @@ public class ProjectScreen {
     }
 
     public void refreshOnFocus(@Observes final PlaceGainFocusEvent placeGainFocusEvent) {
-
         final String identifier = placeGainFocusEvent.getPlace().getIdentifier();
         if (project != null && identifier.equals(LibraryPlaces.PROJECT_SCREEN)) {
-
             setup();
         }
     }
 
     private void setup() {
-        if (project != null && project.equals(projectContext.getActiveWorkspaceProject())) {
-            return;
-        }
-
         PortablePreconditions.checkNotNull("ProjectScreen projectContext.getActiveWorkspaceProject()",
                                            projectContext.getActiveWorkspaceProject());
 

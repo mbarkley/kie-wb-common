@@ -104,20 +104,6 @@ public class ProjectScreenRefreshTest {
     }
 
     @Test
-    public void refreshNoChanges() throws Exception {
-
-        final PlaceGainFocusEvent placeGainFocusEvent = getPlaceGainFocusEvent(LibraryPlaces.PROJECT_SCREEN);
-
-        screen.onStartup();
-
-        reset(this.view);
-
-        screen.refreshOnFocus(placeGainFocusEvent);
-
-        verify(this.view, never()).setContent(any(HTMLElement.class));
-    }
-
-    @Test
     public void refreshProjectChanged() throws Exception {
 
         IsElement view = mock(IsElement.class);
