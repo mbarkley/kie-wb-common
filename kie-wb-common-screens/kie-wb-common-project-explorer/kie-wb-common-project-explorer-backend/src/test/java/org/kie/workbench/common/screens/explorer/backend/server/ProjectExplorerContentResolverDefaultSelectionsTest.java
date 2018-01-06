@@ -48,6 +48,7 @@ import org.mockito.stubbing.Answer;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.backend.vfs.PathFactory;
 import org.uberfire.java.nio.fs.file.SimpleFileSystemProvider;
+import org.uberfire.spaces.Space;
 
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
@@ -225,7 +226,7 @@ public class ProjectExplorerContentResolverDefaultSelectionsTest {
 
     private GitRepository getGitRepository(final String alias) {
         final GitRepository repository = new GitRepository(alias,
-                                                           "scheme");
+                                                           new Space("scheme"));
         final HashMap<String, Branch> branches = new HashMap<>();
         final Path path = PathFactory.newPath("/",
                                               "file://master@module/");

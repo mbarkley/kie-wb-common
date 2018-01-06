@@ -25,6 +25,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.kie.workbench.common.screens.social.hp.security.SocialEventRepositoryConstraint;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.uberfire.spaces.Space;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -38,7 +39,7 @@ public class RepositoryListServiceImplTest {
     public void setup() {
         Set<Repository> repositories = new HashSet<Repository>();
         repositories.add(new GitRepository("dora",
-                                           "space"));
+                                           new Space("space")));
         final SocialEventRepositoryConstraint socialEventRepositoryConstraint = mock(
                 SocialEventRepositoryConstraint.class);
         when(socialEventRepositoryConstraint.getAuthorizedRepositories()).thenReturn(repositories);

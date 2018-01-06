@@ -32,6 +32,7 @@ import org.uberfire.backend.vfs.Path;
 import org.uberfire.io.IOService;
 import org.uberfire.java.nio.file.FileSystem;
 import org.uberfire.java.nio.file.FileSystemAlreadyExistsException;
+import org.uberfire.spaces.SpacesAPI;
 
 /**
  * Helper methods to be used by the different services related to data sources and drivers.
@@ -69,8 +70,8 @@ public class DataSourceServicesHelper {
     protected void init() {
         URI repositoryURI = null;
         try {
-            repositoryURI = spacesAPI.resolveFileSystemURI(SpacesAPIImpl.Scheme.DEFAULT,
-                                                           SpacesAPIImpl.Space.DEFAULT,
+            repositoryURI = spacesAPI.resolveFileSystemURI(SpacesAPI.Scheme.DEFAULT,
+                                                           SpacesAPI.DEFAULT_SPACE,
                                                            getGlobalFileSystemName());
             fileSystem = ioService.newFileSystem(repositoryURI,
                                                  new HashMap<String, Object>() {{

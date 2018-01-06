@@ -41,6 +41,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.uberfire.security.Resource;
 import org.uberfire.security.authz.AuthorizationManager;
 import org.uberfire.security.authz.Permission;
+import org.uberfire.spaces.Space;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -82,7 +83,7 @@ public class SocialEventModuleConstraintTest {
         final OrganizationalUnitImpl ouSpy = spy(ou);
         Collection<Repository> repositories = new ArrayList<Repository>();
         repository = new GitRepository("repo",
-                                       "space");
+                                       new Space("space"));
         repositories.add(repository);
         ous.add(ouSpy);
 

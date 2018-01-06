@@ -46,6 +46,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.security.authz.AuthorizationManager;
+import org.uberfire.spaces.Space;
 import org.uberfire.spaces.SpacesAPI;
 
 import static org.junit.Assert.*;
@@ -167,20 +168,20 @@ public class DefExplorerQueryServiceTest {
         when(module3.getRootPath()).thenReturn(rootPath3);
 
         doReturn(new WorkspaceProject(o3,
-                             repo_o3_1,
-                             new Branch("master",
-                                        mock(Path.class)),
-                             module1)).when(projectService).resolveProject(repo_o3_1);
+                                      repo_o3_1,
+                                      new Branch("master",
+                                                 mock(Path.class)),
+                                      module1)).when(projectService).resolveProject(repo_o3_1);
         doReturn(new WorkspaceProject(o3,
-                             repo_o3_2,
-                             new Branch("master",
-                                        mock(Path.class)),
-                             module2)).when(projectService).resolveProject(repo_o3_2);
+                                      repo_o3_2,
+                                      new Branch("master",
+                                                 mock(Path.class)),
+                                      module2)).when(projectService).resolveProject(repo_o3_2);
         doReturn(new WorkspaceProject(o3,
-                             repo_o3_3,
-                             new Branch("master",
-                                        mock(Path.class)),
-                             module3)).when(projectService).resolveProject(repo_o3_3);
+                                      repo_o3_3,
+                                      new Branch("master",
+                                                 mock(Path.class)),
+                                      module3)).when(projectService).resolveProject(repo_o3_3);
 
         //module1 has data sources ds1 and ds2, and drivers driver1, driver2 and driver3
         ArrayList<DataSourceDefInfo> module2DSs = new ArrayList<>();
@@ -381,8 +382,8 @@ public class DefExplorerQueryServiceTest {
         }
 
         @Override
-        public String getSpace() {
-            return "space";
+        public Space getSpace() {
+            return new Space("space");
         }
 
         @Override
