@@ -128,10 +128,6 @@ public class WorkspaceProjectListAssetsPresenter {
     }
 
     public void show(final WorkspaceProject project) {
-        if (this.project != null && this.project.equals(project)) {
-            return;
-        }
-
         this.project = PortablePreconditions.checkNotNull("ProjectListPresenter.project",
                                                           project);
 

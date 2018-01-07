@@ -24,6 +24,7 @@ import java.util.Set;
 
 import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.context.WorkspaceProjectContextChangeEvent;
+import org.jboss.errai.codegen.util.Str;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.ioc.client.api.ManagedInstance;
 import org.junit.Before;
@@ -116,6 +117,8 @@ public class ImportWorkspaceProjectsScreenTest {
         Map<String, String> params = new HashMap<>();
         params.put("title",
                    "Import Projects");
+        params.put("repositoryUrl",
+                   "repoUrl");
 
         importWorkspaceProjectsScreen.onStartup(new DefaultPlaceRequest(LibraryPlaces.PROJECT_SCREEN,
                                                                         params));
@@ -152,7 +155,11 @@ public class ImportWorkspaceProjectsScreenTest {
 
     @Test
     public void onStartupWithoutProjectsTest() {
-        importWorkspaceProjectsScreen.onStartup(new DefaultPlaceRequest(LibraryPlaces.PROJECT_SCREEN));
+        Map<String, String> params = new HashMap<>();
+        params.put("repositoryUrl",
+                   "repoUrl");
+        importWorkspaceProjectsScreen.onStartup(new DefaultPlaceRequest(LibraryPlaces.PROJECT_SCREEN,
+                                                                        params));
 
         verify(view).hideBusyIndicator();
         verify(notificationEvent).fire(any());
@@ -176,7 +183,11 @@ public class ImportWorkspaceProjectsScreenTest {
                                         null));
         doReturn(projects).when(libraryService).getProjects(anyString());
 
-        importWorkspaceProjectsScreen.onStartup(new DefaultPlaceRequest(LibraryPlaces.PROJECT_SCREEN));
+        Map<String, String> params = new HashMap<>();
+        params.put("repositoryUrl",
+                   "repoUrl");
+        importWorkspaceProjectsScreen.onStartup(new DefaultPlaceRequest(LibraryPlaces.PROJECT_SCREEN,
+                                                                        params));
         final List<TileWidget> filteredProjects = importWorkspaceProjectsScreen.filterProjects("a");
 
         assertEquals(2,
