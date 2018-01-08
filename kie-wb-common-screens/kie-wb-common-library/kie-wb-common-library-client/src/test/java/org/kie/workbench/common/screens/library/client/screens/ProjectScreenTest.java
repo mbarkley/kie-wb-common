@@ -15,11 +15,17 @@
  */
 package org.kie.workbench.common.screens.library.client.screens;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+
 import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.WorkspaceProject;
 import org.guvnor.structure.organizationalunit.OrganizationalUnit;
 import org.guvnor.structure.repositories.Branch;
 import org.guvnor.structure.repositories.Repository;
+import org.jboss.errai.common.client.api.IsElement;
 import org.jboss.errai.common.client.dom.HTMLElement;
 import org.junit.Before;
 import org.junit.Test;
@@ -35,9 +41,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.uberfire.mocks.CallerMock;
 import org.uberfire.mocks.EventSourceMock;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectScreenTest {
 
@@ -51,8 +54,6 @@ public class ProjectScreenTest {
     private EmptyWorkspaceProjectPresenter emptyWorkspaceProjectPresenter;
     @Mock
     private WorkspaceProjectListAssetsPresenter workspaceProjectListAssetsPresenter;
-    @Mock
-    private ProjectMigrationPresenter projectMigrationPresenter;
     @Mock
     private WorkspaceProjectContext projectContext;
     @Mock
@@ -70,7 +71,6 @@ public class ProjectScreenTest {
                                    new CallerMock<>(libraryService),
                                    emptyWorkspaceProjectPresenter,
                                    workspaceProjectListAssetsPresenter,
-                                   projectMigrationPresenter,
                                    projectContext,
                                    projectDetailEvent);
     }
@@ -78,14 +78,16 @@ public class ProjectScreenTest {
     @Test
     public void setUpBranches() throws Exception {
 
-        final ProjectMigrationPresenter.View view = mock(ProjectMigrationPresenter.View.class);
-        doReturn(view).when(projectMigrationPresenter).getView();
-
         final WorkspaceProject project = new WorkspaceProject(mock(OrganizationalUnit.class),
                                                               mock(Repository.class),
                                                               mock(Branch.class),
                                                               null);
         doReturn(project).when(projectContext).getActiveWorkspaceProject();
+
+        IsElement view = mock(IsElement.class);
+        HTMLElement element = mock(HTMLElement.class);
+        doReturn(element).when(view).getElement();
+        doReturn(view).when(emptyWorkspaceProjectPresenter).getView();
 
         screen.onStartup();
 
@@ -93,32 +95,7 @@ public class ProjectScreenTest {
     }
 
     @Test
-    public void showMigration() throws Exception {
-
-        final ProjectMigrationPresenter.View view = mock(ProjectMigrationPresenter.View.class);
-        doReturn(view).when(projectMigrationPresenter).getView();
-        final HTMLElement element = mock(HTMLElement.class);
-        doReturn(element).when(view).getElement();
-
-        final WorkspaceProject project = new WorkspaceProject(mock(OrganizationalUnit.class),
-                                                              mock(Repository.class),
-                                                              mock(Branch.class),
-                                                              null);
-        doReturn(project).when(projectContext).getActiveWorkspaceProject();
-
-        screen.onStartup();
-
-        verify(projectMigrationPresenter).show(project);
-        verify(this.view).setContent(element);
-    }
-
-    @Test
     public void showEmptyProject() throws Exception {
-
-        final ProjectMigrationPresenter.View view = mock(ProjectMigrationPresenter.View.class);
-        doReturn(view).when(emptyWorkspaceProjectPresenter).getView();
-        final HTMLElement element = mock(HTMLElement.class);
-        doReturn(element).when(view).getElement();
 
         final WorkspaceProject project = new WorkspaceProject(mock(OrganizationalUnit.class),
                                                               mock(Repository.class),
@@ -128,22 +105,21 @@ public class ProjectScreenTest {
 
         doReturn(false).when(libraryService).hasAssets(project);
 
+        IsElement view = mock(IsElement.class);
+        HTMLElement element = mock(HTMLElement.class);
+        doReturn(element).when(view).getElement();
+        doReturn(view).when(emptyWorkspaceProjectPresenter).getView();
+
         screen.onStartup();
 
         verify(projectDetailEvent).fire(projectDetailEventArgumentCaptor.capture());
         assertEquals(project, projectDetailEventArgumentCaptor.getValue().getProject());
 
         verify(emptyWorkspaceProjectPresenter).show(project);
-        verify(this.view).setContent(element);
     }
 
     @Test
     public void showList() throws Exception {
-
-        final ProjectMigrationPresenter.View view = mock(ProjectMigrationPresenter.View.class);
-        doReturn(view).when(workspaceProjectListAssetsPresenter).getView();
-        final HTMLElement element = mock(HTMLElement.class);
-        doReturn(element).when(view).getElement();
 
         final WorkspaceProject project = new WorkspaceProject(mock(OrganizationalUnit.class),
                                                               mock(Repository.class),
@@ -154,13 +130,17 @@ public class ProjectScreenTest {
 
         doReturn(true).when(libraryService).hasAssets(project);
 
+        IsElement view = mock(IsElement.class);
+        HTMLElement element = mock(HTMLElement.class);
+        doReturn(element).when(view).getElement();
+        doReturn(view).when(workspaceProjectListAssetsPresenter).getView();
+
         screen.onStartup();
 
         verify(projectDetailEvent).fire(projectDetailEventArgumentCaptor.capture());
         assertEquals(project, projectDetailEventArgumentCaptor.getValue().getProject());
 
         verify(workspaceProjectListAssetsPresenter).show(project);
-        verify(this.view).setContent(element);
     }
 
 //    @Test

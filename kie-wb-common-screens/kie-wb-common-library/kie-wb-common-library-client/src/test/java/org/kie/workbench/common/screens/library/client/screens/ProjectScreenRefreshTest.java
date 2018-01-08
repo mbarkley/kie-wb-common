@@ -59,8 +59,6 @@ public class ProjectScreenRefreshTest {
     @Mock
     private WorkspaceProjectListAssetsPresenter workspaceProjectListAssetsPresenter;
     @Mock
-    private ProjectMigrationPresenter projectMigrationPresenter;
-    @Mock
     private WorkspaceProjectContext projectContext;
     @Mock
     private EventSourceMock<ProjectDetailEvent> projectDetailEvent;
@@ -77,14 +75,8 @@ public class ProjectScreenRefreshTest {
                                    new CallerMock<>(libraryService),
                                    emptyWorkspaceProjectPresenter,
                                    workspaceProjectListAssetsPresenter,
-                                   projectMigrationPresenter,
                                    projectContext,
                                    projectDetailEvent);
-
-        final ProjectMigrationPresenter.View view = mock(ProjectMigrationPresenter.View.class);
-        doReturn(view).when(projectMigrationPresenter).getView();
-        final HTMLElement element = mock(HTMLElement.class);
-        doReturn(element).when(view).getElement();
 
         final WorkspaceProject project = new WorkspaceProject(mock(OrganizationalUnit.class),
                                                               mock(Repository.class),
@@ -131,6 +123,10 @@ public class ProjectScreenRefreshTest {
     public void onlyRefreshIfWeTargetProjectScreen() throws Exception {
 
         final PlaceGainFocusEvent placeGainFocusEvent = getPlaceGainFocusEvent("nothing");
+        IsElement view = mock(IsElement.class);
+        HTMLElement element = mock(HTMLElement.class);
+        doReturn(element).when(view).getElement();
+        doReturn(view).when(emptyWorkspaceProjectPresenter).getView();
 
         screen.onStartup();
 

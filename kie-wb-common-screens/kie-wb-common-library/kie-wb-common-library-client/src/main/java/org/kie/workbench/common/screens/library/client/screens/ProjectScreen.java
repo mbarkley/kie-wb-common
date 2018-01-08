@@ -55,7 +55,6 @@ public class ProjectScreen {
 
     private EmptyWorkspaceProjectPresenter emptyWorkspaceProjectPresenter;
     private WorkspaceProjectListAssetsPresenter workspaceProjectListAssetsPresenter;
-    private ProjectMigrationPresenter projectMigrationPresenter;
     private WorkspaceProjectContext projectContext;
 
     private Event<ProjectDetailEvent> projectDetailEvent;
@@ -71,7 +70,6 @@ public class ProjectScreen {
                          final Caller<LibraryService> libraryService,
                          final EmptyWorkspaceProjectPresenter emptyWorkspaceProjectPresenter,
                          final WorkspaceProjectListAssetsPresenter workspaceProjectListAssetsPresenter,
-                         final ProjectMigrationPresenter projectMigrationPresenter,
                          final WorkspaceProjectContext projectContext,
                          final Event<ProjectDetailEvent> projectDetailEvent) {
         this.view = view;
@@ -79,7 +77,6 @@ public class ProjectScreen {
         this.libraryService = libraryService;
         this.emptyWorkspaceProjectPresenter = emptyWorkspaceProjectPresenter;
         this.workspaceProjectListAssetsPresenter = workspaceProjectListAssetsPresenter;
-        this.projectMigrationPresenter = projectMigrationPresenter;
         this.projectContext = projectContext;
         this.projectDetailEvent = projectDetailEvent;
     }
@@ -103,20 +100,16 @@ public class ProjectScreen {
         project = projectContext.getActiveWorkspaceProject();
         libraryPlaces.setUpBranches();
 
-        if (projectContext.getActiveWorkspaceProject().getMainModule() == null) {
-            showMigration();
-        } else {
-            projectDetailEvent.fire(new ProjectDetailEvent(project));
+        projectDetailEvent.fire(new ProjectDetailEvent(project));
 
-            libraryService.call(hasAssets -> {
+        libraryService.call(hasAssets -> {
 
-                if ((Boolean) hasAssets) {
-                    showList();
-                } else {
-                    showEmptyProject();
-                }
-            }).hasAssets(project);
-        }
+            if ((Boolean) hasAssets) {
+                showList();
+            } else {
+                showEmptyProject();
+            }
+        }).hasAssets(project);
     }
 
     private void showEmptyProject() {
@@ -127,11 +120,6 @@ public class ProjectScreen {
     private void showList() {
         workspaceProjectListAssetsPresenter.show(project);
         view.setContent(workspaceProjectListAssetsPresenter.getView().getElement());
-    }
-
-    private void showMigration() {
-        projectMigrationPresenter.show(project);
-        view.setContent(projectMigrationPresenter.getView().getElement());
     }
 
     @WorkbenchPartTitle
