@@ -91,4 +91,22 @@ public class ToolConfig {
                             true);
     }
 
+    public static interface ToolConfigFactory {
+        ToolConfig parse(String[] args) throws ParseException;
+        void printHelp(PrintStream stream, String app);
+    }
+
+    public static class DefaultFactory implements ToolConfigFactory {
+
+        @Override
+        public ToolConfig parse(String[] args) throws ParseException {
+            return ToolConfig.parse(args);
+        }
+
+        @Override
+        public void printHelp(PrintStream stream, String app) {
+            ToolConfig.printHelp(stream, app);
+        }
+    }
+
 }
