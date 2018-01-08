@@ -213,7 +213,7 @@ public class ProjectExplorerContentResolverDefaultSelectionsTest {
         doReturn(new WorkspaceProject(mock(OrganizationalUnit.class),
                                       repository,
                                       branch,
-                                      module)).when(projectService).resolveProject(branch);
+                                      module)).when(projectService).resolveProject(repository.getSpace(), branch);
 
         final ActiveOptions options = new ActiveOptions();
         options.add(Option.TREE_NAVIGATOR);

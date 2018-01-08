@@ -16,6 +16,14 @@
 
 package org.kie.workbench.common.screens.explorer.backend.server;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -47,10 +55,7 @@ import org.mockito.stubbing.Answer;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.backend.vfs.PathFactory;
 import org.uberfire.java.nio.fs.file.SimpleFileSystemProvider;
-
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.*;
+import org.uberfire.spaces.Space;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ProjectExplorerContentResolverTest {
@@ -64,6 +69,7 @@ public class ProjectExplorerContentResolverTest {
     private HelperWrapper helperWrapper;
     private Branch masterBranch;
     private Branch devBranch;
+    private Space space;
 
     @Mock
     private WorkspaceProjectService projectService;
@@ -78,6 +84,8 @@ public class ProjectExplorerContentResolverTest {
         final ExplorerServiceHelper helper = mock(ExplorerServiceHelper.class);
         final ExplorerServiceHelper explorerServiceHelper = mock(ExplorerServiceHelper.class);
 
+        space = new Space("test-realm");
+
         repository = getGitRepository();
 
         final UserExplorerData userExplorerData = new UserExplorerData();
@@ -90,7 +98,7 @@ public class ProjectExplorerContentResolverTest {
                                        masterBranch,
                                        "module 2"));
 
-        devModules = new HashSet<Module>();
+        devModules = new HashSet<>();
         devModules.add(createModule("dev-1.0.0",
                                     devBranch,
                                     "module 1"));
@@ -323,7 +331,7 @@ public class ProjectExplorerContentResolverTest {
                                       repository,
                                       branch,
                                       module
-        )).when(projectService).resolveProject(branch);
+        )).when(projectService).resolveProject(space, branch);
 
         return module;
     }
@@ -383,7 +391,7 @@ public class ProjectExplorerContentResolverTest {
     }
 
     private GitRepository getGitRepository() {
-        final GitRepository repository = new GitRepository();
+        final GitRepository repository = new GitRepository("alias", space);
 
         final HashMap<String, Branch> branches = new HashMap<>();
         masterBranch = new Branch("master",
@@ -399,6 +407,7 @@ public class ProjectExplorerContentResolverTest {
                      devBranch);
 
         repository.setBranches(branches);
+
         return repository;
     }
 }

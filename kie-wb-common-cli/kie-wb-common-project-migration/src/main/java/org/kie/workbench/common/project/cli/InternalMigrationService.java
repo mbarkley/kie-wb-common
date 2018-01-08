@@ -87,7 +87,7 @@ public class InternalMigrationService {
             });
         cleanup.forEach(repo -> {
             system.out().printf("Removing migrated repository, %s...\n", repo.getAlias());
-            repoService.removeRepository(repo.getAlias());
+            repoService.removeRepository(repo.getSpace(), repo.getAlias());
         });
     }
 

@@ -30,6 +30,7 @@ import org.guvnor.common.services.project.model.Package;
 import org.guvnor.common.services.project.model.WorkspaceProject;
 import org.guvnor.common.services.project.service.WorkspaceProjectService;
 import org.guvnor.structure.repositories.Branch;
+import org.guvnor.structure.repositories.Repository;
 import org.jboss.errai.security.shared.api.identity.User;
 import org.kie.workbench.common.screens.explorer.model.FolderItem;
 import org.kie.workbench.common.screens.explorer.model.FolderItemType;
@@ -43,6 +44,7 @@ import org.kie.workbench.common.services.shared.project.KieModuleService;
 import org.uberfire.backend.server.util.Paths;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.java.nio.file.Files;
+import org.uberfire.spaces.Space;
 
 import static java.util.Collections.emptyList;
 
@@ -119,7 +121,7 @@ public class ProjectExplorerContentResolver {
             final ListIterator<FolderItem> li = content.getFolderListing().getSegments().listIterator(content.getFolderListing().getSegments().size());
             while (li.hasPrevious()) {
                 final FolderItem currentItem = li.previous();
-                final List<FolderItem> result = new ArrayList<FolderItem>();
+                final List<FolderItem> result = new ArrayList<>();
                 result.add(currentItem);
 
                 if (currentItem.getItem() instanceof Package) {
@@ -134,7 +136,7 @@ public class ProjectExplorerContentResolver {
 
         if (content.getSelectedItem() != null && content.getSelectedItem().getType().equals(FolderItemType.FOLDER) &&
                 !content.getSiblings().containsKey(content.getSelectedItem())) {
-            final List<FolderItem> result = new ArrayList<FolderItem>();
+            final List<FolderItem> result = new ArrayList<>();
             result.add(content.getSelectedItem());
 
             if (content.getSelectedItem().getItem() instanceof Package) {
@@ -148,7 +150,7 @@ public class ProjectExplorerContentResolver {
 
         if (content.getFolderListing().getItem().getType().equals(FolderItemType.FOLDER) &&
                 !content.getSiblings().containsKey(content.getFolderListing().getItem())) {
-            final List<FolderItem> result = new ArrayList<FolderItem>();
+            final List<FolderItem> result = new ArrayList<>();
             result.add(content.getFolderListing().getItem());
 
             if (content.getFolderListing().getItem().getItem() instanceof Package) {
@@ -241,12 +243,13 @@ public class ProjectExplorerContentResolver {
             if (query.getRepository() == null && query.getModule() == null) {
                 //If nothing has been selected (i.e. on start-up) set-up Content from last saved state
                 if (query.getOptions().contains(Option.BUSINESS_CONTENT) && lastContent.getLastPackage() != null) {
-                    content.setSelectedProject(projectService.resolveProject(lastContent.getLastPackage().getRepository().getBranch(lastContent.getLastPackage().getBranch()).get()));
+                    Repository lastRepo = lastContent.getLastPackage().getRepository();
+                    content.setSelectedProject(projectService.resolveProject(lastRepo.getSpace(), lastRepo.getBranch(lastContent.getLastPackage().getBranch()).get()));
                     content.setSelectedModule(lastContent.getLastPackage().getModule());
                     content.setSelectedPackage(lastContent.getLastPackage().getPkg());
                     content.setSelectedItem(null);
                 } else if (query.getOptions().contains(Option.TECHNICAL_CONTENT) && lastContent.getLastFolderItem() != null) {
-                    content.setSelectedProject(projectService.resolveProject(lastContent.getLastFolderItem().getRepository().getBranch(lastContent.getLastFolderItem().getBranch()).get()));
+                    content.setSelectedProject(projectService.resolveProject(lastContent.getLastFolderItem().getRepository().getSpace(), lastContent.getLastFolderItem().getRepository().getBranch(lastContent.getLastFolderItem().getBranch()).get()));
                     content.setSelectedModule(lastContent.getLastFolderItem().getModule());
                     content.setSelectedItem(lastContent.getLastFolderItem().getItem());
                     content.setSelectedPackage(null);
@@ -260,7 +263,7 @@ public class ProjectExplorerContentResolver {
                         && !query.getModule().equals(lastContent.getLastPackage().getModule())) {
                     //Handle a change in selected Repository or Module in BUSINESS_CONTENT view
 
-                    content.setSelectedProject(loadProject(query.getRepository().getBranch(query.getBranch().getName()).get()));
+                    content.setSelectedProject(loadProject(query.getRepository().getSpace(), query.getRepository().getBranch(query.getBranch().getName()).get()));
                     content.setSelectedModule(loadModule(content.getSelectedProject(),
                                                          query.getModule()));
                     content.setSelectedPackage(loadPackage(content.getSelectedProject(),
@@ -270,7 +273,7 @@ public class ProjectExplorerContentResolver {
                     content.setSelectedItem(null);
                 } else {
                     //Fall back to the last saved state
-                    content.setSelectedProject(loadProject(lastContent.getLastPackage().getRepository().getBranch(lastContent.getLastPackage().getBranch()).get()));
+                    content.setSelectedProject(loadProject(lastContent.getLastPackage().getRepository().getSpace(), lastContent.getLastPackage().getRepository().getBranch(lastContent.getLastPackage().getBranch()).get()));
                     content.setSelectedModule(loadModule(content.getSelectedProject(),
                                                          lastContent.getLastPackage().getModule()));
                     content.setSelectedPackage(loadPackage(content.getSelectedProject(),
@@ -282,7 +285,7 @@ public class ProjectExplorerContentResolver {
             } else if (query.getOptions().contains(Option.TECHNICAL_CONTENT) && lastContent.getLastFolderItem() != null) {
                 if (lastContent.getOptions().contains(Option.BUSINESS_CONTENT)) {
                     //When switching from BUSINESS_VIEW we cannot use LastFolderItem().getItem() and must use Module root; set by FolderListingResolver.getFolderListing()
-                    content.setSelectedProject(loadProject(lastContent.getLastFolderItem().getRepository().getBranch(lastContent.getLastPackage().getBranch()).get()));
+                    content.setSelectedProject(loadProject(lastContent.getLastPackage().getRepository().getSpace(), lastContent.getLastFolderItem().getRepository().getBranch(lastContent.getLastPackage().getBranch()).get()));
                     content.setSelectedModule(loadModule(content.getSelectedProject(),
                                                          lastContent.getLastFolderItem().getModule()));
                     content.setSelectedItem(null);
@@ -291,14 +294,14 @@ public class ProjectExplorerContentResolver {
                         query.getRepository() != null && !query.getRepository().equals(lastContent.getLastFolderItem().getRepository()) ||
                                 query.getModule() != null && !query.getModule().equals(lastContent.getLastFolderItem().getModule())) {
                     //Handle a change in selected OU, Repository or Module in TECHNICAL_CONTENT view
-                    content.setSelectedProject(loadProject(query.getRepository().getBranch(query.getBranch().getName()).get()));
+                    content.setSelectedProject(loadProject(query.getRepository().getSpace(), query.getRepository().getBranch(query.getBranch().getName()).get()));
                     content.setSelectedModule(loadModule(content.getSelectedProject(),
                                                          query.getModule()));
                     content.setSelectedItem(null);
                     content.setSelectedPackage(null);
                 } else {
                     //Fall back to the last saved state
-                    content.setSelectedProject(loadProject(lastContent.getLastFolderItem().getRepository().getBranch(lastContent.getLastFolderItem().getBranch()).get()));
+                    content.setSelectedProject(loadProject(query.getRepository().getSpace(), lastContent.getLastFolderItem().getRepository().getBranch(lastContent.getLastFolderItem().getBranch()).get()));
                     content.setSelectedModule(loadModule(content.getSelectedProject(),
                                                          lastContent.getLastFolderItem().getModule()));
                     content.setSelectedItem(loadFolderItem(content.getSelectedProject(),
@@ -317,12 +320,12 @@ public class ProjectExplorerContentResolver {
         if (query.getBranch() == null) {
             return null;
         } else {
-            return projectService.resolveProject(query.getBranch());
+            return projectService.resolveProject(query.getRepository().getSpace(), query.getBranch());
         }
     }
 
     private List<FolderItem> getSegmentSiblings(final Path path) {
-        final List<FolderItem> result = new ArrayList<FolderItem>();
+        final List<FolderItem> result = new ArrayList<>();
         org.uberfire.java.nio.file.Path nioParentPath = Paths.convert(path).getParent();
 
         for (org.uberfire.java.nio.file.Path sibling : Files.newDirectoryStream(nioParentPath,
@@ -334,7 +337,7 @@ public class ProjectExplorerContentResolver {
     }
 
     private List<FolderItem> getSegmentSiblings(final Package pkg) {
-        final List<FolderItem> result = new ArrayList<FolderItem>();
+        final List<FolderItem> result = new ArrayList<>();
         final Package parentPkg = moduleService.resolveParentPackage(pkg);
         if (parentPkg == null) {
             return emptyList();
@@ -351,12 +354,12 @@ public class ProjectExplorerContentResolver {
         return result;
     }
 
-    private WorkspaceProject loadProject(final Branch branch) {
+    private WorkspaceProject loadProject(Space space, final Branch branch) {
         if (branch == null) {
             return null;
         }
 
-        return projectService.resolveProject(branch);
+        return projectService.resolveProject(space, branch);
     }
 
     private Module loadModule(final WorkspaceProject project,

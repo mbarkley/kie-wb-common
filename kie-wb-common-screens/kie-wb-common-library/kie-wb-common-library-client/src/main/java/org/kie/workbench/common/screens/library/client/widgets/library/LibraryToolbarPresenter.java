@@ -23,6 +23,7 @@ import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.WorkspaceProject;
 import org.guvnor.common.services.project.service.WorkspaceProjectService;
 import org.guvnor.structure.repositories.Branch;
+import org.guvnor.structure.repositories.Repository;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
@@ -91,6 +92,7 @@ public class LibraryToolbarPresenter {
     void onUpdateSelectedBranch() {
         if (placeManager.closeAllPlacesOrNothing()) {
 
+            Repository repository = projectContext.getActiveWorkspaceProject().getRepository();
             projectService.call(new RemoteCallback<WorkspaceProject>() {
                 @Override
                 public void callback(WorkspaceProject project) {
@@ -99,7 +101,7 @@ public class LibraryToolbarPresenter {
 
                     setBranchSelectorVisibility();
                 }
-            }).resolveProject(projectContext.getActiveWorkspaceProject().getRepository().getBranch(view.getSelectedBranch()).get());
+            }).resolveProject(repository.getSpace(), repository.getBranch(view.getSelectedBranch()).get());
         } else {
             setUpBranches();
         }

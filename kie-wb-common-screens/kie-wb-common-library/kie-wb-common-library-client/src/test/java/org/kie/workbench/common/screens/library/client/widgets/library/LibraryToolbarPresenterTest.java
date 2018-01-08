@@ -36,6 +36,7 @@ import org.uberfire.backend.vfs.Path;
 import org.uberfire.client.mvp.PlaceManager;
 import org.uberfire.mocks.CallerMock;
 import org.uberfire.mvp.Command;
+import org.uberfire.spaces.Space;
 
 import static org.mockito.Mockito.*;
 
@@ -121,7 +122,9 @@ public class LibraryToolbarPresenterTest {
                                                                        selectedRepository,
                                                                        devBranch,
                                                                        mock(Module.class));
-        doReturn(devBranchProject).when(projectService).resolveProject(devBranch);
+        Space space = new Space("test-realm");
+        doReturn(space).when(selectedRepository).getSpace();
+        doReturn(devBranchProject).when(projectService).resolveProject(space, devBranch);
 
         selectedRepositoryBranches.add(devBranch);
         doReturn(Optional.of(devBranch)).when(selectedRepository).getBranch("dev");
