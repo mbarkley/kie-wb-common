@@ -41,17 +41,19 @@ import org.uberfire.client.annotations.WorkbenchPartTitle;
 import org.uberfire.client.annotations.WorkbenchPartView;
 import org.uberfire.client.annotations.WorkbenchScreen;
 import org.uberfire.client.mvp.UberElement;
+import org.uberfire.ext.widgets.common.client.common.HasBusyIndicator;
 import org.uberfire.lifecycle.OnStartup;
 
 @WorkbenchScreen(identifier = LibraryPlaces.ORGANIZATIONAL_UNITS_SCREEN,
         owningPerspective = LibraryPerspective.class)
 public class OrganizationalUnitsScreen {
 
-    public interface View extends UberElement<OrganizationalUnitsScreen> {
+    public interface View extends UberElement<OrganizationalUnitsScreen>,
+                                  HasBusyIndicator {
 
         void clearOrganizationalUnits();
 
-        void hideCreateOrganizationalUnitAction();
+        void showCreateOrganizationalUnitAction();
 
         void addOrganizationalUnit(TileWidget tileWidget);
 
@@ -60,6 +62,8 @@ public class OrganizationalUnitsScreen {
         String getNumberOfRepositoriesLabel(int numberOfRepositories);
 
         void showNoOrganizationalUnits(HTMLElement view);
+
+        void showBusyIndicator();
     }
 
     private View view;
@@ -108,7 +112,6 @@ public class OrganizationalUnitsScreen {
 
     @PostConstruct
     public void init() {
-        setupView();
         setupOrganizationalUnits();
     }
 
@@ -118,13 +121,14 @@ public class OrganizationalUnitsScreen {
     }
 
     private void setupView() {
-        if (!canCreateOrganizationalUnit()) {
-            view.hideCreateOrganizationalUnitAction();
+        if (canCreateOrganizationalUnit()) {
+            view.showCreateOrganizationalUnitAction();
         }
     }
 
     private void setupOrganizationalUnits() {
         if (organizationalUnitController.canReadOrgUnits()) {
+            view.showBusyIndicator();
             libraryService.call((List<OrganizationalUnit> allOrganizationalUnits) -> {
                 organizationalUnits = allOrganizationalUnits;
                 if (allOrganizationalUnits.isEmpty()) {
@@ -132,6 +136,8 @@ public class OrganizationalUnitsScreen {
                 } else {
                     refresh();
                 }
+                setupView();
+                view.hideBusyIndicator();
             }).getOrganizationalUnits();
         }
     }
