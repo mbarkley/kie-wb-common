@@ -16,6 +16,7 @@
 package org.kie.workbench.common.project;
 
 import java.io.File;
+import java.io.PrintStream;
 import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,6 +24,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 import org.apache.commons.cli.ParseException;
+import org.apache.commons.io.output.NullOutputStream;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import org.kie.workbench.common.project.cli.ExternalMigrationService;
@@ -42,7 +44,19 @@ public class MigrationTool {
         new MigrationTool(new ExternalMigrationService(system),
                           new ToolConfig.DefaultFactory(),
                           system,
-                          () -> new Weld().initialize()).run(args);
+                          () -> {
+                            /*
+                             * Work around log4j-api message printed from missing configuration.
+                             */
+                            PrintStream err = System.err;
+                            System.setErr(new PrintStream(new NullOutputStream()));
+                            try {
+                                WeldContainer container = new Weld().initialize();
+                                return container;
+                            } finally {
+                                System.setErr(err);
+                            }
+                        }).run(args);
     }
 
     private final ToolConfigFactory configFactory;
