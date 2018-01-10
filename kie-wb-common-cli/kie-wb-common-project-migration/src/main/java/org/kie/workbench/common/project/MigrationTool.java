@@ -148,15 +148,29 @@ public class MigrationTool {
 
     private void migrateAndExit(Path niogitDir) {
         int exitStatus = 0;
-        try (WeldContainer container = containerFactory.get()) {
+        WeldContainer container = null;
+        try {
+            container = containerFactory.get();
             InternalMigrationService internalService = loadInternalService(container);
             internalService.migrateAllProjects(niogitDir);
         } catch (Throwable t) {
             exitStatus = 1;
             t.printStackTrace(system.err());
+        } finally {
+            if (container != null && container.isRunning()) {
+                quietShutdown(container);
+            }
         }
 
         system.exit(exitStatus);
+    }
+
+    private void quietShutdown(WeldContainer container) {
+        try {
+            container.shutdown();
+        } catch (Throwable ignore) {
+            // Suppress exceptions from bad shutdown
+        }
     }
 
     private void configureProperties(Path niogitDir) {
