@@ -68,27 +68,50 @@ public class InternalMigrationService {
         List<ConfigGroup> repoConfigs = configService.getConfiguration(ConfigType.REPOSITORY);
         Map<String, String> orgUnitByRepo = getOrgUnitsByRepo(orgUnitConfigs);
 
-        addSpacesToRepoConfigs(configService, orgUnitByRepo, repoConfigs);
-        migrateReposToSpaces(niogitDir, orgUnitConfigs, orgUnitByRepo);
-        migrateProjectsToIndividualRepos();
+        if (repoConfigs.isEmpty()) {
+            printNoReposMessage();
+        }
+        else {
+            prepareRepositoriesForMigration(niogitDir, orgUnitConfigs, repoConfigs, orgUnitByRepo);
+            migrateProjectsToIndividualRepos();
+        }
+    }
 
-        system.out().println("Done");
+    private void prepareRepositoriesForMigration(Path niogitDir, List<ConfigGroup> orgUnitConfigs, List<ConfigGroup> repoConfigs, Map<String, String> orgUnitByRepo) {
+        printFoundRepositoriesMessage(repoConfigs);
+        addSpacesToRepoConfigs(orgUnitByRepo, repoConfigs);
+        migrateReposToSpaces(niogitDir, orgUnitConfigs, orgUnitByRepo);
+    }
+
+    private void printFoundRepositoriesMessage(List<ConfigGroup> repoConfigs) {
+        system.out().printf("Found %s user %s:\n", repoConfigs.size(), repoConfigs.size() > 1 ? "repositories" : "repository");
+        repoConfigs.forEach(group -> system.out().printf("\t%s\n", group.getName()));
+    }
+
+    private void printNoReposMessage() {
+        system.out().println("No user repositories found.");
     }
 
     private void migrateProjectsToIndividualRepos() {
         Collection<WorkspaceProject> allProjects = projectService.getAllWorkspaceProjects();
-        system.out().printf("Found %s projects\n", allProjects.size());
+        printFoundProjectsMessage(allProjects);
         Set<Repository> cleanup = new LinkedHashSet<>();
         allProjects
             .forEach(proj -> {
-                system.out().printf("Migrating %s...\n", proj.getName());
+                system.out().printf("Migrating [%s]...\n", proj.getName());
                 cleanup.add(proj.getRepository());
                 projectMigrationService.migrate(proj);
             });
         cleanup.forEach(repo -> {
-            system.out().printf("Removing migrated repository, %s...\n", repo.getAlias());
+            system.out().printf("Removing migrated repository [%s]...\n", repo.getAlias());
             repoService.removeRepository(repo.getSpace(), repo.getAlias());
         });
+        system.out().println("Finished project migration.");
+    }
+
+    private void printFoundProjectsMessage(Collection<WorkspaceProject> allProjects) {
+        system.out().printf("Found %s %s:\n", allProjects.size(), allProjects.size() > 1 ? "projects" : "project");
+        allProjects.forEach(proj -> system.out().printf("\t%s\n", proj.getName()));
     }
 
     private void migrateReposToSpaces(Path niogitDir, List<ConfigGroup> orgUnitConfigs, Map<String, String> orgUnitByRepo) {
@@ -97,18 +120,21 @@ public class InternalMigrationService {
     }
 
     private void moveRepos(Path niogitDir, Map<String, String> orgUnitByRepo) {
+        system.out().println("Moving repositories into spaces...");
         orgUnitByRepo
             .forEach((repo, ou) -> {
                 String repoFolderName = repo + ".git";
                 Path oldRepo = niogitDir.resolve(repoFolderName);
                 Path newRepo = niogitDir.resolve(ou).resolve(repoFolderName);
                 try {
+                    system.out().printf("Moving repo [%s] into space [%s]...\n", repo, ou);
                     Files.move(oldRepo, newRepo);
                 } catch (IOException e) {
-                    system.err().printf("Unable to move %s.\n", oldRepo);
+                    system.err().printf("Unable to move [%s].\n", oldRepo);
                     e.printStackTrace(system.err());
                 }
             });
+        system.out().println("Finished moving repositories into space.");
     }
 
     private static void createSpaceDirs(Path niogitDir, List<ConfigGroup> orgUnitConfigs) {
@@ -121,11 +147,13 @@ public class InternalMigrationService {
             });
     }
 
-    private static void addSpacesToRepoConfigs(ConfigurationService configService, Map<String, String> orgUnitByRepo, List<ConfigGroup> repoConfigs) {
+    private void addSpacesToRepoConfigs(Map<String, String> orgUnitByRepo, List<ConfigGroup> repoConfigs) {
+        system.out().println("Updating repository configurations with spaces...");
         configService.startBatch();
         repoConfigs.forEach(group -> {
             String space = orgUnitByRepo.get(group.getName());
             if (space != null) {
+                system.out().printf("Configuring repo [%s] in space [%s]...\n", group.getName(), space);
                 ConfigItem<Object> item = new ConfigItem<>();
                 item.setName(EnvironmentParameters.SPACE);
                 item.setValue(space);
@@ -134,6 +162,7 @@ public class InternalMigrationService {
             }
         });
         configService.endBatch();
+        system.out().println("Finished updating repository configurations.");
     }
 
     private static Map<String, String> getOrgUnitsByRepo(List<ConfigGroup> orgUnitConfigs) {

@@ -22,6 +22,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.function.Supplier;
+import java.util.logging.LogManager;
 
 import org.apache.commons.cli.ParseException;
 import org.apache.commons.io.output.NullOutputStream;
@@ -40,6 +41,7 @@ import org.uberfire.java.nio.fs.jgit.JGitFileSystemProviderConfiguration;
 public class MigrationTool {
 
     public static void main(String[] args) {
+        disableLogging();
         SystemAccess system = new RealSystemAccess();
         new MigrationTool(new ExternalMigrationService(system),
                           new ToolConfig.DefaultFactory(),
@@ -57,6 +59,10 @@ public class MigrationTool {
                                 System.setErr(err);
                             }
                         }).run(args);
+    }
+
+    private static void disableLogging() {
+        LogManager.getLogManager().reset();
     }
 
     private final ToolConfigFactory configFactory;
@@ -81,7 +87,7 @@ public class MigrationTool {
         validateTarget(niogitDir);
         maybePromptForBackupAndExit(config, niogitDir);
 
-        externalService.moveSystemRepos(this, niogitDir);
+        externalService.moveSystemRepos(niogitDir);
 
         configureProperties(niogitDir);
         migrateAndExit(niogitDir);
@@ -110,16 +116,16 @@ public class MigrationTool {
         try {
             File dirFile = niogitDir.toFile();
             if (!dirFile.exists()) {
-                errorMessage = Optional.of(String.format("The target path does not exist. Given: %s", niogitDir));
+                errorMessage = Optional.of(String.format("The target path does not exist: %s", niogitDir));
             }
             else if (!dirFile.isDirectory()) {
-                errorMessage = Optional.of(String.format("The target path is not a directory. Given: %s", niogitDir));
+                errorMessage = Optional.of(String.format("The target path is not a directory: %s", niogitDir));
             }
-            else if (niogitDir.resolve("system").resolve("system.git").toFile().exists()) {
-                errorMessage = Optional.of(String.format("The target path looks like it already contains an updated filesystem. Given: %s", niogitDir));
+            else if (niogitDir.resolve("system").resolve(MigrationConstants.SYSTEM_GIT).toFile().exists()) {
+                errorMessage = Optional.of(String.format("The target path looks like it already contains an updated filesystem: %s", niogitDir));
             }
         } catch (UnsupportedOperationException e) {
-            errorMessage = Optional.of(String.format("The target path must be a file. Given: %s", niogitDir));
+            errorMessage = Optional.of(String.format("The target path must be a file: %s", niogitDir));
         }
 
         errorMessage.ifPresent(msg -> {

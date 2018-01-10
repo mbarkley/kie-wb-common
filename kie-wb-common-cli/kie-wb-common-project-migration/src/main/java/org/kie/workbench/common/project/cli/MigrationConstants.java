@@ -20,8 +20,10 @@ public interface MigrationConstants {
 
     // TODO Find where these constants come from
 
+    String SYSTEM_GIT = "system.git";
+
     static final String[] systemRepos = {
-                                         "system.git",
+                                         SYSTEM_GIT,
                                          "datasets.git",
                                          "datasources.git",
                                          "plugins.git",

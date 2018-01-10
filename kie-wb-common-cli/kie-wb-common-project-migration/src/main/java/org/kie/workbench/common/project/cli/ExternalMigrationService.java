@@ -21,7 +21,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.util.Arrays;
 
-import org.kie.workbench.common.project.MigrationTool;
 import org.kie.workbench.common.project.cli.SystemAccess.HaltingException;
 
 /**
@@ -37,17 +36,20 @@ public class ExternalMigrationService {
         this.system = system;
     }
 
-    public void moveSystemRepos(MigrationTool migrationTool, Path niogitDir) throws HaltingException {
+    public void moveSystemRepos(Path niogitDir) throws HaltingException {
         Path systemSpace = niogitDir.resolve(MigrationConstants.SYSTEM_SPACE);
         ensureSystemSpaceOrExit(systemSpace);
+        system.out().println("Moving built-in repositories to system space...");
         Arrays
         .stream(systemRepos)
         .forEach(oldRepoRelPath -> {
             Path oldRepoAbsPath = niogitDir.resolve(oldRepoRelPath);
             if (oldRepoAbsPath.toFile().exists()) {
+                system.out().printf("Moving %s...\n", oldRepoRelPath);
                 tryMovingRepo(systemSpace, oldRepoRelPath, oldRepoAbsPath);
             }
         });
+        system.out().println("Finished moving built-in repositories.");
     }
 
     private void ensureSystemSpaceOrExit(Path systemSpace) throws HaltingException {

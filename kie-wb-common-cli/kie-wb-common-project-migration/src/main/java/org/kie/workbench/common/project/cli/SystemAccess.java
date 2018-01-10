@@ -40,5 +40,14 @@ public interface SystemAccess {
 
     class HaltingException extends RuntimeException {
         private static final long serialVersionUID = 1L;
+        private final int status;
+
+        public HaltingException(int status) {
+            this.status = status;
+        }
+
+        public int getStatus() {
+            return status;
+        }
     }
 }
