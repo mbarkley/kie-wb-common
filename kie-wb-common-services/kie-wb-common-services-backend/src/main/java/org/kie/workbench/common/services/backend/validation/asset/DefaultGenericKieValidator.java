@@ -18,11 +18,13 @@ package org.kie.workbench.common.services.backend.validation.asset;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import org.guvnor.common.services.backend.validation.GenericValidator;
 import org.guvnor.common.services.shared.validation.model.ValidationMessage;
+import org.uberfire.backend.server.util.Paths;
 import org.uberfire.backend.vfs.Path;
 
 /**
@@ -60,8 +62,8 @@ public class DefaultGenericKieValidator implements GenericValidator {
 
     protected Predicate<ValidationMessage> fromValidatedPath(final Path path) {
         return message -> {
-            final String destinationPathURI = removeFileExtension(path.toURI());
-            final String messageURI = message.getPath() != null ? removeFileExtension(message.getPath().toURI()) : "";
+            final String destinationPathURI = removeFileExtension(Paths.convert(Paths.convert(path)).toURI());
+            final String messageURI = message.getPath() != null ? removeFileExtension(Paths.convert(Paths.convert(message.getPath())).toURI()) : "";
             return messageURI.isEmpty() || destinationPathURI.endsWith(messageURI);
         };
     }

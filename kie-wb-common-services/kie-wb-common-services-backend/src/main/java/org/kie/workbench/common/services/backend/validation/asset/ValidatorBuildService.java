@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -149,9 +150,14 @@ public class ValidatorBuildService {
         return isResource;
     }
 
-    private String getDestinationPath(final Path path) throws NoModuleException {
-        final int rootPathLength = module(path).getRootPath().toURI().length() + 1;
-        return path.toURI().substring(rootPathLength);
+    private String getDestinationPath(final Path originalPath) throws NoModuleException {
+
+        final Path rootPath = Paths.convert(Paths.convert(module(originalPath).getRootPath()));
+        final Path path = Paths.convert(Paths.convert(originalPath));
+
+        final int rootPathLength = rootPath.toURI().length() + 1;
+        final String substring = path.toURI().substring(rootPathLength);
+        return substring;
     }
 
     private Module module(final Path resourcePath) throws NoModuleException {

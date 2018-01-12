@@ -415,7 +415,7 @@ public class Builder implements Serializable {
     }
 
     public IncrementalBuildResults updateResource(final Path resource,
-                                                  InputStream inputStream) {
+                                                  final InputStream inputStream) {
         synchronized (kieFileSystem) {
             return addResource(resource,
                                inputStream);
