@@ -20,9 +20,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 import com.google.gwtmockito.GwtMock;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.preferences.ProjectScopedResolutionStrategySupplier;
 import org.guvnor.common.services.project.client.repositories.ConflictingRepositoriesPopup;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.GAV;
 import org.guvnor.common.services.project.model.POM;
 import org.guvnor.common.services.project.model.WorkspaceProject;

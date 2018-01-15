@@ -21,7 +21,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.enterprise.event.Event;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.context.WorkspaceProjectContextChangeEvent;
 import org.guvnor.structure.client.security.OrganizationalUnitController;
 import org.guvnor.structure.events.AfterCreateOrganizationalUnitEvent;

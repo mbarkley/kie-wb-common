@@ -20,7 +20,7 @@ import javax.inject.Inject;
 
 import org.dashbuilder.displayer.client.Displayer;
 import org.dashbuilder.displayer.client.DisplayerCoordinator;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.structure.organizationalunit.OrganizationalUnit;
 import org.jboss.errai.ui.client.local.spi.TranslationService;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;

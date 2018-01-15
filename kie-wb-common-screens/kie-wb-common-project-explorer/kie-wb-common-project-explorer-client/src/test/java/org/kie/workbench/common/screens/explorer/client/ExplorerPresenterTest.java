@@ -15,7 +15,7 @@
  */
 package org.kie.workbench.common.screens.explorer.client;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,6 +29,8 @@ import org.uberfire.mvp.Command;
 import org.uberfire.mvp.PlaceRequest;
 
 import static org.mockito.Mockito.*;
+
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExplorerPresenterTest {

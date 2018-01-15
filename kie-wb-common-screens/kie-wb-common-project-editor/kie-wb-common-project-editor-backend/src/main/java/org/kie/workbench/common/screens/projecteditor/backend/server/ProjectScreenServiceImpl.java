@@ -3,7 +3,7 @@
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
- * 
+ *
  *      http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
@@ -101,7 +101,7 @@ public class ProjectScreenServiceImpl
 
     @Override
     public void delete(final WorkspaceProject project) {
-        repositoryService.removeRepository(project.getRepository().getAlias());
+        repositoryService.removeRepository(project.getRepository().getSpace(), project.getRepository().getAlias());
     }
 
     @Override

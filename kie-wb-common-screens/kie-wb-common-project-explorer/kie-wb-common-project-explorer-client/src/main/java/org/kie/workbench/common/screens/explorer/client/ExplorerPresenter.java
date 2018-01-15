@@ -17,7 +17,7 @@ package org.kie.workbench.common.screens.explorer.client;
 
 import javax.inject.Inject;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.kie.workbench.common.screens.explorer.client.resources.i18n.ProjectExplorerConstants;
 import org.kie.workbench.common.screens.explorer.client.widgets.ActiveContextOptions;
 import org.kie.workbench.common.screens.explorer.client.widgets.BaseViewPresenter;

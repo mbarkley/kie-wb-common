@@ -18,8 +18,8 @@ package org.kie.workbench.common.screens.library.client.screens.project;
 import java.util.ArrayList;
 import javax.enterprise.event.Event;
 
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.repositories.ConflictingRepositoriesPopup;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.events.NewProjectEvent;
 import org.guvnor.common.services.project.model.POM;
 import org.guvnor.common.services.project.model.WorkspaceProject;

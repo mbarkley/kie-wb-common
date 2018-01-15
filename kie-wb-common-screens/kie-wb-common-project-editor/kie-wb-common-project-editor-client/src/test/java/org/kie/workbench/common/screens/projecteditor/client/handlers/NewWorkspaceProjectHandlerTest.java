@@ -17,8 +17,8 @@
 package org.kie.workbench.common.screens.projecteditor.client.handlers;
 
 import com.google.gwt.core.client.Callback;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.security.ProjectController;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.context.WorkspaceProjectContextChangeEvent;
 import org.guvnor.common.services.project.model.Module;
 import org.guvnor.common.services.project.model.POM;

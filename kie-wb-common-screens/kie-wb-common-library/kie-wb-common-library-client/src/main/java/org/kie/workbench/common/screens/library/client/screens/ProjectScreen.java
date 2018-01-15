@@ -20,7 +20,7 @@ import javax.enterprise.event.Event;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.WorkspaceProject;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.IsElement;

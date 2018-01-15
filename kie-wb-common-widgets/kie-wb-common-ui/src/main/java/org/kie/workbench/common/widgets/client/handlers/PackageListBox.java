@@ -28,7 +28,7 @@ import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.Style;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.SimplePanel;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.Module;
 import org.guvnor.common.services.project.model.Package;
 import org.gwtbootstrap3.extras.select.client.ui.Option;

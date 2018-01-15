@@ -69,6 +69,8 @@ import org.uberfire.backend.server.util.Paths;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.io.IOService;
 import org.uberfire.java.nio.IOException;
+import org.uberfire.spaces.Space;
+import org.uberfire.spaces.SpacesAPI;
 
 import static org.guvnor.structure.repositories.EnvironmentParameters.SCHEME;
 import static org.guvnor.structure.server.config.ConfigType.REPOSITORY;
@@ -82,7 +84,7 @@ public class ExamplesServiceImpl implements ExamplesService {
     private static final String PROJECT_DESCRIPTON = "project.description";
 
     private static final String KIE_WB_PLAYGROUND_ZIP = "org/kie/kie-wb-playground/kie-wb-playground.zip";
-    private final Set<Repository> clonedRepositories = new HashSet<Repository>();
+    private final Set<Repository> clonedRepositories = new HashSet<>();
     private WorkspaceProjectService projectService;
     private IOService ioService;
     private ConfigurationFactory configurationFactory;
@@ -93,6 +95,7 @@ public class ExamplesServiceImpl implements ExamplesService {
     private OrganizationalUnitService ouService;
     private Event<NewProjectEvent> newProjectEvent;
     private MetadataService metadataService;
+    private SpacesAPI spaces;
     private ExampleRepository playgroundRepository;
 
     public ExamplesServiceImpl() {
@@ -109,6 +112,7 @@ public class ExamplesServiceImpl implements ExamplesService {
                                final OrganizationalUnitService ouService,
                                final WorkspaceProjectService projectService,
                                final MetadataService metadataService,
+                               final SpacesAPI spaces,
                                final Event<NewProjectEvent> newProjectEvent) {
         this.ioService = ioService;
         this.configurationFactory = configurationFactory;
@@ -119,6 +123,7 @@ public class ExamplesServiceImpl implements ExamplesService {
         this.ouService = ouService;
         this.projectService = projectService;
         this.metadataService = metadataService;
+        this.spaces = spaces;
         this.newProjectEvent = newProjectEvent;
     }
 
@@ -403,16 +408,17 @@ public class ExamplesServiceImpl implements ExamplesService {
                                          final ExampleProject exampleProject) {
         final String newRepositoryName = exampleProject.getName();
         final String newTeamRepositoryName = targetOU.getName() + "-" + newRepositoryName;
+        final Space space = spaces.getSpace(targetOU.getName());
 
-        if (repositoryService.getRepository(newRepositoryName) == null) {
+        if (repositoryService.getRepositoryFromSpace(space, newRepositoryName) == null) {
             return newRepositoryName;
-        } else if (repositoryService.getRepository(newTeamRepositoryName) == null) {
+        } else if (repositoryService.getRepositoryFromSpace(space, newTeamRepositoryName) == null) {
             return newTeamRepositoryName;
         }
 
         int index = 1;
         String tempRepositoryName = newTeamRepositoryName + "-1";
-        while (repositoryService.getRepository(tempRepositoryName) != null) {
+        while (repositoryService.getRepositoryFromSpace(space, tempRepositoryName) != null) {
             index++;
             tempRepositoryName = newTeamRepositoryName + "-" + index;
         }

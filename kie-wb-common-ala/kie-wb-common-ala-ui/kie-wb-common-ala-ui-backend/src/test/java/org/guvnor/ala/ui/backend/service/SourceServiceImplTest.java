@@ -38,6 +38,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.uberfire.backend.vfs.Path;
 import org.uberfire.security.authz.AuthorizationManager;
+import org.uberfire.spaces.Space;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -54,6 +55,8 @@ public class SourceServiceImplTest {
     private static final String REPO_NAME = "REPO_NAME";
 
     private static final String BRANCH_NAME = "BRANCH_NAME";
+
+    private static final Space SPACE = new Space(OU_NAME);
 
     @Mock
     private OrganizationalUnitService organizationalUnitService;
@@ -149,9 +152,9 @@ public class SourceServiceImplTest {
         Repository repository = mock(Repository.class);
         when(repository.getBranches()).thenReturn(branches);
 
-        when(repositoryService.getRepository(REPO_NAME)).thenReturn(repository);
+        when(repositoryService.getRepositoryFromSpace(SPACE, REPO_NAME)).thenReturn(repository);
 
-        final Collection<String> result = service.getBranches(REPO_NAME);
+        final Collection<String> result = service.getBranches(SPACE, REPO_NAME);
 
         final List<String> originalBranchNames = new ArrayList<>();
         for (final Branch branch : branches) {
@@ -171,10 +174,11 @@ public class SourceServiceImplTest {
         @SuppressWarnings("unchecked")
         final Set<Module> modules = mock(Set.class);
 
-        when(repositoryService.getRepository(REPO_NAME)).thenReturn(repository);
+        when(repositoryService.getRepositoryFromSpace(SPACE, REPO_NAME)).thenReturn(repository);
         when(moduleService.getAllModules(branch)).thenReturn(modules);
 
-        final Collection<Module> result = service.getModules(REPO_NAME,
+        final Collection<Module> result = service.getModules(SPACE,
+                                                             REPO_NAME,
                                                              BRANCH_NAME);
         assertEquals(modules,
                      result);

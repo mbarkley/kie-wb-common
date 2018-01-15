@@ -18,8 +18,8 @@ package org.kie.workbench.common.widgets.metadata.client.validation;
 
 import javax.inject.Inject;
 
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.security.ProjectController;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.WorkspaceProject;
 import org.uberfire.ext.editor.commons.client.validation.ValidationErrorReason;
 import org.uberfire.ext.editor.commons.client.validation.Validator;

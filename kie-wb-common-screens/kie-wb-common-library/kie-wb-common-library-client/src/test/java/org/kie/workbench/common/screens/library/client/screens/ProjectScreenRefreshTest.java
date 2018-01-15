@@ -15,7 +15,7 @@
  */
 package org.kie.workbench.common.screens.library.client.screens;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.WorkspaceProject;
 import org.guvnor.structure.organizationalunit.OrganizationalUnit;
 import org.guvnor.structure.repositories.Branch;

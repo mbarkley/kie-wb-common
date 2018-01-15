@@ -19,7 +19,7 @@ package org.kie.workbench.common.screens.library.client.screens.organizationalun
 import java.util.ArrayList;
 import java.util.List;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.structure.client.security.OrganizationalUnitController;
 import org.guvnor.structure.events.AfterEditOrganizationalUnitEvent;
 import org.guvnor.structure.organizationalunit.OrganizationalUnit;

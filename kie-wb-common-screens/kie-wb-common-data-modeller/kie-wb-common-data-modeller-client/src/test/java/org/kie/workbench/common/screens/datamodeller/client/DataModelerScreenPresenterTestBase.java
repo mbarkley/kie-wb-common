@@ -25,8 +25,8 @@ import java.util.Set;
 
 import com.google.gwtmockito.GwtMock;
 import com.google.gwtmockito.GwtMockitoTestRunner;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.security.ProjectController;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.shared.message.Level;
 import org.guvnor.common.services.shared.metadata.model.Overview;
 import org.guvnor.messageconsole.events.PublishBatchMessagesEvent;

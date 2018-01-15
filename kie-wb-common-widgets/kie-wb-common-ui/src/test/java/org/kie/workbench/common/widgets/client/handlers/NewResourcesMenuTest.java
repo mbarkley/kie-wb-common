@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gwt.core.client.Callback;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.jboss.errai.ioc.client.container.SyncBeanDef;
 import org.jboss.errai.ioc.client.container.SyncBeanManager;
 import org.junit.Before;

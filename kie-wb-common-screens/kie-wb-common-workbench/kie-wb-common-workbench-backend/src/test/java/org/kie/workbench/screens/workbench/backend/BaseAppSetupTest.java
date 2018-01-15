@@ -46,6 +46,7 @@ import org.uberfire.backend.vfs.PathFactory;
 import org.uberfire.io.IOService;
 import org.uberfire.java.nio.file.FileSystem;
 import org.uberfire.mocks.FileSystemTestingUtils;
+import org.uberfire.spaces.Space;
 
 import static org.mockito.Mockito.*;
 
@@ -212,7 +213,7 @@ public class BaseAppSetupTest {
                                                                       anyString(),
                                                                       anyString(),
                                                                       any(RepositoryEnvironmentConfigurations.class));
-        doReturn(repository).when(repositoryService).getRepository(eq("existentRepository"));
+        doReturn(repository).when(repositoryService).getRepositoryFromSpace(any(Space.class), eq("existentRepository"));
         doReturn("git://amend-repo-test").when(repository).getUri();
     }
 

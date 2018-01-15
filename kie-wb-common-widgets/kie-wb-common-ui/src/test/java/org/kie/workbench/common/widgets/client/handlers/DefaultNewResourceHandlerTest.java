@@ -21,7 +21,7 @@ import javax.enterprise.event.Event;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.gwtmockito.GwtMockitoTestRunner;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.Module;
 import org.guvnor.common.services.project.model.Package;
 import org.jboss.errai.common.client.api.Caller;

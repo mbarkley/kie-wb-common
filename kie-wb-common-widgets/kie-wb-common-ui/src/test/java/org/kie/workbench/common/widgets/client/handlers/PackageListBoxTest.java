@@ -21,7 +21,7 @@ import java.util.List;
 
 import com.google.gwt.dev.util.collect.HashSet;
 import com.google.gwtmockito.GwtMockitoTestRunner;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.Module;
 import org.guvnor.common.services.project.model.Package;
 import org.junit.Before;

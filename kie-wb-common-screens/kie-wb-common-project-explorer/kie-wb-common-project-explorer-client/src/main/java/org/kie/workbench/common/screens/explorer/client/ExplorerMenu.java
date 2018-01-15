@@ -18,7 +18,7 @@ package org.kie.workbench.common.screens.explorer.client;
 import java.util.Optional;
 import javax.inject.Inject;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.structure.repositories.Branch;
 import org.kie.workbench.common.screens.explorer.client.widgets.ActiveContextOptions;
 import org.uberfire.mvp.Command;

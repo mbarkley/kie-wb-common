@@ -21,7 +21,7 @@ import javax.inject.Inject;
 
 import org.dashbuilder.dataset.events.DataSetModifiedEvent;
 import org.dashbuilder.displayer.client.Displayer;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.POM;
 import org.kie.workbench.common.screens.contributors.model.ContributorsDataSets;
 import org.kie.workbench.common.screens.library.client.events.ProjectDetailEvent;

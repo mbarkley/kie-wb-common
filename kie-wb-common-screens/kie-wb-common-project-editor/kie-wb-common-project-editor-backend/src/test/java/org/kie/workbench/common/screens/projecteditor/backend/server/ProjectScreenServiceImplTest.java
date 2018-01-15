@@ -65,6 +65,7 @@ import org.uberfire.io.IOService;
 import org.uberfire.java.nio.base.options.CommentedOption;
 import org.uberfire.java.nio.file.FileSystem;
 import org.uberfire.rpc.SessionInfo;
+import org.uberfire.spaces.Space;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -847,12 +848,15 @@ public class ProjectScreenServiceImplTest {
     public void testDelete() throws Exception {
         final WorkspaceProject project = mock(WorkspaceProject.class);
         final Repository repository = mock(Repository.class);
+        final String ouName = "test-realm";
+        final Space space = new Space(ouName);
 
         doReturn(repository).when(project).getRepository();
         doReturn("myrepo").when(repository).getAlias();
+        doReturn(space).when(repository).getSpace();
 
         service.delete(project);
 
-        verify(repositoryService).removeRepository("myrepo");
+        verify(repositoryService).removeRepository(eq(space), eq("myrepo"));
     }
 }

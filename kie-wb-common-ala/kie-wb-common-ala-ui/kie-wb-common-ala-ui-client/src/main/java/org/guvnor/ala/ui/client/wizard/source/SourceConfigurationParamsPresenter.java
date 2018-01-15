@@ -33,6 +33,7 @@ import org.jboss.errai.common.client.api.IsElement;
 import org.uberfire.client.callbacks.Callback;
 import org.uberfire.client.mvp.UberElement;
 import org.uberfire.ext.widgets.common.client.callbacks.DefaultErrorCallback;
+import org.uberfire.spaces.Space;
 
 import static org.guvnor.ala.ui.client.util.UIUtil.trimOrGetEmpty;
 import static org.guvnor.ala.ui.client.wizard.NewDeployWizard.RUNTIME_NAME;
@@ -150,6 +151,7 @@ public class SourceConfigurationParamsPresenter
         return params;
     }
 
+    @Override
     public void clear() {
         view.clear();
         clearModules();
@@ -218,7 +220,7 @@ public class SourceConfigurationParamsPresenter
             view.setRepositoryStatus(FormStatus.VALID);
             view.clearBranches();
             clearModules();
-            loadBranches(getRepository());
+            loadBranches(getSpace(), getRepository());
         } else {
             view.setRepositoryStatus(FormStatus.ERROR);
         }
@@ -229,12 +231,17 @@ public class SourceConfigurationParamsPresenter
         if (!view.getBranch().isEmpty()) {
             view.setBranchStatus(FormStatus.VALID);
             clearModules();
-            loadProjects(getRepository(),
+            loadProjects(getSpace(),
+                         getRepository(),
                          getBranch());
         } else {
             view.setBranchStatus(FormStatus.ERROR);
         }
         onContentChange();
+    }
+
+    private Space getSpace() {
+        return new Space(view.getOU());
     }
 
     protected void onModuleChange() {
@@ -269,17 +276,18 @@ public class SourceConfigurationParamsPresenter
         ).getRepositories(ou);
     }
 
-    private void loadBranches(final String repository) {
+    private void loadBranches(final Space space, final String repository) {
         sourceService.call((Collection<String> branches) -> {
                                view.clearBranches();
                                branches.forEach(view::addBranch);
                                clearModules();
                            },
                            new DefaultErrorCallback()
-        ).getBranches(repository);
+        ).getBranches(space, repository);
     }
 
-    private void loadProjects(String repository,
+    private void loadProjects(Space space,
+                              String repository,
                               String branch) {
         sourceService.call((Collection<Module> modules) -> {
                                clearModules();
@@ -290,7 +298,8 @@ public class SourceConfigurationParamsPresenter
                                });
                            },
                            new DefaultErrorCallback()
-        ).getModules(repository,
+        ).getModules(space,
+                     repository,
                      branch);
     }
 

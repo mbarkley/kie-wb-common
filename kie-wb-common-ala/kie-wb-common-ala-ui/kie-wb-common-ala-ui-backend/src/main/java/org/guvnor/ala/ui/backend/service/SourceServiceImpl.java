@@ -34,6 +34,7 @@ import org.guvnor.structure.repositories.RepositoryService;
 import org.jboss.errai.bus.server.annotations.Service;
 import org.jboss.errai.security.shared.api.identity.User;
 import org.uberfire.security.authz.AuthorizationManager;
+import org.uberfire.spaces.Space;
 
 import static org.kie.soup.commons.validation.PortablePreconditions.checkNotNull;
 
@@ -95,21 +96,22 @@ public class SourceServiceImpl
     }
 
     @Override
-    public Collection<String> getBranches(final String repositoryName) {
+    public Collection<String> getBranches(final Space space, final String repositoryName) {
         checkNotNull("repositoryName",
                      repositoryName);
-        final Repository repository = repositoryService.getRepository(repositoryName);
+        final Repository repository = repositoryService.getRepositoryFromSpace(space, repositoryName);
         return repository != null ? toBranchNames(repository.getBranches()) : new ArrayList<>();
     }
 
     @Override
-    public Collection<Module> getModules(final String repositoryAlias,
+    public Collection<Module> getModules(final Space space,
+                                         final String repositoryAlias,
                                          final String branchName) {
         checkNotNull("repositoryAlias",
                      repositoryAlias);
         checkNotNull("branchName",
                      branchName);
-        final Repository repository = repositoryService.getRepository(repositoryAlias);
+        final Repository repository = repositoryService.getRepositoryFromSpace(space, repositoryAlias);
         if (repository == null) {
             return new ArrayList<>();
         } else {

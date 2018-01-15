@@ -22,7 +22,7 @@ import javax.inject.Inject;
 
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.user.client.ui.IsWidget;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.jboss.errai.common.client.api.Caller;
 import org.jboss.errai.common.client.api.RemoteCallback;
 import org.kie.workbench.common.services.shared.project.KieModuleService;

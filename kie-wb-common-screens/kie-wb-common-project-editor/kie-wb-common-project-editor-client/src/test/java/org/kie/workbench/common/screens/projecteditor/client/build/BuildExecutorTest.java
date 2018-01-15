@@ -23,8 +23,8 @@ import com.google.gwtmockito.GwtMockitoTestRunner;
 import org.guvnor.common.services.project.builder.model.BuildMessage;
 import org.guvnor.common.services.project.builder.model.BuildResults;
 import org.guvnor.common.services.project.builder.service.BuildService;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.repositories.ConflictingRepositoriesPopup;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.GAV;
 import org.guvnor.common.services.project.model.POM;
 import org.guvnor.common.services.project.model.WorkspaceProject;
@@ -58,8 +58,8 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.argThat;
 import static org.mockito.Matchers.eq;
-import static org.mockito.Mockito.anyString;
 import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyString;
 
 @RunWith(GwtMockitoTestRunner.class)
 public class BuildExecutorTest {

@@ -42,6 +42,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import org.uberfire.io.IOService;
 import org.uberfire.mocks.EventSourceMock;
 import org.uberfire.rpc.SessionInfo;
+import org.uberfire.spaces.SpacesAPI;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -75,6 +76,9 @@ public class ExamplesServiceImplCheckNoIndexConfigTest {
     @Mock
     private WorkspaceProjectService projectService;
 
+    @Mock
+    private SpacesAPI spaces;
+
     @Spy
     private Event<NewProjectEvent> newProjectEvent = new EventSourceMock<NewProjectEvent>() {
         @Override
@@ -99,6 +103,7 @@ public class ExamplesServiceImplCheckNoIndexConfigTest {
                                               ouService,
                                               projectService,
                                               metadataService,
+                                              spaces,
                                               newProjectEvent));
     }
 

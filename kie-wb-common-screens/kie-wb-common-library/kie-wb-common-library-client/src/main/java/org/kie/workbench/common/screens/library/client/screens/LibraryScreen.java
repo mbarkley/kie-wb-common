@@ -22,8 +22,8 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.security.ProjectController;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.WorkspaceProject;
 import org.guvnor.structure.client.security.OrganizationalUnitController;
 import org.guvnor.structure.events.AfterEditOrganizationalUnitEvent;

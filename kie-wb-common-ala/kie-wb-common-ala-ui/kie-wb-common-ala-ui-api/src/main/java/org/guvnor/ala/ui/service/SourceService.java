@@ -20,6 +20,7 @@ import java.util.Collection;
 
 import org.guvnor.common.services.project.model.Module;
 import org.jboss.errai.bus.server.annotations.Remote;
+import org.uberfire.spaces.Space;
 
 /**
  * Service for establishing/selecting the source configuration parameters to be used for launching a pipeline, etc.
@@ -45,7 +46,7 @@ public interface SourceService {
      * @param repository a repository name.
      * @return a list of branch names.
      */
-    Collection<String> getBranches(final String repository);
+    Collection<String> getBranches(final Space space, final String repository);
 
     /**
      * Gets the list of modules accessible by current user in a given repository and branch.
@@ -53,6 +54,7 @@ public interface SourceService {
      * @param branch a branch name.
      * @return a list of modules.
      */
-    Collection<Module> getModules(final String repositoryAlias,
+    Collection<Module> getModules(final Space space,
+                                  final String repositoryAlias,
                                   final String branch);
 }

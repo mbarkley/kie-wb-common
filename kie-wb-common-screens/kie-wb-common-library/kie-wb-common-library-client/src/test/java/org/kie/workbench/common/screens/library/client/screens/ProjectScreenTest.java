@@ -20,7 +20,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.WorkspaceProject;
 import org.guvnor.structure.organizationalunit.OrganizationalUnit;
 import org.guvnor.structure.repositories.Branch;

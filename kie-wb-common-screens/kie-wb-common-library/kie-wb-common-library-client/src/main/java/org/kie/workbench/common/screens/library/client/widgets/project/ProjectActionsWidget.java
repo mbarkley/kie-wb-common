@@ -18,8 +18,8 @@ package org.kie.workbench.common.screens.library.client.widgets.project;
 
 import javax.inject.Inject;
 
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.security.ProjectController;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.kie.workbench.common.screens.library.client.util.LibraryPlaces;
 import org.kie.workbench.common.screens.projecteditor.client.build.BuildExecutor;
 import org.uberfire.client.mvp.UberElement;

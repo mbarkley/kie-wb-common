@@ -16,6 +16,15 @@
 
 package org.guvnor.ala.ui.client.wizard.source;
 
+import static org.guvnor.ala.ui.client.util.UIUtil.EMPTY_STRING;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,14 +42,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.uberfire.mocks.CallerMock;
-
-import static org.guvnor.ala.ui.client.util.UIUtil.EMPTY_STRING;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.spy;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import org.uberfire.spaces.Space;
 
 @RunWith(GwtMockitoTestRunner.class)
 public class SourceConfigurationParamsPresenterTest {
@@ -58,6 +60,8 @@ public class SourceConfigurationParamsPresenterTest {
     private static final String BRANCH = "BRANCH";
 
     private static final String MODULE = "PROJECT";
+
+    private static final Space SPACE = new Space(OU);
 
     @Mock
     private SourceConfigurationParamsPresenter.View view;
@@ -133,8 +137,9 @@ public class SourceConfigurationParamsPresenterTest {
 
         //now the branch is completed and emulate the projects are loaded.
         when(view.getBranch()).thenReturn(BRANCH);
-        when(sourceService.getModules(REPOSITORY,
-                                      BRANCH)).thenReturn(modules);
+        when(sourceService.getModules(eq(SPACE),
+                                      eq(REPOSITORY),
+                                      eq(BRANCH))).thenReturn(modules);
 
         presenter.onBranchChange();
 
@@ -153,8 +158,9 @@ public class SourceConfigurationParamsPresenterTest {
         when(view.getOU()).thenReturn(OU);
         when(view.getRepository()).thenReturn(REPOSITORY);
         when(view.getBranch()).thenReturn(BRANCH);
-        when(sourceService.getModules(REPOSITORY,
-                                      BRANCH)).thenReturn(modules);
+        when(sourceService.getModules(eq(SPACE),
+                                      eq(REPOSITORY),
+                                      eq(BRANCH))).thenReturn(modules);
         when(view.getModule()).thenReturn(MODULE);
         presenter.onBranchChange();
 
@@ -240,7 +246,8 @@ public class SourceConfigurationParamsPresenterTest {
     @Test
     public void testOnRepositoryChangeValid() {
         when(view.getRepository()).thenReturn(REPOSITORY);
-        when(sourceService.getBranches(REPOSITORY)).thenReturn(branches);
+        when(view.getOU()).thenReturn(OU);
+        when(sourceService.getBranches(eq(SPACE), eq(REPOSITORY))).thenReturn(branches);
         presenter.onRepositoryChange();
 
         verify(view,
@@ -266,10 +273,12 @@ public class SourceConfigurationParamsPresenterTest {
 
     @Test
     public void testOnBranchChangeValid() {
+        when(view.getOU()).thenReturn(OU);
         when(view.getRepository()).thenReturn(REPOSITORY);
         when(view.getBranch()).thenReturn(BRANCH);
-        when(sourceService.getModules(REPOSITORY,
-                                      BRANCH)).thenReturn(modules);
+        when(sourceService.getModules(eq(SPACE),
+                                      eq(REPOSITORY),
+                                      eq(BRANCH))).thenReturn(modules);
 
         presenter.onBranchChange();
 

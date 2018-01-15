@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.context.WorkspaceProjectContextChangeEvent;
 import org.jboss.errai.codegen.util.Str;
 import org.jboss.errai.common.client.api.Caller;

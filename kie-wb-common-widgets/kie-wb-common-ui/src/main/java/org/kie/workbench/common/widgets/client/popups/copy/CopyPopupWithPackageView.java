@@ -19,7 +19,7 @@ package org.kie.workbench.common.widgets.client.popups.copy;
 import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.Package;
 import org.guvnor.common.services.project.utils.ModuleResourcePaths;
 import org.gwtbootstrap3.client.ui.Button;

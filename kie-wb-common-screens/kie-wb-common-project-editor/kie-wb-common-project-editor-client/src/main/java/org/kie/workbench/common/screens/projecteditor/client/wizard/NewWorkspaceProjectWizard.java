@@ -25,11 +25,11 @@ import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import com.google.gwt.user.client.ui.Widget;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.repositories.ConflictingRepositoriesPopup;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.POM;
-import org.guvnor.common.services.project.model.WorkspaceProjectWizard;
 import org.guvnor.common.services.project.model.WorkspaceProject;
+import org.guvnor.common.services.project.model.WorkspaceProjectWizard;
 import org.guvnor.common.services.project.service.DeploymentMode;
 import org.guvnor.common.services.project.service.GAVAlreadyExistsException;
 import org.guvnor.common.services.project.service.WorkspaceProjectService;

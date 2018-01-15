@@ -19,7 +19,7 @@ package org.kie.workbench.common.screens.projecteditor.client.menu;
 import java.util.List;
 
 import com.google.gwtmockito.GwtMockitoTestRunner;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

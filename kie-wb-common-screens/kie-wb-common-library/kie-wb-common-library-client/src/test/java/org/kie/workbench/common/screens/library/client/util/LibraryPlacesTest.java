@@ -20,8 +20,8 @@ import javax.enterprise.event.Event;
 
 import org.ext.uberfire.social.activities.model.ExtendedTypes;
 import org.ext.uberfire.social.activities.model.SocialFileSelectedEvent;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.preferences.ProjectScopedResolutionStrategySupplier;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.context.WorkspaceProjectContextChangeEvent;
 import org.guvnor.common.services.project.events.RenameModuleEvent;
 import org.guvnor.common.services.project.model.Module;

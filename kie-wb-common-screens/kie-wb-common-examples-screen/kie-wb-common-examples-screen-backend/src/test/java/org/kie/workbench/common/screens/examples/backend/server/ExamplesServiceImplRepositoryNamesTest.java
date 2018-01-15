@@ -16,10 +16,20 @@
 
 package org.kie.workbench.common.screens.examples.backend.server;
 
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.anyString;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+
 import javax.enterprise.event.Event;
 
 import org.guvnor.common.services.project.events.NewProjectEvent;
@@ -57,8 +67,8 @@ import org.uberfire.backend.vfs.PathFactory;
 import org.uberfire.io.IOService;
 import org.uberfire.mocks.EventSourceMock;
 import org.uberfire.rpc.SessionInfo;
-
-import static org.mockito.Mockito.*;
+import org.uberfire.spaces.Space;
+import org.uberfire.spaces.SpacesAPI;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ExamplesServiceImplRepositoryNamesTest {
@@ -104,6 +114,9 @@ public class ExamplesServiceImplRepositoryNamesTest {
     @Mock
     private WorkspaceProjectService projectService;
 
+    @Mock
+    private SpacesAPI spaces;
+
     private ExamplesServiceImpl service;
 
     @Mock
@@ -121,6 +134,7 @@ public class ExamplesServiceImplRepositoryNamesTest {
                                               ouService,
                                               projectService,
                                               metadataService,
+                                              spaces,
                                               newProjectEvent));
         when(ouService.getOrganizationalUnits()).thenReturn(new HashSet<OrganizationalUnit>() {{
             add(new OrganizationalUnitImpl("ou1Name",
@@ -195,8 +209,7 @@ public class ExamplesServiceImplRepositoryNamesTest {
 
     @Test
     public void nameIsTaken() {
-
-        doReturn(mock(Repository.class)).when(repositoryService).getRepository("module1");
+        doReturn(mock(Repository.class)).when(repositoryService).getRepositoryFromSpace(any(Space.class), eq("module1"));
 
         service.setupExamples(exampleOrganizationalUnit,
                               exampleProjects);
@@ -209,8 +222,8 @@ public class ExamplesServiceImplRepositoryNamesTest {
     @Test
     public void evenTheOuRepositoryComboNameIsTaken() {
 
-        doReturn(mock(Repository.class)).when(repositoryService).getRepository("module1");
-        doReturn(mock(Repository.class)).when(repositoryService).getRepository("ou-module1");
+        doReturn(mock(Repository.class)).when(repositoryService).getRepositoryFromSpace(any(Space.class), eq("module1"));
+        doReturn(mock(Repository.class)).when(repositoryService).getRepositoryFromSpace(any(Space.class), eq("ou-module1"));
 
         service.setupExamples(exampleOrganizationalUnit,
                               exampleProjects);
@@ -223,9 +236,9 @@ public class ExamplesServiceImplRepositoryNamesTest {
     @Test
     public void evenTheOuRepositoryComboPlusNumberNameIsTaken() {
 
-        doReturn(mock(Repository.class)).when(repositoryService).getRepository("module1");
-        doReturn(mock(Repository.class)).when(repositoryService).getRepository("ou-module1");
-        doReturn(mock(Repository.class)).when(repositoryService).getRepository("ou-module1-1");
+        doReturn(mock(Repository.class)).when(repositoryService).getRepositoryFromSpace(any(Space.class), eq("module1"));
+        doReturn(mock(Repository.class)).when(repositoryService).getRepositoryFromSpace(any(Space.class), eq("ou-module1"));
+        doReturn(mock(Repository.class)).when(repositoryService).getRepositoryFromSpace(any(Space.class), eq("ou-module1-1"));
 
         service.setupExamples(exampleOrganizationalUnit,
                               exampleProjects);

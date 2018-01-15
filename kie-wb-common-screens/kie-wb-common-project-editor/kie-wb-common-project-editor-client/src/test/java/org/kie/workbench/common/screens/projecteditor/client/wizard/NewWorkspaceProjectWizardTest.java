@@ -20,8 +20,8 @@ import javax.enterprise.event.Event;
 
 import com.google.gwtmockito.GwtMock;
 import com.google.gwtmockito.GwtMockitoTestRunner;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.repositories.ConflictingRepositoriesPopup;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.GAV;
 import org.guvnor.common.services.project.model.POM;
 import org.guvnor.common.services.project.model.WorkspaceProject;

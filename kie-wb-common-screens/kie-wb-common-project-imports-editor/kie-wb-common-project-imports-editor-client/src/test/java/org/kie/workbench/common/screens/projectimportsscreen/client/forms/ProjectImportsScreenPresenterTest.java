@@ -16,8 +16,8 @@
 
 package org.kie.workbench.common.screens.projectimportsscreen.client.forms;
 
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.client.security.ProjectController;
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.WorkspaceProject;
 import org.guvnor.common.services.shared.metadata.model.Overview;
 import org.jboss.errai.bus.client.api.messaging.Message;

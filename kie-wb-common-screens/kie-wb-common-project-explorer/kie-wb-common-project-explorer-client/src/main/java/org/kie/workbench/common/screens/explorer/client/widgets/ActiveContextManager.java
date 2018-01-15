@@ -18,7 +18,7 @@ package org.kie.workbench.common.screens.explorer.client.widgets;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 
-import org.guvnor.common.services.project.context.WorkspaceProjectContext;
+import org.guvnor.common.services.project.client.context.WorkspaceProjectContext;
 import org.guvnor.common.services.project.model.Module;
 import org.guvnor.structure.repositories.Branch;
 import org.guvnor.structure.repositories.NewBranchEvent;
